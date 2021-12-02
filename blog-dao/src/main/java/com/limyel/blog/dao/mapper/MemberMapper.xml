@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.limyel.blog.dao.MemberMapper">
+  <resultMap id="BaseResultMap" type="com.limyel.blog.entity.Member">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="deleted" jdbcType="BIT" property="deleted" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, created_at, updated_at, deleted, username, avatar, email, link
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from member
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from member
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.limyel.blog.entity.Member">
+    insert into member (id, created_at, updated_at, 
+      deleted, username, avatar, 
+      email, link)
+    values (#{id,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
+      #{deleted,jdbcType=BIT}, #{username,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.limyel.blog.entity.Member">
+    insert into member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="link != null">
+        link,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=BIT},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null">
+        #{link,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.limyel.blog.entity.Member">
+    update member
+    <set>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null">
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.limyel.blog.entity.Member">
+    update member
+    set created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=BIT},
+      username = #{username,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
