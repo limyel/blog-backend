@@ -1,7 +1,9 @@
 package com.limyel.blog.dao;
 
 import com.limyel.blog.entity.AboutItem;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface AboutItemMapper {
     int deleteByPrimaryKey(Long id);
 

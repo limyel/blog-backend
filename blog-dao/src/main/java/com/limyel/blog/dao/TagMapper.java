@@ -1,7 +1,9 @@
 package com.limyel.blog.dao;
 
 import com.limyel.blog.entity.Tag;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface TagMapper {
     int deleteByPrimaryKey(Long id);
 
