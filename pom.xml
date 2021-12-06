@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>blog-entity</module>
-        <module>blog-dao</module>
+        <module>blog-mapper</module>
         <module>blog-web</module>
         <module>blog-service</module>
         <module>blog-common</module>
@@ -22,6 +22,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
         <mybatis-generator.version>1.4.0</mybatis-generator.version>
+        <mysql.version>8.0.22</mysql.version>
+        <mapper.version>4.1.5</mapper.version>
     </properties>
 
     <dependencies>
@@ -141,6 +143,23 @@
             <artifactId>mybatis-typehandlers-jsr310</artifactId>
             <version>1.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
+            <version>2.1.5</version>
+        </dependency>
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-generator</artifactId>
+            <version>1.1.5</version>
+        </dependency>
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper</artifactId>
+            <version>4.1.5</version>
+        </dependency>
+
+
     </dependencies>
 
     <dependencyManagement>
@@ -176,6 +195,18 @@
                     <overwrite>true</overwrite>
                     <verbose>true</verbose>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${mysql.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>tk.mybatis</groupId>
+                        <artifactId>mapper</artifactId>
+                        <version>4.1.5</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

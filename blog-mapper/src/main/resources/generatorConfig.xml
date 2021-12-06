@@ -4,6 +4,9 @@
 
 <!--suppress MybatisGenerateCustomPluginInspection -->
 <generatorConfiguration>
+
+    <classPathEntry location="E:\develop\maven\repository\mysql\mysql-connector-java\8.0.22\mysql-connector-java-8.0.22.jar" />
+
     <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
         <property name="javaFileEncoding" value="UTF-8"/>
         <property name="useMapperCommentGenerator" value="false"/>
@@ -11,10 +14,12 @@
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
             <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
             <property name="caseSensitive" value="true"/>
-            <property name="forceAnnotation" value="true"/>
-            <property name="beginningDelimiter" value="`"/>
-            <property name="endingDelimiter" value="`"/>
         </plugin>
+
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
                         connectionURL="jdbc:mysql://localhost:3306/blog?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Shanghai"
