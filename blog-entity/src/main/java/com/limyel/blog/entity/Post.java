@@ -1,0 +1,27 @@
+package com.limyel.blog.entity;
+
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Date;
+import javax.persistence.*;
+
+@Getter
+@Setter
+@Table(name = "post")
+public class Post {
+    private Long id;
+
+    private Date createdAt;
+
+    private Date updatedAt;
+
+    private Boolean deleted;
+
+    private String title;
+
+    private String content;
+
+    private String slug;
+
+}
