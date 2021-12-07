@@ -19,17 +19,22 @@
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="slug" jdbcType="VARCHAR" property="slug" />
     <result column="introduction" jdbcType="VARCHAR" property="introduction" />
-    <collection property="tags" ofType="com.limyel.blog.entity.dto.TagInPost">
-      <id column="t_id" property="id"/>
-      <result column="t_name" property="name"/>
-    </collection>
+    <collection property="tags" ofType="com.limyel.blog.entity.dto.TagInPost"
+                select="com.limyel.blog.mapper.TagMapper.selectByPostId" column="id" />
+<!--    <collection property="tags" ofType="com.limyel.blog.entity.dto.TagInPost">-->
+<!--      <id column="t_id" property="id"/>-->
+<!--      <result column="t_name" property="name"/>-->
+<!--    </collection>-->
   </resultMap>
 
-  <select id="selectPostInHome" resultMap="PostInHome">
-    select t1.id, t1.created_at, t1.updated_at, t1.title, t1.slug, t1.introduction, t3.id t_id, t3.name t_name from post t1
-        left join post_tag t2 on t2.post_id = t1.id
-        left join tag t3 on t3.id = t2.tag_id and t3.deleted = 0
-    where t1.deleted = 0 order by t1.created_at desc
-    -- group by 分组用来防止分页错误
+  <select id="selectInHome" resultMap="PostInHome">
+    select t1.id, t1.created_at, t1.updated_at, t1.title, t1.slug, t1.introduction from post t1 where t1.deleted = 0 order by t1.created_at desc
   </select>
+
+<!--  <select id="selectInHome" resultMap="PostInHome">-->
+<!--    select t1.id, t1.created_at, t1.updated_at, t1.title, t1.slug, t1.introduction, t3.id t_id, t3.name t_name from (select * from post where deleted = 0 order by created_at desc limit 0, 20) t1-->
+<!--        left join post_tag t2 on t2.post_id = t1.id-->
+<!--        left join tag t3 on t2.tag_id = t3.id and t3.deleted = 0-->
+<!--  </select>-->
+
 </mapper>

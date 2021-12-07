@@ -10,6 +10,8 @@ import javax.persistence.*;
 @Setter
 @Table(name = "post")
 public class Post {
+
+    @Id
     private Long id;
 
     private Date createdAt;
@@ -25,5 +27,7 @@ public class Post {
     private String slug;
 
     private String introduction;
+
+    private Integer views;
 
 }

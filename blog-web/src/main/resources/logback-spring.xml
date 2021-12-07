@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration>
+
+    <!-- 日志文件存放路径-->
+    <property name="PATH" value="/var/logs"/>
+
+    <!-- 彩色日志依赖的渲染类 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+    <conversionRule conversionWord="wex"
+                    converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+    <conversionRule conversionWord="wEx"
+                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+
+<!--    %level：表示输出日志级别 ；-->
+<!--    %date：表示日志发生时的时间，可缩写为 %d；-->
+<!--    %logger：用于输出 Logger 的类路径，包名＋类名，｛n｝限定了输出长度，如果输出长度不够，尽可能显示类名、压缩包名；-->
+<!--    %thread：当前线程名；-->
+<!--    %M：日志发生时的方法名字；-->
+<!--    %L：日志调用所在代码行，线上运行时不建议使用此参数，因为获取代码行对性能有消耗；-->
+<!--    %m：日志、消息；-->
+<!--    %n：日志换行。-->
+
+    <!-- 彩色日志格式 -->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+ <!-- 彩色日志格式 -->
+    <property name="NORMAL_LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %blue(%-30logger{30}:%-4line) %thread %green(%-18X{LOG_ID}) %m%n"/>
+    <!-- 文件日志格式 -->
+    <property name="FILE_LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%msg%n"/>
+
+    <!-- 控制台输出配置-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!--日志输出格式-->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+<!--                ${CONSOLE_LOG_PATTERN}-->
+                ${NORMAL_LOG_PATTERN}
+            </pattern>
+        </layout>
+    </appender>
+
+    <!-- INFO 级别日志文件输出配置-->
+    <appender name="info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--按级别过滤日志，只输出 INFO 级别-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <!--当天日志文件名-->
+        <File>${PATH}/info.log</File>
+        <!--按天分割日志文件-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--历史日志文件名规则-->
+            <fileNamePattern>${PATH}/info.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <!--按大小分割同一天的日志-->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!--日志文件保留天数-->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <!--日志输出格式-->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>${FILE_LOG_PATTERN}</Pattern>
+        </layout>
+    </appender>
+
+    <!-- ERROR 级别日志文件输出配置-->
+    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        ......
+    </appender>
+
+    <!--日志级别-->
+    <root level="info">
+        <appender-ref ref="console"/>
+        <appender-ref ref="info"/>
+        <appender-ref ref="error"/>
+    </root>
+
+</configuration>

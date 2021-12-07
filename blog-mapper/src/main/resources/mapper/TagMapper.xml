@@ -8,4 +8,13 @@
     <result column="deleted" jdbcType="BIT" property="deleted" />
     <result column="name" jdbcType="VARCHAR" property="name" />
   </resultMap>
+
+  <resultMap id="TagInPost" type="com.limyel.blog.entity.dto.TagInPost">
+    <id column="id" property="id"/>
+    <result column="name" property="name"/>
+  </resultMap>
+
+  <select id="selectByPostId" resultMap="TagInPost" parameterType="java.lang.Long">
+    select t1.id, t1.name from tag t1 inner join post_tag t2 on t2.tag_id = t1.id and t2.post_id = #{postId} where t1.deleted = 0
+  </select>
 </mapper>
