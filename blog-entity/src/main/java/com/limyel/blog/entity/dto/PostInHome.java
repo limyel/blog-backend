@@ -1,29 +1,28 @@
-package com.limyel.blog.entity;
+package com.limyel.blog.entity.dto;
 
+import com.limyel.blog.entity.Tag;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
-import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
-@Table(name = "post")
-public class Post {
+public class PostInHome {
+
     private Long id;
 
     private Date createdAt;
 
     private Date updatedAt;
 
-    private Boolean deleted;
-
     private String title;
 
-    private String content;
+    private String introduction;
 
     private String slug;
 
-    private String introduction;
+    private List<TagInPost> tags;
 
 }

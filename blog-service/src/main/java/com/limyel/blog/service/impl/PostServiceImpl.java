@@ -1,6 +1,8 @@
 package com.limyel.blog.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.limyel.blog.entity.dto.PostInHome;
 import com.limyel.blog.mapper.PostMapper;
 import com.limyel.blog.entity.Post;
 import com.limyel.blog.service.PostService;
@@ -16,13 +18,16 @@ public class PostServiceImpl implements PostService {
     private PostMapper postMapper;
 
     @Override
-    public List<Post> list() {
-        List<Post> result = postMapper.selectAll();
-        return result;
+    public PageInfo<PostInHome> pageInHome(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<PostInHome> posts = postMapper.selectPostInHome();
+        PageInfo<PostInHome> pageInfo = new PageInfo<>(posts);
+        pageInfo.setTotal(posts.size());
+        return pageInfo;
     }
 
     @Override
-    public int create(Post post) {
+    public int save(Post post) {
         return postMapper.insertSelective(post);
     }
 }

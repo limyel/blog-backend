@@ -1,8 +1,13 @@
 package com.limyel.blog.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Table(name = "tag")
 public class Tag {
     private Long id;
