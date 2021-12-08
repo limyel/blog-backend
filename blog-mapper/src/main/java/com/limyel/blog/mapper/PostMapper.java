@@ -13,4 +13,8 @@ public interface PostMapper extends Mapper<Post> {
 
     List<PostInHome> selectInHome();
 
+    List<Integer> selectYear();
+
+    List<Post> selectByYear(int year);
+
 }

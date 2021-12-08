@@ -3,6 +3,7 @@ package com.limyel.blog.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.limyel.blog.entity.dto.PostDetail;
+import com.limyel.blog.entity.dto.PostInArchive;
 import com.limyel.blog.entity.dto.PostInHome;
 import com.limyel.blog.mapper.PostMapper;
 import com.limyel.blog.entity.Post;
@@ -59,4 +60,18 @@ public class PostServiceImpl implements PostService {
         postDetail.setTags(tagService.listByPostId(post.getId()));
         return postDetail;
     }
+
+    @Override
+    public List<Integer> listYear() {
+        return postMapper.selectYear();
+    }
+
+    @Override
+    public List<PostInArchive> listInArchive(int year) {
+        List<Post> posts = postMapper.selectByYear(year);
+
+        return BeanUtil.copyList(posts, PostInArchive.class);
+    }
+
+
 }
