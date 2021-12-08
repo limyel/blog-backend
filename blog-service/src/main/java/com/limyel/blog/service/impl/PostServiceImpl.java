@@ -48,4 +48,15 @@ public class PostServiceImpl implements PostService {
         postDetail.setTags(tagService.listByPostId(post.getId()));
         return postDetail;
     }
+
+    @Override
+    public PostDetail getBySlug(String slug) {
+        Post record = new Post();
+        record.setDeleted(false);
+        record.setSlug(slug);
+        Post post = postMapper.selectOne(record);
+        PostDetail postDetail = BeanUtil.copy(post, PostDetail.class);
+        postDetail.setTags(tagService.listByPostId(post.getId()));
+        return postDetail;
+    }
 }

@@ -15,4 +15,6 @@ public interface PostService {
 
     PostDetail getById(Long id);
 
+    PostDetail getBySlug(String slug);
+
 }

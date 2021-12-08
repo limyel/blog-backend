@@ -31,12 +31,11 @@ public class PostController {
     }
 
     @ApiOperation(value = "详情", httpMethod = "GET")
-    @GetMapping("/{id}")
+    @GetMapping("/{slug}")
     public Response getDetail(
-            @PathVariable("id") Long id
+            @PathVariable("slug") String slug
     ) {
-        System.out.println(id);
-        PostDetail postDetail = postService.getById(id);
+        PostDetail postDetail = postService.getBySlug(slug);
         if (postDetail == null) {
             return Response.notFound();
         }
