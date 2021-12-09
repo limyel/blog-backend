@@ -2,6 +2,7 @@ package com.limyel.blog.mapper;
 
 import com.limyel.blog.entity.Post;
 import com.limyel.blog.entity.dto.PostDetail;
+import com.limyel.blog.entity.dto.PostInArchive;
 import com.limyel.blog.entity.dto.PostInHome;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
@@ -16,5 +17,7 @@ public interface PostMapper extends Mapper<Post> {
     List<Integer> selectYear();
 
     List<Post> selectByYear(int year);
+
+    List<PostInArchive> selectHot();
 
 }

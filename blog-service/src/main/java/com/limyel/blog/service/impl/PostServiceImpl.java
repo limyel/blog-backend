@@ -73,5 +73,10 @@ public class PostServiceImpl implements PostService {
         return BeanUtil.copyList(posts, PostInArchive.class);
     }
 
+    @Override
+    public List<PostInArchive> listHot() {
+        return postMapper.selectHot();
+    }
+
 
 }

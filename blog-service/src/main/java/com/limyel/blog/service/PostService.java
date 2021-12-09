@@ -22,4 +22,5 @@ public interface PostService {
 
     List<PostInArchive> listInArchive(int year);
 
+    List<PostInArchive> listHot();
 }

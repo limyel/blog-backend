@@ -39,4 +39,8 @@
     select <include refid="BaseColumns"/> from post where YEAR(created_at) = #{year} and deleted = 0 order by YEAR(created_at) desc limit 0, 10
   </select>
 
+  <select id="selectHot" resultType="com.limyel.blog.entity.dto.PostInArchive">
+    select created_at, title, slug from post where deleted = 0 order by views desc limit 0, 10
+  </select>
+  
 </mapper>

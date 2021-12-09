@@ -58,4 +58,14 @@ public class PostController {
         }
         return Response.success(result);
     }
+
+    @ApiOperation(value = "最热文章", httpMethod = "GET")
+    @GetMapping("/hot")
+    public Response hot() {
+        List<PostInArchive> postInArchives = postService.listHot();
+        for (PostInArchive post: postInArchives) {
+            System.out.println(post.getCreatedAt());
+        }
+        return Response.success();
+    }
 }
