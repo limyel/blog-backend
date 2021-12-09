@@ -11,4 +11,12 @@
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="about_id" jdbcType="BIGINT" property="aboutId" />
   </resultMap>
+
+  <sql id="BaseColumns">
+    id, created_at, updated_at, deleted, name, link, description, about_id
+  </sql>
+
+  <select id="selectByAboutId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select <include refid="BaseColumns"/> from about_item where about_id = #{aboutId} and deleted = 0
+  </select>
 </mapper>

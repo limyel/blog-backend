@@ -9,4 +9,16 @@
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="sequence" jdbcType="INTEGER" property="sequence" />
   </resultMap>
+
+  <resultMap id="AboutDetail" type="com.limyel.blog.entity.dto.AboutDetail" extends="BaseResultMap">
+    <collection column="id" property="items" ofType="com.limyel.blog.entity.AboutItem" select="com.limyel.blog.mapper.AboutItemMapper.selectByAboutId"/>
+  </resultMap>
+
+  <sql id="BaseColumns">
+    id, created_at, updated_at, deleted, title, sequence
+  </sql>
+
+  <select id="selectDetail" resultMap="AboutDetail">
+    select <include refid="BaseColumns"/> from about where deleted = 0
+  </select>
 </mapper>
