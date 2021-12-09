@@ -36,7 +36,7 @@
   </select>
 
   <select id="selectByYear" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-    select <include refid="BaseColumn"/> from post where YEAR(created_at) = #{year} and deleted = 0 limit 0, 10
+    select <include refid="BaseColumn"/> from post where YEAR(created_at) = #{year} and deleted = 0 order by YEAR(created_at) desc limit 0, 10
   </select>
 
 </mapper>
