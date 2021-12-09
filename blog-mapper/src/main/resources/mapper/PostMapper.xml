@@ -40,7 +40,7 @@
   </select>
 
   <select id="selectHot" resultType="com.limyel.blog.entity.dto.PostInArchive">
-    select created_at, title, slug from post where deleted = 0 order by views desc limit 0, 10
+    select created_at, title, slug from post where deleted = 0 order by views desc limit 0, 5
   </select>
   
 </mapper>
