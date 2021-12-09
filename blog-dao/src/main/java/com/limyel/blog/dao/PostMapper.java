@@ -1,7 +1,6 @@
-package com.limyel.blog.mapper;
+package com.limyel.blog.dao;
 
 import com.limyel.blog.entity.Post;
-import com.limyel.blog.entity.dto.PostDetail;
 import com.limyel.blog.entity.dto.PostInArchive;
 import com.limyel.blog.entity.dto.PostInHome;
 import org.springframework.stereotype.Repository;

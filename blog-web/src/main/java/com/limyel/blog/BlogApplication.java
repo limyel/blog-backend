@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import tk.mybatis.spring.annotation.MapperScan;
 
-@MapperScan(basePackages = "com.limyel.blog.mapper")
 @SpringBootApplication
+@MapperScan(basePackages = "com.limyel.blog.dao")
 public class BlogApplication {
 
     public static void main(String[] args) {

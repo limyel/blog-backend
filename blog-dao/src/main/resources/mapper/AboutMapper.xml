@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.limyel.blog.mapper.AboutMapper">
+<mapper namespace="com.limyel.blog.dao.AboutMapper">
   <resultMap id="BaseResultMap" type="com.limyel.blog.entity.About">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
@@ -11,7 +11,7 @@
   </resultMap>
 
   <resultMap id="AboutDetail" type="com.limyel.blog.entity.dto.AboutDetail" extends="BaseResultMap">
-    <collection column="id" property="items" ofType="com.limyel.blog.entity.AboutItem" select="com.limyel.blog.mapper.AboutItemMapper.selectByAboutId"/>
+    <collection column="id" property="items" ofType="com.limyel.blog.entity.AboutItem" select="com.limyel.blog.dao.AboutItemMapper.selectByAboutId"/>
   </resultMap>
 
   <sql id="BaseColumns">

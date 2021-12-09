@@ -1,4 +1,4 @@
-package com.limyel.blog.mapper;
+package com.limyel.blog.dao;
 
 import com.limyel.blog.entity.About;
 import com.limyel.blog.entity.dto.AboutDetail;

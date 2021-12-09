@@ -2,7 +2,7 @@ package com.limyel.blog.service.impl;
 
 import com.limyel.blog.entity.Tag;
 import com.limyel.blog.entity.dto.TagInPost;
-import com.limyel.blog.mapper.TagMapper;
+import com.limyel.blog.dao.TagMapper;
 import com.limyel.blog.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

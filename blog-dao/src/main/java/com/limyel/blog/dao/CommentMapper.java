@@ -1,4 +1,4 @@
-package com.limyel.blog.mapper;
+package com.limyel.blog.dao;
 
 import com.limyel.blog.entity.Comment;
 import tk.mybatis.mapper.common.Mapper;

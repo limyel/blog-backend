@@ -19,13 +19,7 @@
         </dependency>
         <dependency>
             <groupId>com.limyel</groupId>
-            <artifactId>blog-mapper</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.limyel</groupId>
-            <artifactId>blog-common</artifactId>
+            <artifactId>blog-dao</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

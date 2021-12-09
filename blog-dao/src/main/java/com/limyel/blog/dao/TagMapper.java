@@ -1,4 +1,4 @@
-package com.limyel.blog.mapper;
+package com.limyel.blog.dao;
 
 import com.limyel.blog.entity.Tag;
 import com.limyel.blog.entity.dto.TagInPost;

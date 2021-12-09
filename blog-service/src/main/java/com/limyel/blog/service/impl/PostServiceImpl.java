@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.limyel.blog.entity.dto.PostDetail;
 import com.limyel.blog.entity.dto.PostInArchive;
 import com.limyel.blog.entity.dto.PostInHome;
-import com.limyel.blog.mapper.PostMapper;
+import com.limyel.blog.dao.PostMapper;
 import com.limyel.blog.entity.Post;
 import com.limyel.blog.service.PostService;
 import com.limyel.blog.service.TagService;
