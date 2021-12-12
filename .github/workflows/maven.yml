@@ -34,8 +34,8 @@ jobs:
           key: ${{ secrets.DEPLOY_KEY }} # 服务器配置的私钥
           # 脚本 推送新构建的镜像到仓库
           script: |
-            cp /home/ubuntu/private/application-private.properties /home/ubuntu/blog/blog-backend/blog-web/src/main/resources/
-            cd /home/ubuntu/blog/blog-backend
+            cp /home/ubuntu/private/application-private.properties /home/ubuntu/blog/backend/blog-web/src/main/resources/
+            cd /home/ubuntu/blog/backend
             mvn clean install --file pom.xml
             docker build -t ${{ secrets.DOCKER_REPOSITORY }}:latest .
             docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
