@@ -20,8 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Api(tags = "文章")
-@RestController
+@Api(tags = "web 文章")
+@RestController("")
 @RequestMapping("/blog/posts")
 public class PostController {
 
