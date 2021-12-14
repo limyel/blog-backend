@@ -29,7 +29,8 @@ public class OauthController {
     @ApiOperation(value = "GitHub", httpMethod = "GET")
     @GetMapping("/github")
     public Response github(
-            @RequestParam(value = "code") String code
+            @RequestParam(value = "code") String code,
+            @RequestParam(value = "postId") Long postId
     ) {
         githubOauthService.bindAccount(code);
         return Response.success();
