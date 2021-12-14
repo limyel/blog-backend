@@ -37,7 +37,7 @@ public class OkHttpUtil {
         return doGet(url, params, null);
     }
 
-    public String doGet(String url, List<String> headers) {
+    public String doGetWithHeaders(String url, Map<String, String> headers) {
         return doGet(url, null, headers);
     }
 
@@ -48,7 +48,7 @@ public class OkHttpUtil {
      * @param headers   请求头
      * @return
      */
-    public String doGet(String url, Map<String, String> params, List<String> headers) {
+    public String doGet(String url, Map<String, String> params, Map<String, String> headers) {
         StringBuilder stringBuilder = new StringBuilder(url);
         if (params != null && params.keySet().size() > 0) {
             boolean firstFlag = true;
@@ -65,12 +65,8 @@ public class OkHttpUtil {
 
         Request.Builder builder = new Request.Builder();
         if (headers != null && headers.size() > 0) {
-            if (headers.size() % 2 == 0) {
-                for (int i = 0; i < headers.size(); i = i + 2) {
-                    builder.addHeader(headers.get(i), headers.get(i+1));
-                }
-            } else {
-                log.warn("headers's length[{}] is error.", headers.size());
+            for (String key: headers.keySet()) {
+                builder.addHeader(key, headers.get(key));
             }
         }
 
@@ -85,7 +81,7 @@ public class OkHttpUtil {
      * @param params
      * @return
      */
-    public String doPost(String url, Map<String, String> params) {
+    public String doPost(String url, Map<String, String> params, Map<String, String> headers) {
         FormBody.Builder builder = new FormBody.Builder();
 
         if (params != null && params.keySet().size() > 0) {
@@ -93,7 +89,14 @@ public class OkHttpUtil {
                 builder.add(key, params.get(key));
             }
         }
-        Request request = new Request.Builder().url(url).post(builder.build()).build();
+        Request.Builder requestBuilder = new Request.Builder().url(url);
+        if (headers != null && headers.size() > 0) {
+            for (String key: headers.keySet()) {
+                requestBuilder.addHeader(key, headers.get(key));
+            }
+        }
+        Request request = requestBuilder.post(builder.build()).build();
+
         log.info("do post request and url[{}]", url);
 
         return execute(request);

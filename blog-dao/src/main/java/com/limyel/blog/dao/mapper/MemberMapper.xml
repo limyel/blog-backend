@@ -6,9 +6,9 @@
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="username" jdbcType="VARCHAR" property="name" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatarUrl" />
     <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="link" jdbcType="VARCHAR" property="htmlUrl" />
   </resultMap>
 </mapper>

@@ -2,8 +2,8 @@ package com.limyel.blog.service;
 
 import com.limyel.blog.entity.Member;
 
-public interface MemberService {
+public interface GithubOauthService {
 
-    int save(Member member);
+    Member bindAccount(String code);
 
 }
