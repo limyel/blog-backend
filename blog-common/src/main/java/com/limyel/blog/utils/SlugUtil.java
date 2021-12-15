@@ -11,6 +11,7 @@ public class SlugUtil {
 
     public static String generate(String s) {
         StringBuilder stringBuilder = new StringBuilder();
+        // 标记，ascii 字符和汉字交界的地方加上 - 符号
         boolean flag = true;
         for (char c: s.toCharArray()) {
             if ((int) c <= 128) {
@@ -28,6 +29,7 @@ public class SlugUtil {
                 e.printStackTrace();
             }
             if (c != s.charAt(s.length()-1)) {
+                // 如果不是最后一个字符，结尾加上 - 符号
                 stringBuilder.append("-");
             }
         }
