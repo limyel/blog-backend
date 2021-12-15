@@ -5,11 +5,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class TagInPost {
+public class TagDetail {
 
     private Long id;
 
     private String name;
 
     private String slug;
+
+    private Integer postNum;
+
 }

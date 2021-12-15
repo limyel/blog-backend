@@ -7,14 +7,28 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="slug" jdbcType="VARCHAR" property="slug" />
   </resultMap>
 
   <resultMap id="TagInPost" type="com.limyel.blog.entity.dto.TagInPost">
     <id column="id" property="id"/>
     <result column="name" property="name"/>
+    <result column="slug" jdbcType="VARCHAR" property="slug" />
   </resultMap>
 
+  <resultMap id="TagDetail" type="com.limyel.blog.entity.dto.TagDetail" extends="TagInPost">
+    <result column="post_num" property="postNum"/>
+  </resultMap>
+
+  <sql id="BaseColumns">
+    id, created_at, updated_at, deleted, name, slug
+  </sql>
+
   <select id="selectByPostId" resultMap="TagInPost" parameterType="java.lang.Long">
-    select t1.id, t1.name from tag t1 inner join post_tag t2 on t2.tag_id = t1.id and t2.post_id = #{postId} where t1.deleted = 0
+    select t1.id, t1.name, t1.slug from tag t1 inner join post_tag t2 on t2.tag_id = t1.id and t2.post_id = #{postId} where t1.deleted = 0
+  </select>
+
+  <select id="selectDetail" resultMap="TagDetail">
+    select t1.id, t1.name, t1.slug, (select count(t2.id) num from post_tag t2 where t2.tag_id = t1.id and t2.deleted = 0) post_num from tag t1
   </select>
 </mapper>

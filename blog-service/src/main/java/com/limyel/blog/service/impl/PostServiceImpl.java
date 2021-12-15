@@ -2,6 +2,7 @@ package com.limyel.blog.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.limyel.blog.entity.Tag;
 import com.limyel.blog.entity.dto.PostDetail;
 import com.limyel.blog.entity.dto.PostInArchive;
 import com.limyel.blog.entity.dto.PostInHome;
@@ -28,7 +29,6 @@ public class PostServiceImpl implements PostService {
     public PageInfo<PostInHome> pageInHome(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<PostInHome> posts = postMapper.selectInHome();
-        System.out.println(posts.get(0).getTags());
         PageInfo<PostInHome> pageInfo = new PageInfo<>(posts);
         pageInfo.setTotal(posts.size());
         return pageInfo;
@@ -76,6 +76,14 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<PostInArchive> listHot() {
         return postMapper.selectHot();
+    }
+
+    @Override
+    public PageInfo<PostInArchive> pageInTag(Tag tag, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<PostInArchive> posts = postMapper.selectByTagId(tag.getId());
+        PageInfo<PostInArchive> pageInfo = new PageInfo<>(posts);
+        return pageInfo;
     }
 
 

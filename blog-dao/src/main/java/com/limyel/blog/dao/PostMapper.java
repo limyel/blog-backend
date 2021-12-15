@@ -19,4 +19,6 @@ public interface PostMapper extends Mapper<Post> {
 
     List<PostInArchive> selectHot();
 
+    List<PostInArchive> selectByTagId(Long tagId);
+
 }

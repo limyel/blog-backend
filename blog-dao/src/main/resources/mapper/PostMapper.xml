@@ -42,4 +42,8 @@
   <select id="selectHot" resultType="com.limyel.blog.entity.dto.PostInArchive">
     select created_at, title, slug from post where deleted = 0 order by views desc limit 0, 5
   </select>
+
+  <select id="selectByTagId" parameterType="java.lang.Long" resultType="com.limyel.blog.entity.dto.PostInArchive">
+    select created_at, title, slug from post where deleted = 0 and id in (select t1.post_id from post_tag t1 where t1.deleted = 0 and t1.tag_id = #{tagId})
+  </select>
 </mapper>

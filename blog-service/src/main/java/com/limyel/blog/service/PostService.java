@@ -2,6 +2,7 @@ package com.limyel.blog.service;
 
 import com.github.pagehelper.PageInfo;
 import com.limyel.blog.entity.Post;
+import com.limyel.blog.entity.Tag;
 import com.limyel.blog.entity.dto.PostDetail;
 import com.limyel.blog.entity.dto.PostInArchive;
 import com.limyel.blog.entity.dto.PostInHome;
@@ -23,4 +24,6 @@ public interface PostService {
     List<PostInArchive> listInArchive(int year);
 
     List<PostInArchive> listHot();
+
+    PageInfo<PostInArchive> pageInTag(Tag tag, int pageNum, int pageSize);
 }

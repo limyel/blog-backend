@@ -2,11 +2,13 @@ package com.limyel.blog.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.limyel.blog.entity.Post;
+import com.limyel.blog.entity.Tag;
 import com.limyel.blog.entity.dto.PostDetail;
 import com.limyel.blog.entity.dto.PostInArchive;
 import com.limyel.blog.entity.dto.PostInHome;
 import com.limyel.blog.service.PostService;
 import com.limyel.blog.common.Response;
+import com.limyel.blog.service.TagService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class PostController {
 
     @Autowired
     private PostService postService;
+
+    @Autowired
+    private TagService tagService;
 
     @ApiOperation(value = "列表", httpMethod = "GET")
     @GetMapping
@@ -63,5 +68,20 @@ public class PostController {
     @GetMapping("/hot")
     public Response hot() {
         return Response.success(postService.listHot());
+    }
+
+    @ApiOperation(value = "根据标签", httpMethod = "GET")
+    @GetMapping("/tag/{slug}")
+    public Response getInTag(
+            @PathVariable(value = "slug") String slug,
+            @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize
+    ) {
+        Tag tag = tagService.getBySlug(slug);
+        if (tag == null) {
+            return Response.notFound();
+        }
+        PageInfo<PostInArchive> pageInfo = postService.pageInTag(tag, pageNum, pageSize);
+        return Response.success(pageInfo);
     }
 }
