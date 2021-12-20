@@ -16,4 +16,5 @@ public interface TagService {
 
     Tag getBySlug(String slug);
 
+    int countByIds(List<Long> ids);
 }

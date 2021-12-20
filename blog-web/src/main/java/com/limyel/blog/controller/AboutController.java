@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(tags = "关于")
+@Api(tags = "Blog 关于")
 @RestController
 @RequestMapping("/blog/about")
 public class AboutController {

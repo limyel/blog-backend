@@ -15,4 +15,5 @@ public interface TagMapper extends Mapper<Tag> {
 
     List<TagDetail> selectDetail();
 
+    Integer selectCountByIds(List<Long> ids);
 }

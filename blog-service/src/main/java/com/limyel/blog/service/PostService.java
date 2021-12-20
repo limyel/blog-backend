@@ -6,18 +6,21 @@ import com.limyel.blog.entity.Tag;
 import com.limyel.blog.entity.dto.PostDetail;
 import com.limyel.blog.entity.dto.PostInArchive;
 import com.limyel.blog.entity.dto.PostInHome;
+import com.limyel.blog.entity.vo.PostVO;
 
 import java.util.List;
 
 public interface PostService {
 
+    Post getById(Long id);
+
     PageInfo<PostInHome> pageInHome(int pageNum, int pageSize);
 
-    int save(Post post);
+    int save(PostVO vo);
 
-    PostDetail getById(Long id);
+    PostDetail getDetailById(Long id);
 
-    PostDetail getBySlug(String slug);
+    PostDetail getDetailBySlug(String slug);
 
     List<Integer> listYear();
 
@@ -26,4 +29,6 @@ public interface PostService {
     List<PostInArchive> listHot();
 
     PageInfo<PostInArchive> pageInTag(Tag tag, int pageNum, int pageSize);
+
+    int update(Post post, PostVO vo);
 }

@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Api(tags = "web 文章")
+@Api(tags = "Blog 文章")
 @RestController("")
 @RequestMapping("/blog/posts")
 public class PostController {
@@ -47,7 +47,7 @@ public class PostController {
     public Response<PostDetail> getDetail(
             @PathVariable("slug") String slug
     ) {
-        PostDetail postDetail = postService.getBySlug(slug);
+        PostDetail postDetail = postService.getDetailBySlug(slug);
         if (postDetail == null) {
             return Response.notFound();
         }

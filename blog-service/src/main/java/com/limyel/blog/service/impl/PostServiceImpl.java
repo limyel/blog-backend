@@ -2,15 +2,20 @@ package com.limyel.blog.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.limyel.blog.common.exception.BlogException;
+import com.limyel.blog.entity.PostTag;
 import com.limyel.blog.entity.Tag;
 import com.limyel.blog.entity.dto.PostDetail;
 import com.limyel.blog.entity.dto.PostInArchive;
 import com.limyel.blog.entity.dto.PostInHome;
 import com.limyel.blog.dao.PostMapper;
 import com.limyel.blog.entity.Post;
+import com.limyel.blog.entity.vo.PostVO;
 import com.limyel.blog.service.PostService;
+import com.limyel.blog.service.PostTagService;
 import com.limyel.blog.service.TagService;
 import com.limyel.blog.utils.BeanUtil;
+import com.limyel.blog.utils.SlugUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +30,14 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private TagService tagService;
 
+    @Autowired
+    private PostTagService postTagService;
+
+    @Override
+    public Post getById(Long id) {
+        return postMapper.selectByPrimaryKey(id);
+    }
+
     @Override
     public PageInfo<PostInHome> pageInHome(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
@@ -35,12 +48,27 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public int save(Post post) {
-        return postMapper.insertSelective(post);
+    public int save(PostVO vo) {
+        Post post = BeanUtil.copy(vo, Post.class);
+        post.setSlug(SlugUtil.generate(vo.getTitle()));
+
+        if (!validateTags(vo.getTags())) {
+            throw new BlogException("标签不存在");
+        }
+        int result = postMapper.insertSelective(post);
+
+        for (Long tagId: vo.getTags()) {
+            PostTag postTag = new PostTag();
+            postTag.setPostId(post.getId());
+            postTag.setTagId(tagId);
+            postTagService.save(postTag);
+        }
+
+        return result;
     }
 
     @Override
-    public PostDetail getById(Long id) {
+    public PostDetail getDetailById(Long id) {
         Post post = postMapper.selectByPrimaryKey(id);
         if (post == null) {
             return null;
@@ -51,7 +79,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDetail getBySlug(String slug) {
+    public PostDetail getDetailBySlug(String slug) {
         Post record = new Post();
         record.setDeleted(false);
         record.setSlug(slug);
@@ -86,5 +114,26 @@ public class PostServiceImpl implements PostService {
         return pageInfo;
     }
 
+    @Override
+    public int update(Post post, PostVO vo) {
+        if (!validateTags(vo.getTags())) {
+            throw new BlogException("标签不存在");
+        }
+        post.setTitle(vo.getTitle());
+        post.setContent(vo.getContent());
+        post.setIntroduction(vo.getIntroduction());
+        post.setSlug(SlugUtil.generate(vo.getTitle()));
 
+        return postMapper.updateByPrimaryKeySelective(post);
+    }
+
+
+    /**
+     * 验证标签是否正确
+     * @param ids
+     * @return
+     */
+    private boolean validateTags(List<Long> ids) {
+        return tagService.countByIds(ids) == ids.size();
+    }
 }

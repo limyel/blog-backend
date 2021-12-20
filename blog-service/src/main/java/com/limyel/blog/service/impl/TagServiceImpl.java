@@ -8,6 +8,7 @@ import com.limyel.blog.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,5 +38,13 @@ public class TagServiceImpl implements TagService {
         record.setSlug(slug);
         Tag tag = tagMapper.selectOne(record);
         return tag;
+    }
+
+    @Override
+    public int countByIds(List<Long> ids) {
+        if (ids == null || ids.size() == 0) {
+            return 0;
+        }
+        return tagMapper.selectCountByIds(ids);
     }
 }

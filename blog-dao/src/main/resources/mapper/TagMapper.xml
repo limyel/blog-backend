@@ -31,4 +31,8 @@
   <select id="selectDetail" resultMap="TagDetail">
     select t1.id, t1.name, t1.slug, (select count(t2.id) num from post_tag t2 where t2.tag_id = t1.id and t2.deleted = 0) post_num from tag t1
   </select>
+
+  <select id="selectCountByIds" resultType="java.lang.Integer">
+    select count(id) from tag where id in #{ids}
+  </select>
 </mapper>
