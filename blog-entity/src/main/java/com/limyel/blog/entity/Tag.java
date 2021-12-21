@@ -10,6 +10,8 @@ import javax.persistence.*;
 @Setter
 @Table(name = "tag")
 public class Tag {
+
+    @Id
     private Long id;
 
     private Date createdAt;

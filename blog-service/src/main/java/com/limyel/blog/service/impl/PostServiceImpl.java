@@ -127,6 +127,12 @@ public class PostServiceImpl implements PostService {
         return postMapper.updateByPrimaryKeySelective(post);
     }
 
+    @Override
+    public int delete(Post post) {
+        post.setDeleted(true);
+        return postMapper.updateByPrimaryKey(post);
+    }
+
 
     /**
      * 验证标签是否正确

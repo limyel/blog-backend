@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Api(tags = "Blog 关于")
 @RestController
-@RequestMapping("/blog/about")
+@RequestMapping("/blog/abouts")
 public class AboutController {
 
     @Autowired

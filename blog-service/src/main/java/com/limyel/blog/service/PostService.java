@@ -31,4 +31,6 @@ public interface PostService {
     PageInfo<PostInArchive> pageInTag(Tag tag, int pageNum, int pageSize);
 
     int update(Post post, PostVO vo);
+
+    int delete(Post post);
 }

@@ -5,6 +5,8 @@ import javax.persistence.*;
 
 @Table(name = "about_item")
 public class AboutItem {
+
+    @Id
     private Long id;
 
     private Date createdAt;

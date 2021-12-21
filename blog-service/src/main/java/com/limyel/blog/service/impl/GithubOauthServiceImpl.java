@@ -53,7 +53,6 @@ public class GithubOauthServiceImpl implements GithubOauthService {
         if (member == null) {
             throw new BlogException("获取 GitHub 用户信息失败");
         }
-        member.setId(1L);
         memberService.save(member);
 
         return member;

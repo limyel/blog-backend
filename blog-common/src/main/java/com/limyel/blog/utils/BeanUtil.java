@@ -40,8 +40,19 @@ public class BeanUtil {
         List<Field> sourceFields = Arrays.asList(source.getClass().getDeclaredFields());
         List<Field> targetFields = Arrays.asList(target.getClass().getDeclaredFields());
 
+        // todo 更好的写法？
         for (Field targetField: targetFields) {
-
+            for (Field sourceField: sourceFields) {
+                if (targetField.getName().equals(sourceField.getName()) && targetField.getType().equals(sourceField.getType())) {
+                    targetField.setAccessible(true);
+                    sourceField.setAccessible(true);
+                    try {
+                        targetField.set(target, sourceField.get(source));
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
 
     }
