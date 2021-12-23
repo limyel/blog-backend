@@ -1,5 +1,6 @@
 package com.limyel.blog.config;
 
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -12,6 +13,10 @@ import java.util.List;
 
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurationSupport {
+
+    @Autowired
+    private List<HandlerMethodArgumentResolver> handlerMethodArgumentResolvers;
+
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         // swagger2 的静态资源
@@ -47,17 +52,13 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     }
 
 
-//    @Autowired
-//    private CurrentUserArgumentResolver currentUserArgumentResolver;
-
     /**
      * @param argumentResolvers
      */
     @Override
     protected void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
 
-        // 当前用户
-//        argumentResolvers.add(currentUserArgumentResolver);
+        argumentResolvers.addAll(handlerMethodArgumentResolvers);
 
         super.addArgumentResolvers(argumentResolvers);
     }
