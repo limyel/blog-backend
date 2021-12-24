@@ -18,15 +18,13 @@ import java.util.Map;
 @Slf4j
 public class JwtUtil {
 
-    private static String secret;
+    @Value("${blog.jwt.secret}")
+    private String secret;
 
     @Value("${blog.jwt.expiration}")
-    private static Long expiration;
+    private Long expiration;
 
-    @Value("${blog.jwt.secret}")
-
-
-    public static String generateJWT(Long userId) {
+    public String generateJWT(Long userId) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("userId", userId);
 
@@ -38,7 +36,7 @@ public class JwtUtil {
                 .compact();
     }
 
-    public static Map<String, Object> parseJWT(String jwt) {
+    public Map<String, Object> parseJWT(String jwt) {
         Claims claims = Jwts.parser()
                 .setSigningKey(secret)
                 .parseClaimsJws(jwt)
@@ -51,11 +49,16 @@ public class JwtUtil {
         return result;
     }
 
+    public Long parseId(String jwt) {
+        Map<String, Object> map = parseJWT(jwt);
+        return map.get("id") == null? null: (long) map.get("id");
+    }
+
     /**
      * 生成过期时间
      * @return
      */
-    private static Date generateExpirationDate() {
+    private Date generateExpirationDate() {
         return new Date(System.currentTimeMillis() + expiration * 1000);
     }
 

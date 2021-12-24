@@ -2,6 +2,7 @@ package com.limyel.blog.framework.argresolver;//package com.limyel.blog.common.a
 
 import com.limyel.blog.common.exception.InvalidTokenException;
 import com.limyel.blog.common.annotation.CurrentUser;
+import com.limyel.blog.dao.MemberMapper;
 import com.limyel.blog.entity.Member;
 import com.limyel.blog.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class CurrentUserArgumentResolver implements HandlerMethodArgumentResolve
 
     @Autowired
     private JwtUtil jwtUtil;
+
+    @Autowired
+    private MemberMapper memberMapper;
 
     @Override
     public boolean supportsParameter(MethodParameter methodParameter) {
@@ -43,8 +47,8 @@ public class CurrentUserArgumentResolver implements HandlerMethodArgumentResolve
             throw new InvalidTokenException();
         }
 
-        Member member = jwtUtil.parseJWT(token);
+        Long id = jwtUtil.parseId(token);
 
-        return member;
+        return id == null? null: memberMapper.selectByPrimaryKey(id);
     }
 }
