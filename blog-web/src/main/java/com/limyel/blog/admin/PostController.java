@@ -3,13 +3,12 @@ package com.limyel.blog.admin;
 import com.github.pagehelper.PageInfo;
 import com.limyel.blog.common.Response;
 import com.limyel.blog.entity.Post;
-import com.limyel.blog.entity.dto.PostDetail;
-import com.limyel.blog.entity.dto.PostInHome;
-import com.limyel.blog.entity.vo.PostVO;
+import com.limyel.blog.entity.vo.PostDetailVO;
+import com.limyel.blog.entity.vo.PostInHomeVO;
+import com.limyel.blog.entity.dto.PostDTO;
 import com.limyel.blog.service.PostService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,14 +34,14 @@ public class PostController {
             @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize
     ) {
-        PageInfo<PostInHome> pageInfo = postService.pageInHome(pageNum, pageSize);
+        PageInfo<PostInHomeVO> pageInfo = postService.pageInHome(pageNum, pageSize);
         return Response.success(pageInfo);
     }
 
     @ApiOperation(value = "新增", httpMethod = "POST")
     @PostMapping
     public Response save(
-            @RequestBody PostVO vo
+            @RequestBody PostDTO vo
     ) {
         postService.save(vo);
         return Response.success();
@@ -53,7 +52,7 @@ public class PostController {
     public Response getDetail(
             @PathVariable("id") Long id
     ) {
-        PostDetail postDetail = postService.getDetailById(id);
+        PostDetailVO postDetail = postService.getDetailById(id);
         return Response.success(postDetail);
     }
 
@@ -61,7 +60,7 @@ public class PostController {
     @PutMapping("/{id}")
     public Response update(
             @PathVariable("id") Long id,
-            @RequestBody PostVO vo
+            @RequestBody PostDTO vo
     ) {
         Post post = postService.getById(id);
         if (post == null) {

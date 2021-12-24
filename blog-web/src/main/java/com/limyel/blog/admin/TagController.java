@@ -3,7 +3,7 @@ package com.limyel.blog.admin;
 import com.github.pagehelper.PageInfo;
 import com.limyel.blog.common.Response;
 import com.limyel.blog.entity.Tag;
-import com.limyel.blog.entity.vo.TagVO;
+import com.limyel.blog.entity.dto.TagDTO;
 import com.limyel.blog.service.TagService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,7 +29,7 @@ public class TagController {
     @ApiOperation(value = "保存", httpMethod = "POST")
     @PostMapping
     public Response save(
-            @RequestBody TagVO vo
+            @RequestBody TagDTO vo
     ) {
         Tag tag = new Tag();
         tag.setName(vo.getName());
@@ -55,7 +55,7 @@ public class TagController {
     @PutMapping("/{id}")
     public Response update(
             @PathVariable("id") Long id,
-            @RequestBody TagVO vo
+            @RequestBody TagDTO vo
     ) {
         Tag tag = tagService.getById(id);
         if (tag == null) {

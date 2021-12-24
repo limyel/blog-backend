@@ -33,3 +33,5 @@ build/
 .mvn
 
 application-private.properties
+application-dev.properties
+application-private.properties

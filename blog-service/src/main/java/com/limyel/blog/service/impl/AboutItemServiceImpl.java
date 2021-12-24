@@ -4,7 +4,7 @@ import com.limyel.blog.common.exception.BlogException;
 import com.limyel.blog.dao.AboutItemMapper;
 import com.limyel.blog.entity.About;
 import com.limyel.blog.entity.AboutItem;
-import com.limyel.blog.entity.vo.AboutItemVO;
+import com.limyel.blog.entity.dto.AboutItemDTO;
 import com.limyel.blog.service.AboutItemService;
 import com.limyel.blog.service.AboutService;
 import com.limyel.blog.utils.BeanUtil;
@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author limyel
+ */
 @Service
 public class AboutItemServiceImpl implements AboutItemService {
 
@@ -28,7 +31,7 @@ public class AboutItemServiceImpl implements AboutItemService {
     }
 
     @Override
-    public int save(AboutItemVO vo) {
+    public int save(AboutItemDTO vo) {
         About about = aboutService.getById(vo.getAboutId());
         if (about == null) {
             throw new BlogException("About not found");

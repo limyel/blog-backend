@@ -6,6 +6,9 @@ import com.limyel.blog.service.PostTagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author limyel
+ */
 @Service
 public class PostTagServiceImpl implements PostTagService {
 

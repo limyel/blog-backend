@@ -2,7 +2,7 @@ package com.limyel.blog.admin;
 
 import com.limyel.blog.common.Response;
 import com.limyel.blog.entity.AboutItem;
-import com.limyel.blog.entity.vo.AboutItemVO;
+import com.limyel.blog.entity.dto.AboutItemDTO;
 import com.limyel.blog.service.AboutItemService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,7 +26,7 @@ public class AboutItemController {
     @ApiOperation(value = "添加 item", httpMethod = "POST")
     @PostMapping
     public Response save(
-            @RequestBody AboutItemVO vo
+            @RequestBody AboutItemDTO vo
     ) {
         aboutItemService.save(vo);
         return Response.success();

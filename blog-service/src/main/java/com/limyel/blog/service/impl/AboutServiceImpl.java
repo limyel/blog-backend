@@ -4,8 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.limyel.blog.common.exception.BlogException;
 import com.limyel.blog.entity.About;
-import com.limyel.blog.entity.Tag;
-import com.limyel.blog.entity.dto.AboutDetail;
+import com.limyel.blog.entity.vo.AboutDetailVO;
 import com.limyel.blog.dao.AboutMapper;
 import com.limyel.blog.service.AboutItemService;
 import com.limyel.blog.service.AboutService;
@@ -15,6 +14,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author limyel
+ */
 @Service
 public class AboutServiceImpl implements AboutService {
 
@@ -25,7 +27,7 @@ public class AboutServiceImpl implements AboutService {
     private AboutItemService aboutItemService;
 
     @Override
-    public List<AboutDetail> listDetail() {
+    public List<AboutDetailVO> listDetail() {
         return aboutMapper.selectDetail();
     }
 
@@ -58,12 +60,12 @@ public class AboutServiceImpl implements AboutService {
     }
 
     @Override
-    public AboutDetail getDetailById(Long id) {
+    public AboutDetailVO getDetailById(Long id) {
         About about = aboutMapper.selectByPrimaryKey(id);
         if (about == null) {
             throw new BlogException("About not found");
         }
-        AboutDetail aboutDetail = BeanUtil.copy(about, AboutDetail.class);
+        AboutDetailVO aboutDetail = BeanUtil.copy(about, AboutDetailVO.class);
         aboutDetail.setItems(aboutItemService.listByAboutId(about.getId()));
         return aboutDetail;
     }

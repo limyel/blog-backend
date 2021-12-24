@@ -10,7 +10,7 @@
     <result column="sequence" jdbcType="INTEGER" property="sequence" />
   </resultMap>
 
-  <resultMap id="AboutDetail" type="com.limyel.blog.entity.dto.AboutDetail" extends="BaseResultMap">
+  <resultMap id="AboutDetail" type="com.limyel.blog.entity.vo.AboutDetailVO" extends="BaseResultMap">
     <collection column="id" property="items" ofType="com.limyel.blog.entity.AboutItem" select="com.limyel.blog.dao.AboutItemMapper.selectByAboutId"/>
   </resultMap>
 

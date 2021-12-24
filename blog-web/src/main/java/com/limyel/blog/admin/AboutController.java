@@ -3,9 +3,8 @@ package com.limyel.blog.admin;
 import com.github.pagehelper.PageInfo;
 import com.limyel.blog.common.Response;
 import com.limyel.blog.entity.About;
-import com.limyel.blog.entity.AboutItem;
-import com.limyel.blog.entity.vo.AboutItemVO;
-import com.limyel.blog.entity.vo.AboutVO;
+import com.limyel.blog.entity.vo.AboutDetailVO;
+import com.limyel.blog.entity.dto.AboutDTO;
 import com.limyel.blog.service.AboutItemService;
 import com.limyel.blog.service.AboutService;
 import com.limyel.blog.utils.BeanUtil;
@@ -36,7 +35,7 @@ public class AboutController {
     @ApiOperation(value = "新增", httpMethod = "POST")
     @PostMapping
     public Response save(
-            @RequestBody AboutVO vo
+            @RequestBody AboutDTO vo
     ) {
         About about = BeanUtil.copy(vo, About.class);
         aboutService.save(about);
@@ -60,7 +59,7 @@ public class AboutController {
     @PutMapping("/{id}")
     public Response update(
             @PathVariable("id") Long id,
-            @RequestBody AboutVO vo
+            @RequestBody AboutDTO vo
     ) {
         About about = aboutService.getById(id);
         if (about == null) {
@@ -73,17 +72,18 @@ public class AboutController {
 
     @ApiOperation(value = "列表", httpMethod = "GET")
     @GetMapping
-    public Response list(
+    public Response<PageInfo<About>> list(
             @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize
     ) {
         PageInfo<About> pageInfo = aboutService.page(pageNum, pageSize);
+        System.out.println("hello");
         return Response.success(pageInfo);
     }
 
     @ApiOperation(value = "详情", httpMethod = "GET")
     @GetMapping("/{id}")
-    public Response getDetail(
+    public Response<AboutDetailVO> getDetail(
             @PathVariable("id") Long id
     ) {
         return Response.success(aboutService.getDetailById(id));

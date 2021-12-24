@@ -2,7 +2,7 @@ package com.limyel.blog.controller;
 
 import com.limyel.blog.common.Response;
 import com.limyel.blog.entity.Tag;
-import com.limyel.blog.entity.dto.TagDetail;
+import com.limyel.blog.entity.vo.TagDetailVO;
 import com.limyel.blog.service.TagService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+
 @Api(tags = "Blog 标签")
 @RestController
 @RequestMapping("/blog/tags")
@@ -24,8 +25,8 @@ public class TagController {
 
     @ApiOperation(value = "列表", httpMethod = "GET")
     @GetMapping
-    public Response<List<TagDetail>> list() {
-        List<TagDetail> result = tagService.listDetail();
+    public Response<List<TagDetailVO>> list() {
+        List<TagDetailVO> result = tagService.listDetail();
         return Response.success(result);
     }
 

@@ -1,15 +1,28 @@
 package com.limyel.blog.service;
 
 import com.limyel.blog.entity.AboutItem;
-import com.limyel.blog.entity.vo.AboutItemVO;
+import com.limyel.blog.entity.dto.AboutItemDTO;
 
 import java.util.List;
 
+/**
+ * @author limyel
+ */
 public interface AboutItemService {
 
+    /**
+     * 根据 关于id 获取 关于items
+     * @param aboutId 关于id
+     * @return 关于items 列表
+     */
     List<AboutItem> listByAboutId(Long aboutId);
 
-    int save(AboutItemVO vo);
+    /**
+     * 新增
+     * @param vo
+     * @return
+     */
+    int save(AboutItemDTO vo);
 
     AboutItem getById(Long id);
 

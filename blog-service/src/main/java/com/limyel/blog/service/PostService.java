@@ -3,10 +3,10 @@ package com.limyel.blog.service;
 import com.github.pagehelper.PageInfo;
 import com.limyel.blog.entity.Post;
 import com.limyel.blog.entity.Tag;
-import com.limyel.blog.entity.dto.PostDetail;
-import com.limyel.blog.entity.dto.PostInArchive;
-import com.limyel.blog.entity.dto.PostInHome;
-import com.limyel.blog.entity.vo.PostVO;
+import com.limyel.blog.entity.vo.PostDetailVO;
+import com.limyel.blog.entity.vo.PostInArchiveVO;
+import com.limyel.blog.entity.vo.PostInHomeVO;
+import com.limyel.blog.entity.dto.PostDTO;
 
 import java.util.List;
 
@@ -14,23 +14,23 @@ public interface PostService {
 
     Post getById(Long id);
 
-    PageInfo<PostInHome> pageInHome(int pageNum, int pageSize);
+    PageInfo<PostInHomeVO> pageInHome(int pageNum, int pageSize);
 
-    int save(PostVO vo);
+    int save(PostDTO vo);
 
-    PostDetail getDetailById(Long id);
+    PostDetailVO getDetailById(Long id);
 
-    PostDetail getDetailBySlug(String slug);
+    PostDetailVO getDetailBySlug(String slug);
 
     List<Integer> listYear();
 
-    List<PostInArchive> listInArchive(int year);
+    List<PostInArchiveVO> listInArchive(int year);
 
-    List<PostInArchive> listHot();
+    List<PostInArchiveVO> listHot();
 
-    PageInfo<PostInArchive> pageInTag(Tag tag, int pageNum, int pageSize);
+    PageInfo<PostInArchiveVO> pageInTag(Tag tag, int pageNum, int pageSize);
 
-    int update(Post post, PostVO vo);
+    int update(Post post, PostDTO vo);
 
     int delete(Post post);
 }

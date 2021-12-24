@@ -1,11 +1,11 @@
-package com.limyel.blog.entity.dto;
+package com.limyel.blog.entity.vo;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class TagDetail {
+public class TagDetailVO {
 
     private Long id;
 

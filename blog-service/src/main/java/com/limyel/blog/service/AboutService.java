@@ -2,14 +2,13 @@ package com.limyel.blog.service;
 
 import com.github.pagehelper.PageInfo;
 import com.limyel.blog.entity.About;
-import com.limyel.blog.entity.Tag;
-import com.limyel.blog.entity.dto.AboutDetail;
+import com.limyel.blog.entity.vo.AboutDetailVO;
 
 import java.util.List;
 
 public interface AboutService {
 
-    List<AboutDetail> listDetail();
+    List<AboutDetailVO> listDetail();
 
     int save(About about);
 
@@ -21,5 +20,5 @@ public interface AboutService {
 
     PageInfo<About> page(int pageNum, int pageSize);
 
-    AboutDetail getDetailById(Long id);
+    AboutDetailVO getDetailById(Long id);
 }

@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 
 /**
  * 当前用户注解
+ * @author limyel
  */
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)

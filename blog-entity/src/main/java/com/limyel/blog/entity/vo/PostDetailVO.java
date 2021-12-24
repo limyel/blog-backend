@@ -1,4 +1,4 @@
-package com.limyel.blog.entity.dto;
+package com.limyel.blog.entity.vo;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,13 +8,13 @@ import java.util.List;
 
 @Getter
 @Setter
-public class PostDetail {
+public class PostDetailVO {
 
     private Long id;
 
     private Date createdAt;
 
-    private List<TagInPost> tags;
+    private List<TagInPostVO> tags;
 
     private Integer views;
 

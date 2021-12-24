@@ -2,9 +2,9 @@ package com.limyel.blog.service;
 
 import com.github.pagehelper.PageInfo;
 import com.limyel.blog.entity.Tag;
-import com.limyel.blog.entity.dto.TagDetail;
-import com.limyel.blog.entity.dto.TagInPost;
-import com.limyel.blog.entity.vo.TagVO;
+import com.limyel.blog.entity.vo.TagDetailVO;
+import com.limyel.blog.entity.vo.TagInPostVO;
+import com.limyel.blog.entity.dto.TagDTO;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ public interface TagService {
 
     int save(Tag tag);
 
-    List<TagInPost> listByPostId(Long postId);
+    List<TagInPostVO> listByPostId(Long postId);
 
-    List<TagDetail> listDetail();
+    List<TagDetailVO> listDetail();
 
     Tag getBySlug(String slug);
 
@@ -24,7 +24,7 @@ public interface TagService {
 
     int delete(Tag tag);
 
-    int update(Tag tag, TagVO vo);
+    int update(Tag tag, TagDTO vo);
 
     PageInfo<Tag> page(int pageNum, int pageSize);
 }

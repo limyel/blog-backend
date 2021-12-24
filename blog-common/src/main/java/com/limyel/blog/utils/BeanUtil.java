@@ -6,7 +6,9 @@ import org.springframework.util.CollectionUtils;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BeanUtil {
 
@@ -37,23 +39,24 @@ public class BeanUtil {
     }
 
     public static <T> void cover(Object source, T target) {
-        List<Field> sourceFields = Arrays.asList(source.getClass().getDeclaredFields());
-        List<Field> targetFields = Arrays.asList(target.getClass().getDeclaredFields());
+        Field[] sourceFields = source.getClass().getDeclaredFields();
+        Field[] targetFields = target.getClass().getDeclaredFields();
 
-        // todo 更好的写法？
+        Map<String, Field> map = new HashMap<>();
         for (Field targetField: targetFields) {
-            for (Field sourceField: sourceFields) {
-                if (targetField.getName().equals(sourceField.getName()) && targetField.getType().equals(sourceField.getType())) {
-                    targetField.setAccessible(true);
-                    sourceField.setAccessible(true);
-                    try {
-                        targetField.set(target, sourceField.get(source));
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
+            map.put(targetField.getName(), targetField);
+        }
+        for (Field sourceField: sourceFields) {
+            if (map.get(sourceField.getName()) != null && sourceField.getType().equals(map.get(sourceField.getName()).getType())) {
+                Field field = map.get(sourceField.getName());
+                sourceField.setAccessible(true);
+                field.setAccessible(true);
+                try {
+                    field.set(target, sourceField.get(source));
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
                 }
             }
         }
-
     }
 }

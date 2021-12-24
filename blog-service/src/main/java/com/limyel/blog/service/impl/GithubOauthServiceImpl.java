@@ -4,12 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.limyel.blog.common.exception.BlogException;
-import com.limyel.blog.common.exception.ExternalException;
 import com.limyel.blog.entity.Member;
-import com.limyel.blog.entity.vo.GithubAccessTokenVO;
-import com.limyel.blog.entity.vo.GithubUserInfoVO;
+import com.limyel.blog.entity.dto.GithubAccessTokenDTO;
+import com.limyel.blog.entity.dto.GithubUserInfoDTO;
+import com.limyel.blog.entity.vo.MemberVO;
 import com.limyel.blog.service.GithubOauthService;
 import com.limyel.blog.service.MemberService;
+import com.limyel.blog.utils.BeanUtil;
 import com.limyel.blog.utils.OkHttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +19,9 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author limyel
+ */
 @Service
 public class GithubOauthServiceImpl implements GithubOauthService {
 
@@ -40,7 +44,7 @@ public class GithubOauthServiceImpl implements GithubOauthService {
     private MemberService memberService;
 
     @Override
-    public Member bindAccount(String code) {
+    public MemberVO bindAccount(String code) {
         Map<String, String> params = new HashMap<>();
         params.put("client_id", clientId);
         params.put("client_secret", clientSecret);
@@ -55,7 +59,7 @@ public class GithubOauthServiceImpl implements GithubOauthService {
         }
         memberService.save(member);
 
-        return member;
+        return BeanUtil.copy(member, MemberVO.class);
     }
 
     private Member getMemberInfo(String accessToken) {
@@ -66,7 +70,7 @@ public class GithubOauthServiceImpl implements GithubOauthService {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
         try {
-            GithubUserInfoVO vo = objectMapper.readValue(result, GithubUserInfoVO.class);
+            GithubUserInfoDTO vo = objectMapper.readValue(result, GithubUserInfoDTO.class);
             Member member = new Member();
             member.setAvatarUrl(vo.getAvatarUrl());
             member.setEmail(vo.getEmail());
@@ -86,7 +90,7 @@ public class GithubOauthServiceImpl implements GithubOauthService {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
         try {
-            GithubAccessTokenVO vo = objectMapper.readValue(result, GithubAccessTokenVO.class);
+            GithubAccessTokenDTO vo = objectMapper.readValue(result, GithubAccessTokenDTO.class);
             return vo.getAccessToken();
         } catch (JsonProcessingException e) {
             e.printStackTrace();

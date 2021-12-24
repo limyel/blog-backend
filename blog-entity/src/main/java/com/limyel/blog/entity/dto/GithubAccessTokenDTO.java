@@ -1,11 +1,11 @@
-package com.limyel.blog.entity.vo;
+package com.limyel.blog.entity.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class GithubAccessTokenVO {
+public class GithubAccessTokenDTO {
 
     private String accessToken;
 

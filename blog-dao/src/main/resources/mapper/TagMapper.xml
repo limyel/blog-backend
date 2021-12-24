@@ -10,13 +10,13 @@
     <result column="slug" jdbcType="VARCHAR" property="slug" />
   </resultMap>
 
-  <resultMap id="TagInPost" type="com.limyel.blog.entity.dto.TagInPost">
+  <resultMap id="TagInPost" type="com.limyel.blog.entity.vo.TagInPostVO">
     <id column="id" property="id"/>
     <result column="name" property="name"/>
     <result column="slug" jdbcType="VARCHAR" property="slug" />
   </resultMap>
 
-  <resultMap id="TagDetail" type="com.limyel.blog.entity.dto.TagDetail" extends="TagInPost">
+  <resultMap id="TagDetail" type="com.limyel.blog.entity.vo.TagDetailVO" extends="TagInPost">
     <result column="post_num" property="postNum"/>
   </resultMap>
 

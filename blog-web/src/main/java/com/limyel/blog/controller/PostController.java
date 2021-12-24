@@ -1,11 +1,10 @@
 package com.limyel.blog.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.limyel.blog.entity.Post;
 import com.limyel.blog.entity.Tag;
-import com.limyel.blog.entity.dto.PostDetail;
-import com.limyel.blog.entity.dto.PostInArchive;
-import com.limyel.blog.entity.dto.PostInHome;
+import com.limyel.blog.entity.vo.PostDetailVO;
+import com.limyel.blog.entity.vo.PostInArchiveVO;
+import com.limyel.blog.entity.vo.PostInHomeVO;
 import com.limyel.blog.service.PostService;
 import com.limyel.blog.common.Response;
 import com.limyel.blog.service.TagService;
@@ -22,6 +21,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author limyel
+ */
 @Api(tags = "Blog 文章")
 @RestController("")
 @RequestMapping("/blog/posts")
@@ -35,7 +37,7 @@ public class PostController {
 
     @ApiOperation(value = "列表", httpMethod = "GET")
     @GetMapping
-    public Response<PageInfo<PostInHome>> listInHome(
+    public Response<PageInfo<PostInHomeVO>> listInHome(
             @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize
     ) {
@@ -44,10 +46,10 @@ public class PostController {
 
     @ApiOperation(value = "详情", httpMethod = "GET")
     @GetMapping("/{slug}")
-    public Response<PostDetail> getDetail(
+    public Response<PostDetailVO> getDetail(
             @PathVariable("slug") String slug
     ) {
-        PostDetail postDetail = postService.getDetailBySlug(slug);
+        PostDetailVO postDetail = postService.getDetailBySlug(slug);
         if (postDetail == null) {
             return Response.notFound();
         }
@@ -56,8 +58,8 @@ public class PostController {
 
     @ApiOperation(value = "归档", httpMethod = "GET")
     @GetMapping("/archives")
-    public Response<Map<Integer, List<PostInArchive>>> archives() {
-        Map<Integer, List<PostInArchive>> result = new HashMap<>();
+    public Response<Map<Integer, List<PostInArchiveVO>>> archives() {
+        Map<Integer, List<PostInArchiveVO>> result = new HashMap<>();
         for (int year: postService.listYear()) {
             result.put(year, postService.listInArchive(year));
         }
@@ -81,7 +83,7 @@ public class PostController {
         if (tag == null) {
             return Response.notFound();
         }
-        PageInfo<PostInArchive> pageInfo = postService.pageInTag(tag, pageNum, pageSize);
+        PageInfo<PostInArchiveVO> pageInfo = postService.pageInTag(tag, pageNum, pageSize);
         return Response.success(pageInfo);
     }
 }

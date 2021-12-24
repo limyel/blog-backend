@@ -3,12 +3,16 @@ package com.limyel.blog.entity.vo;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
-public class AboutVO {
+public class PostInArchiveVO {
+
+    private Date createdAt;
 
     private String title;
 
-    private Integer sequence;
+    private String slug;
 
 }

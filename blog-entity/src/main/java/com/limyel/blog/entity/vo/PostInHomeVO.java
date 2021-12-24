@@ -1,6 +1,5 @@
-package com.limyel.blog.entity.dto;
+package com.limyel.blog.entity.vo;
 
-import com.limyel.blog.entity.Tag;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class PostInHome {
+public class PostInHomeVO {
 
     private Long id;
 
@@ -23,6 +22,6 @@ public class PostInHome {
 
     private String slug;
 
-    private List<TagInPost> tags;
+    private List<TagInPostVO> tags;
 
 }

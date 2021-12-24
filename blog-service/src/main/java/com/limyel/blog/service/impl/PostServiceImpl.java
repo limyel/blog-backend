@@ -5,12 +5,12 @@ import com.github.pagehelper.PageInfo;
 import com.limyel.blog.common.exception.BlogException;
 import com.limyel.blog.entity.PostTag;
 import com.limyel.blog.entity.Tag;
-import com.limyel.blog.entity.dto.PostDetail;
-import com.limyel.blog.entity.dto.PostInArchive;
-import com.limyel.blog.entity.dto.PostInHome;
+import com.limyel.blog.entity.vo.PostDetailVO;
+import com.limyel.blog.entity.vo.PostInArchiveVO;
+import com.limyel.blog.entity.vo.PostInHomeVO;
 import com.limyel.blog.dao.PostMapper;
 import com.limyel.blog.entity.Post;
-import com.limyel.blog.entity.vo.PostVO;
+import com.limyel.blog.entity.dto.PostDTO;
 import com.limyel.blog.service.PostService;
 import com.limyel.blog.service.PostTagService;
 import com.limyel.blog.service.TagService;
@@ -39,16 +39,16 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PageInfo<PostInHome> pageInHome(int pageNum, int pageSize) {
+    public PageInfo<PostInHomeVO> pageInHome(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<PostInHome> posts = postMapper.selectInHome();
-        PageInfo<PostInHome> pageInfo = new PageInfo<>(posts);
+        List<PostInHomeVO> posts = postMapper.selectInHome();
+        PageInfo<PostInHomeVO> pageInfo = new PageInfo<>(posts);
         pageInfo.setTotal(posts.size());
         return pageInfo;
     }
 
     @Override
-    public int save(PostVO vo) {
+    public int save(PostDTO vo) {
         Post post = BeanUtil.copy(vo, Post.class);
         post.setSlug(SlugUtil.generate(vo.getTitle()));
 
@@ -68,23 +68,23 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDetail getDetailById(Long id) {
+    public PostDetailVO getDetailById(Long id) {
         Post post = postMapper.selectByPrimaryKey(id);
         if (post == null) {
             return null;
         }
-        PostDetail postDetail = BeanUtil.copy(post, PostDetail.class);
+        PostDetailVO postDetail = BeanUtil.copy(post, PostDetailVO.class);
         postDetail.setTags(tagService.listByPostId(post.getId()));
         return postDetail;
     }
 
     @Override
-    public PostDetail getDetailBySlug(String slug) {
+    public PostDetailVO getDetailBySlug(String slug) {
         Post record = new Post();
         record.setDeleted(false);
         record.setSlug(slug);
         Post post = postMapper.selectOne(record);
-        PostDetail postDetail = BeanUtil.copy(post, PostDetail.class);
+        PostDetailVO postDetail = BeanUtil.copy(post, PostDetailVO.class);
         postDetail.setTags(tagService.listByPostId(post.getId()));
         return postDetail;
     }
@@ -95,27 +95,27 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostInArchive> listInArchive(int year) {
+    public List<PostInArchiveVO> listInArchive(int year) {
         List<Post> posts = postMapper.selectByYear(year);
 
-        return BeanUtil.copyList(posts, PostInArchive.class);
+        return BeanUtil.copyList(posts, PostInArchiveVO.class);
     }
 
     @Override
-    public List<PostInArchive> listHot() {
+    public List<PostInArchiveVO> listHot() {
         return postMapper.selectHot();
     }
 
     @Override
-    public PageInfo<PostInArchive> pageInTag(Tag tag, int pageNum, int pageSize) {
+    public PageInfo<PostInArchiveVO> pageInTag(Tag tag, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<PostInArchive> posts = postMapper.selectByTagId(tag.getId());
-        PageInfo<PostInArchive> pageInfo = new PageInfo<>(posts);
+        List<PostInArchiveVO> posts = postMapper.selectByTagId(tag.getId());
+        PageInfo<PostInArchiveVO> pageInfo = new PageInfo<>(posts);
         return pageInfo;
     }
 
     @Override
-    public int update(Post post, PostVO vo) {
+    public int update(Post post, PostDTO vo) {
         if (!validateTags(vo.getTags())) {
             throw new BlogException("标签不存在");
         }

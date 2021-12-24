@@ -1,9 +1,10 @@
 package com.limyel.blog.service;
 
 import com.limyel.blog.entity.Member;
+import com.limyel.blog.entity.vo.MemberVO;
 
 public interface GithubOauthService {
 
-    Member bindAccount(String code);
+    MemberVO bindAccount(String code);
 
 }
