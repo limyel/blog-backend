@@ -6,4 +6,8 @@ public interface MemberService {
 
     int save(Member member);
 
+    int update(Member member);
+
+    Member getByInfo(String name, String email);
+
 }

@@ -22,7 +22,7 @@ public interface AboutItemService {
      * @param vo
      * @return
      */
-    int save(AboutItemDTO vo);
+    int save(AboutItemDTO vo); // todo 改为 AboutItem
 
     AboutItem getById(Long id);
 

@@ -16,6 +16,7 @@ public interface PostService {
 
     PageInfo<PostInHomeVO> pageInHome(int pageNum, int pageSize);
 
+    // todo 改为 Post
     int save(PostDTO vo);
 
     PostDetailVO getDetailById(Long id);

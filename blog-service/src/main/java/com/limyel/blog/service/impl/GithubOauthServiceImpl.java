@@ -57,7 +57,14 @@ public class GithubOauthServiceImpl implements GithubOauthService {
         if (member == null) {
             throw new BlogException("获取 GitHub 用户信息失败");
         }
-        memberService.save(member);
+        Member oldMember = memberService.getByInfo(member.getName(), member.getEmail());
+        if (oldMember != null) {
+            BeanUtil.cover(member, oldMember);
+            memberService.update(oldMember);
+            member = oldMember;
+        } else {
+            memberService.save(member);
+        }
 
         return BeanUtil.copy(member, MemberVO.class);
     }

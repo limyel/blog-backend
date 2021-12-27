@@ -6,9 +6,28 @@
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl" />
     <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="html_url" jdbcType="VARCHAR" property="htmlUrl" />
   </resultMap>
+
+  <resultMap id="Member" type="com.limyel.blog.entity.vo.MemberVO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl" />
+    <result column="html_url" jdbcType="VARCHAR" property="htmlUrl" />
+  </resultMap>
+
+  <sql id="BaseColumns">
+    id, created_at, updated_at, deleted, name, avatar_url, email, html_url
+  </sql>
+
+  <select id="selectVOById" resultMap="Member" parameterType="java.lang.Long">
+    select id, name, avatar_url, html_url from member
+  </select>
+
+  <select id="selectByInfo" resultMap="BaseResultMap">
+    select <include refid="BaseColumns"/> from member where name=#{name} and email=#{email}
+  </select>
 </mapper>

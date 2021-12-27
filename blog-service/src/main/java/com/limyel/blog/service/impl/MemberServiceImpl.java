@@ -19,4 +19,14 @@ public class MemberServiceImpl implements MemberService {
     public int save(Member member) {
         return memberMapper.insertSelective(member);
     }
+
+    @Override
+    public int update(Member member) {
+        return memberMapper.updateByPrimaryKeySelective(member);
+    }
+
+    @Override
+    public Member getByInfo(String name, String email) {
+        return memberMapper.selectByInfo(name, email);
+    }
 }

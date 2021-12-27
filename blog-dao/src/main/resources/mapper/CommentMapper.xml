@@ -8,9 +8,35 @@
     <result column="deleted" jdbcType="BIT" property="deleted" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="member_id" jdbcType="BIGINT" property="memberId" />
-    <result column="comment_id" jdbcType="BIGINT" property="commentId" />
+    <result column="parent_comment_id" jdbcType="BIGINT" property="parentCommentId" />
     <result column="post_id" jdbcType="BIGINT" property="postId" />
     <result column="floor" jdbcType="INTEGER" property="floor" />
     <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
+
+  <resultMap id="CommentInPost" type="com.limyel.blog.entity.vo.CommentInPostVO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="floor" jdbcType="INTEGER" property="floor" />
+    <association column="member_id" property="member" select="com.limyel.blog.dao.MemberMapper.selectVOById" />
+    <association column="parent_comment_id" property="parentComment" select="com.limyel.blog.dao.CommentMapper.selectParentById"/>
+  </resultMap>
+
+  <resultMap id="ParentComment" type="com.limyel.blog.entity.vo.ParentCommentVO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="floor" jdbcType="INTEGER" property="floor" />
+    <association column="member_id" property="member" select="com.limyel.blog.dao.MemberMapper.selectVOById" />
+  </resultMap>
+
+  <select id="selectByPostId" parameterType="java.lang.Long" resultMap="CommentInPost">
+    select id, created_at, content, floor, member_id, parent_comment_id from comment where post_id=#{postId} order by created_at desc
+  </select>
+
+  <select id="selectParentById" parameterType="java.lang.Long" resultMap="ParentComment">
+    select id, created_at, content, floor, member_id from comment where id = #{parentCommentId}
+  </select>
+
 </mapper>
