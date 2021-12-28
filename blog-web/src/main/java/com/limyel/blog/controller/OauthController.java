@@ -1,8 +1,7 @@
 package com.limyel.blog.controller;
 
 import com.limyel.blog.common.Response;
-import com.limyel.blog.entity.Member;
-import com.limyel.blog.entity.vo.MemberVO;
+import com.limyel.blog.entity.vo.UserVO;
 import com.limyel.blog.service.GithubOauthService;
 import com.limyel.blog.utils.JwtUtil;
 import io.swagger.annotations.Api;
@@ -32,7 +31,7 @@ public class OauthController {
     public Response github(
             @RequestParam(value = "code") String code
     ) {
-        MemberVO memberVO = githubOauthService.bindAccount(code);
+        UserVO memberVO = githubOauthService.bindAccount(code);
         String jwt = jwtUtil.generateJWT(memberVO.getId());
         Map<String, Object> result = new HashMap<>();
         result.put("jwt", jwt);

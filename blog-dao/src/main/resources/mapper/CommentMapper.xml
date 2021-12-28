@@ -19,7 +19,7 @@
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="floor" jdbcType="INTEGER" property="floor" />
-    <association column="member_id" property="member" select="com.limyel.blog.dao.MemberMapper.selectVOById" />
+    <association column="member_id" property="member" select="com.limyel.blog.dao.UserMapper.selectVOById" />
     <association column="parent_comment_id" property="parentComment" select="com.limyel.blog.dao.CommentMapper.selectParentById"/>
   </resultMap>
 
@@ -28,7 +28,7 @@
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="floor" jdbcType="INTEGER" property="floor" />
-    <association column="member_id" property="member" select="com.limyel.blog.dao.MemberMapper.selectVOById" />
+    <association column="member_id" property="member" select="com.limyel.blog.dao.UserMapper.selectVOById" />
   </resultMap>
 
   <select id="selectByPostId" parameterType="java.lang.Long" resultMap="CommentInPost">

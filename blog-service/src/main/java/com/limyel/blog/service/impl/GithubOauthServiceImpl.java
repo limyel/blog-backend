@@ -4,10 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.limyel.blog.common.exception.BlogException;
-import com.limyel.blog.entity.Member;
+import com.limyel.blog.entity.User;
 import com.limyel.blog.entity.dto.GithubAccessTokenDTO;
 import com.limyel.blog.entity.dto.GithubUserInfoDTO;
-import com.limyel.blog.entity.vo.MemberVO;
+import com.limyel.blog.entity.vo.UserVO;
 import com.limyel.blog.service.GithubOauthService;
 import com.limyel.blog.service.MemberService;
 import com.limyel.blog.utils.BeanUtil;
@@ -44,7 +44,7 @@ public class GithubOauthServiceImpl implements GithubOauthService {
     private MemberService memberService;
 
     @Override
-    public MemberVO bindAccount(String code) {
+    public UserVO bindAccount(String code) {
         Map<String, String> params = new HashMap<>();
         params.put("client_id", clientId);
         params.put("client_secret", clientSecret);
@@ -53,11 +53,11 @@ public class GithubOauthServiceImpl implements GithubOauthService {
         if (accessToken == null) {
             throw new BlogException("获取 GitHub access token 失败");
         }
-        Member member = getMemberInfo(accessToken);
+        User member = getMemberInfo(accessToken);
         if (member == null) {
             throw new BlogException("获取 GitHub 用户信息失败");
         }
-        Member oldMember = memberService.getByInfo(member.getName(), member.getEmail());
+        User oldMember = memberService.getByInfo(member.getName(), member.getEmail());
         if (oldMember != null) {
             BeanUtil.cover(member, oldMember);
             memberService.update(oldMember);
@@ -66,10 +66,10 @@ public class GithubOauthServiceImpl implements GithubOauthService {
             memberService.save(member);
         }
 
-        return BeanUtil.copy(member, MemberVO.class);
+        return BeanUtil.copy(member, UserVO.class);
     }
 
-    private Member getMemberInfo(String accessToken) {
+    private User getMemberInfo(String accessToken) {
         Map<String, String> headers = new HashMap<>();
         headers.put("Authorization", "token " + accessToken);
         headers.put("Accept", "application/json");
@@ -78,7 +78,7 @@ public class GithubOauthServiceImpl implements GithubOauthService {
         objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
         try {
             GithubUserInfoDTO vo = objectMapper.readValue(result, GithubUserInfoDTO.class);
-            Member member = new Member();
+            User member = new User();
             member.setAvatarUrl(vo.getAvatarUrl());
             member.setEmail(vo.getEmail());
             member.setHtmlUrl(vo.getHtmlUrl());

@@ -3,7 +3,7 @@ package com.limyel.blog.controller;
 import com.limyel.blog.common.Response;
 import com.limyel.blog.common.annotation.CurrentUser;
 import com.limyel.blog.entity.Comment;
-import com.limyel.blog.entity.Member;
+import com.limyel.blog.entity.User;
 import com.limyel.blog.entity.Post;
 import com.limyel.blog.entity.dto.CommentDTO;
 import com.limyel.blog.entity.vo.CommentInPostVO;
@@ -54,7 +54,7 @@ public class CommentController {
     @ApiOperation(value = "发布", httpMethod = "POST")
     @PostMapping
     public Response save(
-            @CurrentUser Member member,
+            @CurrentUser User member,
             @RequestBody CommentDTO commentDTO
     ) {
         Comment comment = BeanUtil.copy(commentDTO, Comment.class);

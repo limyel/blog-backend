@@ -1,13 +1,13 @@
 package com.limyel.blog.service;
 
-import com.limyel.blog.entity.Member;
+import com.limyel.blog.entity.User;
 
 public interface MemberService {
 
-    int save(Member member);
+    int save(User member);
 
-    int update(Member member);
+    int update(User member);
 
-    Member getByInfo(String name, String email);
+    User getByInfo(String name, String email);
 
 }

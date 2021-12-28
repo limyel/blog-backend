@@ -1,6 +1,6 @@
 package com.limyel.blog.config;
 
-import com.limyel.blog.entity.Member;
+import com.limyel.blog.entity.User;
 import io.swagger.annotations.Api;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,7 +44,7 @@ public class SwaggerConfig {
         // 全局参数
         docket.globalOperationParameters(parameters);
         // 忽略方法中的参数
-        docket.ignoredParameterTypes(Member.class);
+        docket.ignoredParameterTypes(User.class);
 
         ApiKey apiKey = new ApiKey("Authorization", "jwt token", "header");
         List<ApiKey> apiKeys = new ArrayList<>();

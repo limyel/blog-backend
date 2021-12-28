@@ -2,8 +2,7 @@ package com.limyel.blog.framework.argresolver;//package com.limyel.blog.common.a
 
 import com.limyel.blog.common.exception.InvalidTokenException;
 import com.limyel.blog.common.annotation.CurrentUser;
-import com.limyel.blog.dao.MemberMapper;
-import com.limyel.blog.entity.Member;
+import com.limyel.blog.dao.UserMapper;
 import com.limyel.blog.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
@@ -23,7 +22,7 @@ public class CurrentUserArgumentResolver implements HandlerMethodArgumentResolve
     private JwtUtil jwtUtil;
 
     @Autowired
-    private MemberMapper memberMapper;
+    private UserMapper memberMapper;
 
     @Override
     public boolean supportsParameter(MethodParameter methodParameter) {

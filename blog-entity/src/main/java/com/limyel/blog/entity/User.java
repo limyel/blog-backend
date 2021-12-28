@@ -8,8 +8,8 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@Table(name = "member")
-public class Member {
+@Table(name = "user")
+public class User {
 
     @Id
     private Long id;

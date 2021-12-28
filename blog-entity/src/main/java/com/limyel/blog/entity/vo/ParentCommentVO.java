@@ -15,7 +15,7 @@ public class ParentCommentVO {
 
     private String content;
 
-    private MemberVO member;
+    private UserVO member;
 
     private Integer floor;
 
