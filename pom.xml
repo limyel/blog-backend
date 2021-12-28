@@ -8,10 +8,10 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>blog-entity</module>
-        <module>blog-web</module>
         <module>blog-service</module>
         <module>blog-common</module>
         <module>blog-dao</module>
+        <module>blog-api</module>
     </modules>
     <name>blog-backend</name>
     <description>backend</description>
