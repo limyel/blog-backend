@@ -59,9 +59,9 @@ public class GithubOauthServiceImpl implements GithubOauthService {
         }
         User oldMember = memberService.getByInfo(member.getName(), member.getEmail());
         if (oldMember != null) {
+            member.setId(oldMember.getId());
             BeanUtil.cover(member, oldMember);
             memberService.update(oldMember);
-            member = oldMember;
         } else {
             memberService.save(member);
         }

@@ -48,7 +48,7 @@ public class JwtUtil {
 
     public Long parseId(String jwt) {
         Map<String, Object> map = parseJWT(jwt);
-        return map.get("id") == null? null: (long) map.get("id");
+        return map.get("userId") == null? null: Long.valueOf(String.valueOf(map.get("userId")));
     }
 
     /**

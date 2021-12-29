@@ -12,7 +12,7 @@ public class CommentDTO {
 
     private String content;
 
-    private Long commentId;
+    private Long parentId;
 
     private Long postId;
 

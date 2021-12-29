@@ -12,7 +12,7 @@
     <result column="html_url" jdbcType="VARCHAR" property="htmlUrl" />
   </resultMap>
 
-  <resultMap id="Member" type="com.limyel.blog.entity.vo.UserVO">
+  <resultMap id="User" type="com.limyel.blog.entity.vo.UserVO">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl" />
@@ -23,11 +23,11 @@
     id, created_at, updated_at, deleted, name, avatar_url, email, html_url
   </sql>
 
-  <select id="selectVOById" resultMap="Member" parameterType="java.lang.Long">
-    select id, name, avatar_url, html_url from member
+  <select id="selectVOById" resultMap="User" parameterType="java.lang.Long">
+    select id, name, avatar_url, html_url from user
   </select>
 
   <select id="selectByInfo" resultMap="BaseResultMap">
-    select <include refid="BaseColumns"/> from member where name=#{name} and email=#{email}
+    select <include refid="BaseColumns"/> from user where name=#{name} and email=#{email}
   </select>
 </mapper>

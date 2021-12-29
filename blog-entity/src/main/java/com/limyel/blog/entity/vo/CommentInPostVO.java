@@ -18,7 +18,7 @@ public class CommentInPostVO {
 
     private String content;
 
-    private UserVO member;
+    private UserVO user;
 
     private ParentCommentVO parentComment;
 

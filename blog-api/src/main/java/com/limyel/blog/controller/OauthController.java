@@ -31,11 +31,11 @@ public class OauthController {
     public Response github(
             @RequestParam(value = "code") String code
     ) {
-        UserVO memberVO = githubOauthService.bindAccount(code);
-        String jwt = jwtUtil.generateJWT(memberVO.getId());
+        UserVO userVO = githubOauthService.bindAccount(code);
+        String jwt = jwtUtil.generateJWT(userVO.getId());
         Map<String, Object> result = new HashMap<>();
         result.put("jwt", jwt);
-        result.put("memberInfo", memberVO);
+        result.put("userInfo", userVO);
 
         return Response.success(result);
     }
