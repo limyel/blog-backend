@@ -20,7 +20,7 @@ public class Comment {
 
     private String content;
 
-    private Long memberId;
+    private Long userId;
 
     private Long parentCommentId;
 

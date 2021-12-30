@@ -2,7 +2,7 @@ package com.limyel.blog.service.impl;
 
 import com.limyel.blog.dao.UserMapper;
 import com.limyel.blog.entity.User;
-import com.limyel.blog.service.MemberService;
+import com.limyel.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,23 +10,28 @@ import org.springframework.stereotype.Service;
  * @author limyel
  */
 @Service
-public class MemberServiceImpl implements MemberService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserMapper memberMapper;
+    private UserMapper userMapper;
 
     @Override
     public int save(User member) {
-        return memberMapper.insertSelective(member);
+        return userMapper.insertSelective(member);
     }
 
     @Override
     public int update(User member) {
-        return memberMapper.updateByPrimaryKeySelective(member);
+        return userMapper.updateByPrimaryKeySelective(member);
     }
 
     @Override
     public User getByInfo(String name, String email) {
-        return memberMapper.selectByInfo(name, email);
+        return userMapper.selectByInfo(name, email);
+    }
+
+    @Override
+    public User getById(Long id) {
+        return userMapper.selectByPrimaryKey(id);
     }
 }

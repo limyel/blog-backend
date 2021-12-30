@@ -2,7 +2,7 @@ package com.limyel.blog.service;
 
 import com.limyel.blog.entity.User;
 
-public interface MemberService {
+public interface UserService {
 
     int save(User member);
 
@@ -10,4 +10,5 @@ public interface MemberService {
 
     User getByInfo(String name, String email);
 
+    User getById(Long id);
 }

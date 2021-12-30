@@ -7,6 +7,7 @@ import com.limyel.blog.entity.User;
 import com.limyel.blog.entity.Post;
 import com.limyel.blog.entity.dto.CommentDTO;
 import com.limyel.blog.entity.vo.CommentInPostVO;
+import com.limyel.blog.entity.vo.CommentLatestVO;
 import com.limyel.blog.service.CommentService;
 import com.limyel.blog.service.PostService;
 import com.limyel.blog.utils.BeanUtil;
@@ -54,7 +55,7 @@ public class CommentController {
     @ApiOperation(value = "发布", httpMethod = "POST")
     @PostMapping
     public Response save(
-            @CurrentUser User member,
+            @CurrentUser User user,
             @RequestBody CommentDTO commentDTO
     ) {
         Comment comment = BeanUtil.copy(commentDTO, Comment.class);
@@ -64,11 +65,18 @@ public class CommentController {
         if (comment.getPostId() != null && postService.getById(comment.getPostId()) == null) {
             return Response.notFound();
         }
-        comment.setMemberId(member.getId());
+        comment.setUserId(user.getId());
 
         commentService.save(comment);
 
         return Response.success();
+    }
+
+    @ApiOperation(value = "最新", httpMethod = "GET")
+    @GetMapping("/latest")
+    public Response latest() {
+        List<CommentLatestVO> result = commentService.listLatest();
+        return Response.success(result);
     }
 
 }

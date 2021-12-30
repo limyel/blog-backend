@@ -7,9 +7,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class ParentCommentVO {
-
-    private Long id;
+public class CommentLatestVO {
 
     private Date createdAt;
 
@@ -17,6 +15,6 @@ public class ParentCommentVO {
 
     private UserVO user;
 
-    private Integer floor;
+    private PostInArchiveVO post;
 
 }

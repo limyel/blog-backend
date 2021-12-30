@@ -7,7 +7,7 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
     <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="parent_comment_id" jdbcType="BIGINT" property="parentCommentId" />
     <result column="post_id" jdbcType="BIGINT" property="postId" />
     <result column="floor" jdbcType="INTEGER" property="floor" />
@@ -19,7 +19,7 @@
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="floor" jdbcType="INTEGER" property="floor" />
-    <association column="member_id" property="member" select="com.limyel.blog.dao.UserMapper.selectVOById" />
+    <association column="user_id" property="user" select="com.limyel.blog.dao.UserMapper.selectVOById" />
     <association column="parent_comment_id" property="parentComment" select="com.limyel.blog.dao.CommentMapper.selectParentById"/>
   </resultMap>
 
@@ -28,8 +28,12 @@
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="floor" jdbcType="INTEGER" property="floor" />
-    <association column="member_id" property="member" select="com.limyel.blog.dao.UserMapper.selectVOById" />
+    <association column="user_id" property="user" select="com.limyel.blog.dao.UserMapper.selectVOById" />
   </resultMap>
+
+  <sql id="BaseColumns">
+    id, created_at, updated_at, deleted, content, user_id, parent_comment_id, post_id, floor, status
+  </sql>
 
   <select id="selectByPostId" parameterType="java.lang.Long" resultMap="CommentInPost">
     select id, created_at, content, floor, member_id, parent_comment_id from comment where post_id=#{postId} order by created_at desc
@@ -37,6 +41,10 @@
 
   <select id="selectParentById" parameterType="java.lang.Long" resultMap="ParentComment">
     select id, created_at, content, floor, member_id from comment where id = #{parentCommentId}
+  </select>
+
+  <select id="selectLatest" resultMap="BaseResultMap">
+    select <include refid="BaseColumns"/> from comment order by created_at desc limit 5
   </select>
 
 </mapper>

@@ -9,7 +9,7 @@ import com.limyel.blog.entity.dto.GithubAccessTokenDTO;
 import com.limyel.blog.entity.dto.GithubUserInfoDTO;
 import com.limyel.blog.entity.vo.UserVO;
 import com.limyel.blog.service.GithubOauthService;
-import com.limyel.blog.service.MemberService;
+import com.limyel.blog.service.UserService;
 import com.limyel.blog.utils.BeanUtil;
 import com.limyel.blog.utils.OkHttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class GithubOauthServiceImpl implements GithubOauthService {
     private OkHttpUtil okHttpUtil;
 
     @Autowired
-    private MemberService memberService;
+    private UserService memberService;
 
     @Override
     public UserVO bindAccount(String code) {
