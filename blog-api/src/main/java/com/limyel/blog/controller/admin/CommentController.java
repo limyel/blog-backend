@@ -1,4 +1,4 @@
-package com.limyel.blog.admin;
+package com.limyel.blog.controller.admin;
 
 import com.limyel.blog.service.CommentService;
 import io.swagger.annotations.Api;

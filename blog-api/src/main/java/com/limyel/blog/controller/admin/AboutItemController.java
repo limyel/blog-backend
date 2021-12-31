@@ -1,4 +1,4 @@
-package com.limyel.blog.admin;
+package com.limyel.blog.controller.admin;
 
 import com.limyel.blog.common.Response;
 import com.limyel.blog.entity.AboutItem;

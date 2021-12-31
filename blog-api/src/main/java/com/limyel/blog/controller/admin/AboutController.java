@@ -1,4 +1,4 @@
-package com.limyel.blog.admin;
+package com.limyel.blog.controller.admin;
 
 import com.github.pagehelper.PageInfo;
 import com.limyel.blog.common.Response;
