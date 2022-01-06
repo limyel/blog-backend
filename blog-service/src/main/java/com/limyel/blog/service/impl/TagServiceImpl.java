@@ -12,6 +12,7 @@ import com.limyel.blog.utils.BeanUtil;
 import com.limyel.blog.utils.SlugUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -74,7 +75,9 @@ public class TagServiceImpl implements TagService {
     @Override
     public PageInfo<Tag> page(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Tag> tags = tagMapper.selectAll();
+        Example example = new Example(Tag.class);
+        example.createCriteria().andEqualTo("deleted", false);
+        List<Tag> tags = tagMapper.selectByExample(example);
         return new PageInfo<>(tags);
     }
 }

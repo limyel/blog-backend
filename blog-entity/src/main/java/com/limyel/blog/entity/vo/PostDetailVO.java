@@ -16,6 +16,8 @@ public class PostDetailVO {
 
     private List<TagInPostVO> tags;
 
+    private List<Long> tagIds;
+
     private Integer views;
 
     private String title;

@@ -20,6 +20,7 @@ import com.limyel.blog.utils.SlugUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -76,7 +77,10 @@ public class PostServiceImpl implements PostService {
             return null;
         }
         PostDetailVO postDetail = BeanUtil.copy(post, PostDetailVO.class);
+        // todo tag 只需要 id
         postDetail.setTags(tagService.listByPostId(post.getId()));
+        postDetail.setTagIds(new ArrayList<>());
+        postDetail.getTags().forEach(tag -> postDetail.getTagIds().add(tag.getId()));
         return postDetail;
     }
 
