@@ -1,5 +1,6 @@
 package com.limyel.blog.service.impl;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.limyel.blog.common.exception.BlogException;
@@ -40,10 +41,11 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PageInfo<PostInHomeVO> pageInHome(int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
+        Page page = PageHelper.startPage(pageNum, pageSize);
         List<PostInHomeVO> posts = postMapper.selectInHome();
         PageInfo<PostInHomeVO> pageInfo = new PageInfo<>(posts);
         pageInfo.setTotal(posts.size());
+        pageInfo.setTotal(page.getTotal());
         return pageInfo;
     }
 
@@ -52,12 +54,12 @@ public class PostServiceImpl implements PostService {
         Post post = BeanUtil.copy(vo, Post.class);
         post.setSlug(SlugUtil.generate(vo.getTitle()));
 
-        if (!validateTags(vo.getTags())) {
+        if (!validateTags(vo.getTagIds())) {
             throw new BlogException("标签不存在");
         }
         int result = postMapper.insertSelective(post);
 
-        for (Long tagId: vo.getTags()) {
+        for (Long tagId: vo.getTagIds()) {
             PostTag postTag = new PostTag();
             postTag.setPostId(post.getId());
             postTag.setTagId(tagId);
@@ -116,7 +118,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public int update(Post post, PostDTO vo) {
-        if (!validateTags(vo.getTags())) {
+        if (!validateTags(vo.getTagIds())) {
             throw new BlogException("标签不存在");
         }
         post.setTitle(vo.getTitle());

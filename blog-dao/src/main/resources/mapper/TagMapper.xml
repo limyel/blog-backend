@@ -33,6 +33,9 @@
   </select>
 
   <select id="selectCountByIds" resultType="java.lang.Integer">
-    select count(id) from tag where id in #{ids}
+    select count(id) from tag where id in
+        <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
+          #{id}
+        </foreach>
   </select>
 </mapper>

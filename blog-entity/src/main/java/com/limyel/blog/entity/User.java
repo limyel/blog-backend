@@ -2,6 +2,7 @@ package com.limyel.blog.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import tk.mybatis.mapper.annotation.KeySql;
 
 import java.util.Date;
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import javax.persistence.*;
 public class User {
 
     @Id
+    @KeySql(useGeneratedKeys = true)
     private Long id;
 
     private Date createdAt;

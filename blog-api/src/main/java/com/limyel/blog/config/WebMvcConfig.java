@@ -1,6 +1,5 @@
 package com.limyel.blog.config;
 
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -53,6 +52,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
 
     /**
+     * controller 的参数解析
      * @param argumentResolvers
      */
     @Override

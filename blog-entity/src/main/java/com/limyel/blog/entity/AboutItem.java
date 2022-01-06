@@ -1,5 +1,7 @@
 package com.limyel.blog.entity;
 
+import tk.mybatis.mapper.annotation.KeySql;
+
 import java.util.Date;
 import javax.persistence.*;
 
@@ -7,6 +9,7 @@ import javax.persistence.*;
 public class AboutItem {
 
     @Id
+    @KeySql(useGeneratedKeys = true)
     private Long id;
 
     private Date createdAt;

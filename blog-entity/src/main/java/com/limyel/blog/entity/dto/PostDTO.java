@@ -15,6 +15,6 @@ public class PostDTO {
 
     private String introduction;
 
-    private List<Long> tags;
+    private List<Long> tagIds;
 
 }

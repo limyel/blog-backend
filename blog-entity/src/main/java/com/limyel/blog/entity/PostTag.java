@@ -1,10 +1,15 @@
 package com.limyel.blog.entity;
 
+import tk.mybatis.mapper.annotation.KeySql;
+
 import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "post_tag")
 public class PostTag {
+
+    @Id
+    @KeySql(useGeneratedKeys = true)
     private Long id;
 
     private Date createdAt;
