@@ -9,6 +9,9 @@ import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
 
+/**
+ * @author limyel
+ */
 @Repository
 public interface CommentMapper extends Mapper<Comment> {
 

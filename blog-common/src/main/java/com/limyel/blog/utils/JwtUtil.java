@@ -21,9 +21,9 @@ public class JwtUtil {
     @Value("${blog.jwt.expiration}")
     private Long expiration;
 
-    public String generateJWT(Long userId) {
+    public String generateJWT(Long id) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("userId", userId);
+        claims.put("id", id);
 
         return Jwts.builder()
                 .setClaims(claims)

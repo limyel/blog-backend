@@ -5,14 +5,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MenuDTO {
+public class AdminLoginDTO {
 
     private String name;
 
-    private String path;
-
-    private Integer sequence;
-
-    private Long parentId;
+    private String password;
 
 }

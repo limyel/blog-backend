@@ -5,6 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import tk.mybatis.spring.annotation.MapperScan;
 
+/**
+ * @author limyel
+ */
 @SpringBootApplication
 @MapperScan(basePackages = "com.limyel.blog.dao")
 public class BlogApplication {
