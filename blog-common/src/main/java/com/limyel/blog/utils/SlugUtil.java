@@ -33,7 +33,7 @@ public class SlugUtil {
                 stringBuilder.append("-");
             }
         }
-        return stringBuilder.toString();
+        return stringBuilder.toString().toLowerCase();
     }
 
 }
