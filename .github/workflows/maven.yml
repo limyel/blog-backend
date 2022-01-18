@@ -36,7 +36,7 @@ jobs:
           script: |
             cp /home/ubuntu/private/blog-backend-private.properties /home/ubuntu/blog/backend/blog-api/src/main/resources/application-private.properties
             cd /home/ubuntu/blog/backend
-            mvn clean install --file pom.xml
+            mvn clean install package --file pom.xml
             docker build -t ${{ secrets.DOCKER_REPOSITORY }}:latest .
             docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
             docker push ${{ secrets.DOCKER_REPOSITORY }}:latest
