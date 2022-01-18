@@ -11,4 +11,5 @@ public interface AboutItemMapper extends Mapper<AboutItem> {
 
     List<AboutItem> selectByAboutId(Long aboutId);
 
+    int deleteByAboutId(Long aboutId);
 }

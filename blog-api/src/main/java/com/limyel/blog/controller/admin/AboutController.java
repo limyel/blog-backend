@@ -77,7 +77,6 @@ public class AboutController {
             @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize
     ) {
         PageInfo<About> pageInfo = aboutService.page(pageNum, pageSize);
-        System.out.println("hello");
         return Response.success(pageInfo);
     }
 

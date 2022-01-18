@@ -28,4 +28,7 @@ public interface AboutItemService {
 
     int delete(AboutItem aboutItem);
 
+    int update(AboutItem aboutItem);
+
+    int deleteByAboutId(Long aboutId);
 }

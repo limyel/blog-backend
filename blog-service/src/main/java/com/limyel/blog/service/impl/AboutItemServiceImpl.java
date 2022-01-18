@@ -10,6 +10,7 @@ import com.limyel.blog.service.AboutService;
 import com.limyel.blog.utils.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -49,6 +50,16 @@ public class AboutItemServiceImpl implements AboutItemService {
     public int delete(AboutItem aboutItem) {
         aboutItem.setDeleted(true);
         return aboutItemMapper.updateByPrimaryKey(aboutItem);
+    }
+
+    @Override
+    public int update(AboutItem aboutItem) {
+        return aboutItemMapper.updateByPrimaryKey(aboutItem);
+    }
+
+    @Override
+    public int deleteByAboutId(Long aboutId) {
+        return aboutItemMapper.deleteByAboutId(aboutId);
     }
 
 

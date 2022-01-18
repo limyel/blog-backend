@@ -11,6 +11,7 @@ import com.limyel.blog.service.AboutService;
 import com.limyel.blog.utils.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -44,6 +45,7 @@ public class AboutServiceImpl implements AboutService {
     @Override
     public int delete(About about) {
         about.setDeleted(true);
+        aboutItemService.deleteByAboutId(about.getId());
         return aboutMapper.updateByPrimaryKey(about);
     }
 
@@ -55,7 +57,9 @@ public class AboutServiceImpl implements AboutService {
     @Override
     public PageInfo<About> page(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<About> abouts = aboutMapper.selectAll();
+        Example example = new Example(About.class);
+        example.createCriteria().andEqualTo("deleted", "false");
+        List<About> abouts = aboutMapper.selectByExample(example);
         return new PageInfo<>(abouts);
     }
 
