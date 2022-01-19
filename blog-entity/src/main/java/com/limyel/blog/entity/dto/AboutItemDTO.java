@@ -14,4 +14,6 @@ public class AboutItemDTO {
     private String description;
 
     private Long aboutId;
+
+    private Integer sequence;
 }
