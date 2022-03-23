@@ -10,6 +10,7 @@ import com.limyel.blog.common.Response;
 import com.limyel.blog.service.TagService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import java.util.Map;
 /**
  * @author limyel
  */
+@Slf4j
 @Api(tags = "Blog 文章")
 @RestController("")
 @RequestMapping("/blog/posts")
@@ -51,6 +53,7 @@ public class PostController {
     ) {
         PostDetailVO postDetail = postService.getDetailBySlug(slug);
         if (postDetail == null) {
+            log.error("not found");
             return Response.notFound();
         }
         return Response.success(postDetail);

@@ -6,30 +6,32 @@ package com.limyel.blog.common.enumerate;
 public enum RetCode {
     SUCCESS(0, "成功", "success"),
 
-    EXTERNAL_FAILURE(-269, "第三方服务错误", "external failure"),
+    EXTERNAL_FAILURE(-260, "第三方服务错误", "external failure"),
 
-    FAILED(-255, "失败", "failed"),
-    TIMEOUT(-254, "超时", "timeout"),
-    UNKNOWN(-253, "未知错误", "unknown"),
-    TOO_FREQUENT(-252, "请求过于频繁", "request too frequent"),
-    DEPRECATED(-251, "已废弃", "interface deprecated"),
+    // 操作
+    FAILED(-250, "失败", "failed"),
+    TIMEOUT(-251, "超时", "timeout"),
+    UNKNOWN(-252, "未知错误", "unknown"),
+    TOO_FREQUENT(-253, "请求过于频繁", "request too frequent"),
+    DEPRECATED(-254, "已废弃", "interface deprecated"),
 
-    NOT_FOUND(-249, "未找到", "not found"),
-    ALREADY_EXISTS(-248, "已存在", "already exists"),
+    // 资源
+    NOT_FOUND(-240, "未找到", "not found"),
+    ALREADY_EXISTS(-241, "已存在", "already exists"),
 
-    PERMISSION_DENIED(-239, "无权访问", "permission denied"),
-    INVALID_ROLE(-238, "无法获得此权限角色", "acquire role failed"),
-    INVALID_TOKEN(-237, "无效token", "invalid access token"),
+    // 权限
+    PERMISSION_DENIED(-230, "无权访问", "permission denied"),
+    INVALID_ROLE(-231, "无法获得此权限角色", "acquire role failed"),
+    INVALID_TOKEN(-232, "无效token", "invalid access token"),
 
-    CHECK_FAILURE(-229, "校验失败", "check failure"),
-    PARAM_REQUIRED(-228, "需要参数", "parameter(s) required"),
-    POSTDATA_REQUIRED(-227, "需要请求体参数", "post data item(s) required"),
+    // 请求内容
+    INVALID_PARAMS(-220, "非法参数", "invalid parameters"),
+    INVALID_POSTDATA(-221, "非法提交内容", "invalid post"),
 
-    INVALID_PARAMS(-219, "非法参数", "invalid parameters"),
-    INVALID_POSTDATA(-218, "非法提交内容", "invalid post"),
-    INVALID_HEADERS(-217, "非法请求头", "invalid headers"),
+    // HTTP请求异常
+    INVALID_HEADERS(-210, "非法请求头", "invalid headers"),
 
-    WS_DONE(1, "Websocket 请求完成", "websocket request done"),
+    WS_DONE(10, "Websocket 请求完成", "websocket request done"),
 
     ;
 
