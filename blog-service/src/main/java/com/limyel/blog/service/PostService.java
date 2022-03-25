@@ -3,10 +3,10 @@ package com.limyel.blog.service;
 import com.github.pagehelper.PageInfo;
 import com.limyel.blog.entity.Post;
 import com.limyel.blog.entity.Tag;
-import com.limyel.blog.entity.vo.PostDetailVO;
-import com.limyel.blog.entity.vo.PostInArchiveVO;
-import com.limyel.blog.entity.vo.PostInHomeVO;
-import com.limyel.blog.entity.dto.PostDTO;
+import com.limyel.blog.vo.PostDetailVO;
+import com.limyel.blog.vo.PostInArchiveVO;
+import com.limyel.blog.vo.PostInHomeVO;
+import com.limyel.blog.dto.PostDTO;
 
 import java.util.List;
 

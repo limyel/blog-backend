@@ -1,11 +1,10 @@
 package com.limyel.blog.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.limyel.blog.entity.Comment;
-import com.limyel.blog.entity.vo.CommentLatestVO;
-import com.limyel.blog.entity.vo.CommentInPostVO;
-import com.limyel.blog.entity.vo.ParentCommentVO;
+import com.limyel.blog.vo.CommentInPostVO;
+import com.limyel.blog.vo.ParentCommentVO;
 import org.springframework.stereotype.Repository;
-import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
  * @author limyel
  */
 @Repository
-public interface CommentMapper extends Mapper<Comment> {
+public interface CommentMapper extends BaseMapper<Comment> {
 
     List<CommentInPostVO> selectByPostId(Long postId);
 

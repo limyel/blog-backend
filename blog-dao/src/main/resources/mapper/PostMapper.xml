@@ -12,14 +12,14 @@
     <result column="introduction" jdbcType="VARCHAR" property="introduction" />
   </resultMap>
 
-  <resultMap id="PostInHome" type="com.limyel.blog.entity.vo.PostInHomeVO">
+  <resultMap id="PostInHome" type="com.limyel.blog.vo.PostInHomeVO">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="slug" jdbcType="VARCHAR" property="slug" />
     <result column="introduction" jdbcType="VARCHAR" property="introduction" />
-    <collection property="tags" ofType="com.limyel.blog.entity.vo.TagInPostVO"
+    <collection property="tags" ofType="com.limyel.blog.vo.TagInPostVO"
                 select="com.limyel.blog.dao.TagMapper.selectByPostId" column="id" />
   </resultMap>
 
@@ -39,11 +39,11 @@
     select <include refid="BaseColumns"/> from post where YEAR(created_at) = #{year} and deleted = 0 order by YEAR(created_at) desc limit 0, 10
   </select>
 
-  <select id="selectHot" resultType="com.limyel.blog.entity.vo.PostInArchiveVO">
+  <select id="selectHot" resultType="com.limyel.blog.vo.PostInArchiveVO">
     select created_at, title, slug from post where deleted = 0 order by views desc limit 0, 5
   </select>
 
-  <select id="selectByTagId" parameterType="java.lang.Long" resultType="com.limyel.blog.entity.vo.PostInArchiveVO">
+  <select id="selectByTagId" parameterType="java.lang.Long" resultType="com.limyel.blog.vo.PostInArchiveVO">
     select created_at, title, slug from post where deleted = 0 and id in (select t1.post_id from post_tag t1 where t1.deleted = 0 and t1.tag_id = #{tagId})
   </select>
 </mapper>

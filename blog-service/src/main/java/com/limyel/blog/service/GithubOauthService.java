@@ -1,6 +1,6 @@
 package com.limyel.blog.service;
 
-import com.limyel.blog.entity.vo.UserVO;
+import com.limyel.blog.vo.UserVO;
 
 public interface GithubOauthService {
 

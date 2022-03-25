@@ -2,7 +2,7 @@ package com.limyel.blog.controller.admin;
 
 import com.limyel.blog.common.Response;
 import com.limyel.blog.entity.User;
-import com.limyel.blog.entity.dto.AdminLoginDTO;
+import com.limyel.blog.dto.AdminLoginDTO;
 import com.limyel.blog.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

@@ -3,7 +3,7 @@ package com.limyel.blog.service.impl;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.limyel.blog.dao.AdminMapper;
 import com.limyel.blog.entity.Admin;
-import com.limyel.blog.entity.dto.AdminLoginDTO;
+import com.limyel.blog.dto.AdminLoginDTO;
 import com.limyel.blog.service.AdminService;
 import com.limyel.blog.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;

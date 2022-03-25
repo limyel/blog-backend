@@ -2,9 +2,9 @@ package com.limyel.blog.service;
 
 import com.github.pagehelper.PageInfo;
 import com.limyel.blog.entity.Tag;
-import com.limyel.blog.entity.vo.TagDetailVO;
-import com.limyel.blog.entity.vo.TagInPostVO;
-import com.limyel.blog.entity.dto.TagDTO;
+import com.limyel.blog.vo.TagDetailVO;
+import com.limyel.blog.vo.TagInPostVO;
+import com.limyel.blog.dto.TagDTO;
 
 import java.util.List;
 

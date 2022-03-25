@@ -2,7 +2,7 @@ package com.limyel.blog.service.impl;
 
 import com.limyel.blog.dao.UserMapper;
 import com.limyel.blog.entity.User;
-import com.limyel.blog.entity.dto.AdminLoginDTO;
+import com.limyel.blog.dto.AdminLoginDTO;
 import com.limyel.blog.service.UserService;
 import com.limyel.blog.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;

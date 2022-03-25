@@ -1,10 +1,10 @@
 package com.limyel.blog.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.limyel.blog.entity.Tag;
-import com.limyel.blog.entity.vo.TagDetailVO;
-import com.limyel.blog.entity.vo.TagInPostVO;
+import com.limyel.blog.vo.TagDetailVO;
+import com.limyel.blog.vo.TagInPostVO;
 import org.springframework.stereotype.Repository;
-import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * @author limyel
  */
 @Repository
-public interface TagMapper extends Mapper<Tag> {
+public interface TagMapper extends BaseMapper<Tag> {
 
     List<TagInPostVO> selectByPostId(Long postId);
 

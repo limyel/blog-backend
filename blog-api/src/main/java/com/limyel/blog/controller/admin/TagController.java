@@ -3,7 +3,7 @@ package com.limyel.blog.controller.admin;
 import com.github.pagehelper.PageInfo;
 import com.limyel.blog.common.Response;
 import com.limyel.blog.entity.Tag;
-import com.limyel.blog.entity.dto.TagDTO;
+import com.limyel.blog.dto.TagDTO;
 import com.limyel.blog.service.TagService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

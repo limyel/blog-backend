@@ -1,9 +1,8 @@
 package com.limyel.blog;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import tk.mybatis.spring.annotation.MapperScan;
 
 /**
  * @author limyel

@@ -1,15 +1,16 @@
 package com.limyel.blog.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
 import com.limyel.blog.entity.About;
-import com.limyel.blog.entity.vo.AboutDetailVO;
+import com.limyel.blog.vo.AboutDetailVO;
 
 import java.util.List;
 
 /**
  * @author limyel
  */
-public interface AboutService {
+public interface AboutService extends IService<About> {
 
     /**
      * 关于详情列表

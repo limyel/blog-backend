@@ -1,34 +1,26 @@
 package com.limyel.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
-import tk.mybatis.mapper.annotation.KeySql;
 
 import java.util.Date;
-import javax.persistence.*;
 
 @Getter
 @Setter
-@Table(name = "about_item")
+@TableName("about_item")
 public class AboutItem {
 
-    @Id
-    @KeySql(useGeneratedKeys = true)
+    @TableId
     private Long id;
 
-    /**
-     * 创建时间
-     */
-    private Date createdAt;
+    private Date createTime;
 
-    /**
-     * 更新时间
-     */
-    private Date updatedAt;
+    private Date updateTime;
 
-    /**
-     * 是否删除
-     */
     private Boolean deleted;
 
     /**

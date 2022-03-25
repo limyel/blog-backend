@@ -1,14 +1,14 @@
 package com.limyel.blog.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.limyel.blog.entity.About;
-import com.limyel.blog.entity.vo.AboutDetailVO;
+import com.limyel.blog.vo.AboutDetailVO;
 import org.springframework.stereotype.Repository;
-import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
 
 @Repository
-public interface AboutMapper extends Mapper<About> {
+public interface AboutMapper extends BaseMapper<About> {
 
     List<AboutDetailVO> selectDetail();
 

@@ -1,4 +1,4 @@
-package com.limyel.blog.entity.vo;
+package com.limyel.blog.vo;
 
 import com.limyel.blog.entity.About;
 import com.limyel.blog.entity.AboutItem;

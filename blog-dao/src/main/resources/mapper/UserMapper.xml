@@ -12,7 +12,7 @@
     <result column="html_url" jdbcType="VARCHAR" property="htmlUrl" />
   </resultMap>
 
-  <resultMap id="User" type="com.limyel.blog.entity.vo.UserVO">
+  <resultMap id="User" type="com.limyel.blog.vo.UserVO">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl" />

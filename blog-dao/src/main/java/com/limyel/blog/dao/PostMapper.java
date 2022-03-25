@@ -1,10 +1,10 @@
 package com.limyel.blog.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.limyel.blog.entity.Post;
-import com.limyel.blog.entity.vo.PostInArchiveVO;
-import com.limyel.blog.entity.vo.PostInHomeVO;
+import com.limyel.blog.vo.PostInArchiveVO;
+import com.limyel.blog.vo.PostInHomeVO;
 import org.springframework.stereotype.Repository;
-import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * @author limyel
  */
 @Repository
-public interface PostMapper extends Mapper<Post> {
+public interface PostMapper extends BaseMapper<Post> {
 
     List<PostInHomeVO> selectInHome();
 

@@ -1,7 +1,7 @@
 package com.limyel.blog.service;
 
 import com.limyel.blog.entity.User;
-import com.limyel.blog.entity.dto.AdminLoginDTO;
+import com.limyel.blog.dto.AdminLoginDTO;
 
 public interface UserService {
 

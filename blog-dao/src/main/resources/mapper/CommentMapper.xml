@@ -14,7 +14,7 @@
     <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
 
-  <resultMap id="CommentInPost" type="com.limyel.blog.entity.vo.CommentInPostVO">
+  <resultMap id="CommentInPost" type="com.limyel.blog.vo.CommentInPostVO">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="content" jdbcType="VARCHAR" property="content" />
@@ -23,7 +23,7 @@
     <association column="parent_comment_id" property="parentComment" select="com.limyel.blog.dao.CommentMapper.selectParentById"/>
   </resultMap>
 
-  <resultMap id="ParentComment" type="com.limyel.blog.entity.vo.ParentCommentVO">
+  <resultMap id="ParentComment" type="com.limyel.blog.vo.ParentCommentVO">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="content" jdbcType="VARCHAR" property="content" />

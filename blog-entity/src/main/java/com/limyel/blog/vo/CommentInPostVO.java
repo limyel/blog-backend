@@ -1,13 +1,16 @@
-package com.limyel.blog.entity.vo;
+package com.limyel.blog.vo;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
 
+/**
+ * @author limyel
+ */
 @Getter
 @Setter
-public class ParentCommentVO {
+public class CommentInPostVO {
 
     private Long id;
 
@@ -16,6 +19,8 @@ public class ParentCommentVO {
     private String content;
 
     private UserVO user;
+
+    private ParentCommentVO parentComment;
 
     private Integer floor;
 

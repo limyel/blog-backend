@@ -2,9 +2,9 @@ package com.limyel.blog.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.limyel.blog.entity.Tag;
-import com.limyel.blog.entity.vo.PostDetailVO;
-import com.limyel.blog.entity.vo.PostInArchiveVO;
-import com.limyel.blog.entity.vo.PostInHomeVO;
+import com.limyel.blog.vo.PostDetailVO;
+import com.limyel.blog.vo.PostInArchiveVO;
+import com.limyel.blog.vo.PostInHomeVO;
 import com.limyel.blog.service.PostService;
 import com.limyel.blog.common.Response;
 import com.limyel.blog.service.TagService;

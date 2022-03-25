@@ -1,18 +1,15 @@
-package com.limyel.blog.entity.vo;
+package com.limyel.blog.vo;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class TagDetailVO {
+public class TagInPostVO {
 
     private Long id;
 
     private String name;
 
     private String slug;
-
-    private Integer postNum;
-
 }

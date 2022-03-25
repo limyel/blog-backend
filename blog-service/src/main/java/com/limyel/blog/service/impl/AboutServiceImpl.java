@@ -4,7 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.limyel.blog.common.exception.BlogException;
 import com.limyel.blog.entity.About;
-import com.limyel.blog.entity.vo.AboutDetailVO;
+import com.limyel.blog.vo.AboutDetailVO;
 import com.limyel.blog.dao.AboutMapper;
 import com.limyel.blog.service.AboutItemService;
 import com.limyel.blog.service.AboutService;

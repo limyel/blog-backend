@@ -3,10 +3,10 @@ package com.limyel.blog.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.limyel.blog.entity.Tag;
-import com.limyel.blog.entity.vo.TagDetailVO;
-import com.limyel.blog.entity.vo.TagInPostVO;
+import com.limyel.blog.vo.TagDetailVO;
+import com.limyel.blog.vo.TagInPostVO;
 import com.limyel.blog.dao.TagMapper;
-import com.limyel.blog.entity.dto.TagDTO;
+import com.limyel.blog.dto.TagDTO;
 import com.limyel.blog.service.TagService;
 import com.limyel.blog.utils.BeanUtil;
 import com.limyel.blog.utils.SlugUtil;
@@ -25,7 +25,7 @@ public class TagServiceImpl implements TagService {
     @Override
     public int save(Tag tag) {
         tag.setSlug(SlugUtil.generate(tag.getName()));
-        return tagMapper.insertSelective(tag);
+        return tagMapper.insert(tag);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class TagServiceImpl implements TagService {
     public Tag getBySlug(String slug) {
         Tag record = new Tag();
         record.setSlug(slug);
-        Tag tag = tagMapper.selectOne(record);
+        Tag tag = tagMapper.select;
         return tag;
     }
 

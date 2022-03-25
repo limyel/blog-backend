@@ -1,7 +1,7 @@
 package com.limyel.blog.controller;
 
 import com.limyel.blog.common.Response;
-import com.limyel.blog.entity.vo.UserVO;
+import com.limyel.blog.vo.UserVO;
 import com.limyel.blog.service.GithubOauthService;
 import com.limyel.blog.utils.JwtUtil;
 import io.swagger.annotations.Api;

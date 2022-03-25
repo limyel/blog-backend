@@ -2,7 +2,7 @@ package com.limyel.blog.controller;
 
 import com.limyel.blog.common.Response;
 import com.limyel.blog.entity.Tag;
-import com.limyel.blog.entity.vo.TagDetailVO;
+import com.limyel.blog.vo.TagDetailVO;
 import com.limyel.blog.service.TagService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

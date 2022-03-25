@@ -1,14 +1,15 @@
 package com.limyel.blog.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.limyel.blog.entity.AboutItem;
-import com.limyel.blog.entity.dto.AboutItemDTO;
+import com.limyel.blog.dto.AboutItemDTO;
 
 import java.util.List;
 
 /**
  * @author limyel
  */
-public interface AboutItemService {
+public interface AboutItemService extends IService<AboutItem> {
 
     /**
      * 根据 关于id 获取 关于items

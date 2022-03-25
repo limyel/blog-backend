@@ -1,10 +1,11 @@
 package com.limyel.blog.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.limyel.blog.common.exception.BlogException;
 import com.limyel.blog.dao.AboutItemMapper;
 import com.limyel.blog.entity.About;
 import com.limyel.blog.entity.AboutItem;
-import com.limyel.blog.entity.dto.AboutItemDTO;
+import com.limyel.blog.dto.AboutItemDTO;
 import com.limyel.blog.service.AboutItemService;
 import com.limyel.blog.service.AboutService;
 import com.limyel.blog.utils.BeanUtil;
@@ -38,7 +39,7 @@ public class AboutItemServiceImpl implements AboutItemService {
             throw new BlogException("About not found");
         }
         AboutItem aboutItem = BeanUtil.copy(vo, AboutItem.class);
-        return aboutItemMapper.insertSelective(aboutItem);
+        return aboutItemMapper(aboutItem);
     }
 
     @Override
