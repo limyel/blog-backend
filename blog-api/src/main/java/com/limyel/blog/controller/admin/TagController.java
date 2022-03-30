@@ -1,7 +1,7 @@
 package com.limyel.blog.controller.admin;
 
-import com.github.pagehelper.PageInfo;
-import com.limyel.blog.common.Response;
+import com.limyel.blog.core.Response;
+import com.limyel.blog.core.util.PageUtil;
 import com.limyel.blog.entity.Tag;
 import com.limyel.blog.dto.TagDTO;
 import com.limyel.blog.service.TagService;
@@ -67,11 +67,10 @@ public class TagController {
 
     @ApiOperation(value = "列表", httpMethod = "GET")
     @GetMapping
-    public Response list(
-            @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
-            @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize
+    public Response<PageUtil> list(
+            @RequestParam(name = "pageNum", required = false, defaultValue = "1") Long pageNum,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "20") Long pageSize
     ) {
-        PageInfo<Tag> page = tagService.page(pageNum, pageSize);
-        return Response.success(page);
+        return Response.success(tagService.page(pageNum, pageSize));
     }
 }

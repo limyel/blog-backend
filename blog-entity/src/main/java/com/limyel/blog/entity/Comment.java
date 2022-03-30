@@ -12,16 +12,7 @@ import java.util.Date;
 @Getter
 @Setter
 @TableName("comment")
-public class Comment {
-
-    @TableId
-    private Long id;
-
-    private Date createTime;
-
-    private Date updateTime;
-
-    private Boolean deleted;
+public class Comment extends BaseEntity {
 
     private String content;
 

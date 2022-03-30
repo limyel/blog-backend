@@ -1,9 +1,11 @@
 package com.limyel.blog.service.impl;
 
-import com.github.pagehelper.Page;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.limyel.blog.common.exception.BlogException;
+import com.limyel.blog.core.util.PageUtil;
 import com.limyel.blog.entity.PostTag;
 import com.limyel.blog.entity.Tag;
 import com.limyel.blog.vo.PostDetailVO;
@@ -24,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class PostServiceImpl implements PostService {
+public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements PostService {
 
     @Autowired
     private PostMapper postMapper;
@@ -37,17 +39,16 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post getById(Long id) {
-        return postMapper.selectByPrimaryKey(id);
+        return postMapper.selectById(id);
     }
 
     @Override
-    public PageInfo<PostInHomeVO> pageInHome(int pageNum, int pageSize) {
-        Page page = PageHelper.startPage(pageNum, pageSize);
-        List<PostInHomeVO> posts = postMapper.selectInHome();
-        PageInfo<PostInHomeVO> pageInfo = new PageInfo<>(posts);
-        pageInfo.setTotal(posts.size());
-        pageInfo.setTotal(page.getTotal());
-        return pageInfo;
+    public PageUtil pageInHome(Long pageNum, Long pageSize) {
+        Page<Post> page = new Page<>(pageNum, pageSize);
+//        Page<Post> postPage = this.page(page);
+
+        Page<PostInHomeVO> postPage = postMapper.selectInHome(page);
+        return new PageUtil(postPage);
     }
 
     @Override
@@ -58,7 +59,7 @@ public class PostServiceImpl implements PostService {
         if (!validateTags(vo.getTagIds())) {
             throw new BlogException("标签不存在");
         }
-        int result = postMapper.insertSelective(post);
+        int result = postMapper.insert(post);
 
         for (Long tagId: vo.getTagIds()) {
             PostTag postTag = new PostTag();
@@ -72,7 +73,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDetailVO getDetailById(Long id) {
-        Post post = postMapper.selectByPrimaryKey(id);
+        Post post = postMapper.selectById(id);
         if (post == null) {
             return null;
         }
@@ -86,10 +87,10 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDetailVO getDetailBySlug(String slug) {
-        Post record = new Post();
-        record.setDeleted(false);
-        record.setSlug(slug);
-        Post post = postMapper.selectOne(record);
+        QueryWrapper<Post> wrapper = new QueryWrapper<>();
+        wrapper.eq("deleted", false);
+        wrapper.eq("slug", slug);
+        Post post = postMapper.selectOne(wrapper);
         PostDetailVO postDetail = BeanUtil.copy(post, PostDetailVO.class);
         postDetail.setTags(tagService.listByPostId(post.getId()));
         return postDetail;
@@ -113,11 +114,15 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PageInfo<PostInArchiveVO> pageInTag(Tag tag, int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
-        List<PostInArchiveVO> posts = postMapper.selectByTagId(tag.getId());
-        PageInfo<PostInArchiveVO> pageInfo = new PageInfo<>(posts);
-        return pageInfo;
+    public PageUtil pageByTag(String slug, Long pageNum, Long pageSize) {
+        Tag tag = tagService.getBySlug(slug);
+
+        Page<Post> page = new Page<>(pageNum, pageSize);
+        QueryWrapper<Post> wrapper = new QueryWrapper<>();
+        wrapper.eq("tag_id", tag.getId());
+        Page<Post> postPage = postMapper.selectPage(page, wrapper);
+
+        return new PageUtil(postPage);
     }
 
     @Override
@@ -130,15 +135,14 @@ public class PostServiceImpl implements PostService {
         post.setIntroduction(vo.getIntroduction());
         post.setSlug(SlugUtil.generate(vo.getTitle()));
 
-        return postMapper.updateByPrimaryKeySelective(post);
+        return postMapper.updateById(post);
     }
 
     @Override
     public int delete(Post post) {
         post.setDeleted(true);
-        return postMapper.updateByPrimaryKey(post);
+        return postMapper.updateById(post);
     }
-
 
     /**
      * 验证标签是否正确

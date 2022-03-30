@@ -13,16 +13,7 @@ import java.util.Date;
 @Getter
 @Setter
 @TableName("post")
-public class Post {
-
-    @TableId
-    private Long id;
-
-    private Date createTime;
-
-    private Date updateTime;
-
-    private Boolean deleted;
+public class Post extends BaseEntity {
 
     private String title;
 

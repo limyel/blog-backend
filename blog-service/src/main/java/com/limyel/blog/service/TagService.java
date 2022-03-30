@@ -1,12 +1,13 @@
 package com.limyel.blog.service;
 
-import com.github.pagehelper.PageInfo;
+import com.limyel.blog.core.util.PageUtil;
 import com.limyel.blog.entity.Tag;
 import com.limyel.blog.vo.TagDetailVO;
 import com.limyel.blog.vo.TagInPostVO;
 import com.limyel.blog.dto.TagDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TagService {
 
@@ -26,5 +27,5 @@ public interface TagService {
 
     int update(Tag tag, TagDTO vo);
 
-    PageInfo<Tag> page(int pageNum, int pageSize);
+    PageUtil page(Long pageNum, Long pageSize);
 }

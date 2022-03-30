@@ -17,6 +17,6 @@ public class PostTagServiceImpl implements PostTagService {
 
     @Override
     public int save(PostTag postTag) {
-        return postTagMapper.insertSelective(postTag);
+        return postTagMapper.insert(postTag);
     }
 }

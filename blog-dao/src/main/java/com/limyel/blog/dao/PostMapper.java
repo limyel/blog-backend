@@ -1,6 +1,8 @@
 package com.limyel.blog.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.limyel.blog.entity.Post;
 import com.limyel.blog.vo.PostInArchiveVO;
 import com.limyel.blog.vo.PostInHomeVO;
@@ -14,7 +16,7 @@ import java.util.List;
 @Repository
 public interface PostMapper extends BaseMapper<Post> {
 
-    List<PostInHomeVO> selectInHome();
+    Page<PostInHomeVO> selectInHome(IPage<Post> page);
 
     List<Integer> selectYear();
 

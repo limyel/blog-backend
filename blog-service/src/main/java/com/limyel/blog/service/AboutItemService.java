@@ -27,7 +27,7 @@ public interface AboutItemService extends IService<AboutItem> {
 
     AboutItem getById(Long id);
 
-    int delete(AboutItem aboutItem);
+    int deleteById(Long id);
 
     int update(AboutItem aboutItem);
 

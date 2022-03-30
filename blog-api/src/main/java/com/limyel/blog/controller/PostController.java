@@ -1,12 +1,10 @@
 package com.limyel.blog.controller;
 
-import com.github.pagehelper.PageInfo;
-import com.limyel.blog.entity.Tag;
+import com.limyel.blog.core.Response;
+import com.limyel.blog.core.util.PageUtil;
 import com.limyel.blog.vo.PostDetailVO;
 import com.limyel.blog.vo.PostInArchiveVO;
-import com.limyel.blog.vo.PostInHomeVO;
 import com.limyel.blog.service.PostService;
-import com.limyel.blog.common.Response;
 import com.limyel.blog.service.TagService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,9 +37,9 @@ public class PostController {
 
     @ApiOperation(value = "列表", httpMethod = "GET")
     @GetMapping
-    public Response<PageInfo<PostInHomeVO>> listInHome(
-            @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
-            @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize
+    public Response<PageUtil> listInHome(
+            @RequestParam(name = "pageNum", required = false, defaultValue = "1") Long pageNum,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "20") Long pageSize
     ) {
         return Response.success(postService.pageInHome(pageNum, pageSize));
     }
@@ -79,14 +77,9 @@ public class PostController {
     @GetMapping("/tag/{slug}")
     public Response getInTag(
             @PathVariable(value = "slug") String slug,
-            @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
-            @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize
+            @RequestParam(name = "pageNum", required = false, defaultValue = "1") Long pageNum,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "20") Long pageSize
     ) {
-        Tag tag = tagService.getBySlug(slug);
-        if (tag == null) {
-            return Response.notFound();
-        }
-        PageInfo<PostInArchiveVO> pageInfo = postService.pageInTag(tag, pageNum, pageSize);
-        return Response.success(pageInfo);
+        return Response.success(postService.pageByTag(slug, pageNum, pageSize));
     }
 }

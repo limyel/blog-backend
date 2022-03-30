@@ -12,16 +12,7 @@ import java.util.Date;
 @Getter
 @Setter
 @TableName("post_tag")
-public class PostTag {
-
-    @TableId
-    private Long id;
-
-    private Date createTime;
-
-    private Date updateTime;
-
-    private Boolean deleted;
+public class PostTag extends BaseEntity {
 
     private Long postId;
 

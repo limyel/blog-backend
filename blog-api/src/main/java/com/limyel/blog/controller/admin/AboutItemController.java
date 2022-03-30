@@ -1,6 +1,6 @@
 package com.limyel.blog.controller.admin;
 
-import com.limyel.blog.common.Response;
+import com.limyel.blog.core.Response;
 import com.limyel.blog.entity.AboutItem;
 import com.limyel.blog.dto.AboutItemDTO;
 import com.limyel.blog.service.AboutItemService;
@@ -46,7 +46,7 @@ public class AboutItemController {
         if (aboutItem == null) {
             return Response.notFound();
         }
-        aboutItemService.delete(aboutItem);
+        aboutItemService.deleteById(id);
         return Response.success();
     }
 

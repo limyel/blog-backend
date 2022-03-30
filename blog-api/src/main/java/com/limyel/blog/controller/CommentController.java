@@ -1,7 +1,7 @@
 package com.limyel.blog.controller;
 
-import com.limyel.blog.common.Response;
-import com.limyel.blog.common.annotation.CurrentUser;
+import com.limyel.blog.core.Response;
+import com.limyel.blog.core.annotation.CurrentUser;
 import com.limyel.blog.entity.Comment;
 import com.limyel.blog.entity.User;
 import com.limyel.blog.entity.Post;

@@ -11,7 +11,6 @@ import com.limyel.blog.service.AboutService;
 import com.limyel.blog.utils.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ import java.util.List;
  * @author limyel
  */
 @Service
-public class AboutItemServiceImpl implements AboutItemService {
+public class AboutItemServiceImpl extends ServiceImpl<AboutItemMapper, AboutItem> implements AboutItemService {
 
     @Autowired
     private AboutItemMapper aboutItemMapper;
@@ -39,28 +38,31 @@ public class AboutItemServiceImpl implements AboutItemService {
             throw new BlogException("About not found");
         }
         AboutItem aboutItem = BeanUtil.copy(vo, AboutItem.class);
-        return aboutItemMapper(aboutItem);
+        return aboutItemMapper.insert(aboutItem);
     }
 
     @Override
     public AboutItem getById(Long id) {
-        return aboutItemMapper.selectByPrimaryKey(id);
+        return aboutItemMapper.selectById(id);
     }
 
     @Override
-    public int delete(AboutItem aboutItem) {
-        aboutItem.setDeleted(true);
-        return aboutItemMapper.updateByPrimaryKey(aboutItem);
+    public int deleteById(Long id) {
+        AboutItem aboutItem = aboutItemMapper.selectById(id);
+        if (aboutItem == null) {
+
+        }
+        return aboutItemMapper.deleteById(id);
     }
 
     @Override
     public int update(AboutItem aboutItem) {
-        return aboutItemMapper.updateByPrimaryKey(aboutItem);
+        return aboutItemMapper.updateById(aboutItem);
     }
 
     @Override
     public int deleteByAboutId(Long aboutId) {
-        return aboutItemMapper.deleteByAboutId(aboutId);
+        return aboutItemMapper.deleteById(aboutId);
     }
 
 

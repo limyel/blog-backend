@@ -1,7 +1,7 @@
 package com.limyel.blog.controller.admin;
 
-import com.github.pagehelper.PageInfo;
-import com.limyel.blog.common.Response;
+import com.limyel.blog.core.Response;
+import com.limyel.blog.core.util.PageUtil;
 import com.limyel.blog.entity.About;
 import com.limyel.blog.vo.AboutDetailVO;
 import com.limyel.blog.dto.AboutDTO;
@@ -72,12 +72,11 @@ public class AboutController {
 
     @ApiOperation(value = "列表", httpMethod = "GET")
     @GetMapping
-    public Response<PageInfo<About>> list(
-            @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
-            @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize
+    public Response<PageUtil> list(
+            @RequestParam(name = "pageNum", required = false, defaultValue = "1") Long pageNum,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "20") Long pageSize
     ) {
-        PageInfo<About> pageInfo = aboutService.page(pageNum, pageSize);
-        return Response.success(pageInfo);
+        return Response.success(aboutService.page(pageNum, pageSize));
     }
 
     @ApiOperation(value = "详情", httpMethod = "GET")

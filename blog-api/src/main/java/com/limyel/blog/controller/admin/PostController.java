@@ -1,10 +1,9 @@
 package com.limyel.blog.controller.admin;
 
-import com.github.pagehelper.PageInfo;
-import com.limyel.blog.common.Response;
+import com.limyel.blog.core.Response;
+import com.limyel.blog.core.util.PageUtil;
 import com.limyel.blog.entity.Post;
 import com.limyel.blog.vo.PostDetailVO;
-import com.limyel.blog.vo.PostInHomeVO;
 import com.limyel.blog.dto.PostDTO;
 import com.limyel.blog.service.PostService;
 import io.swagger.annotations.Api;
@@ -41,12 +40,11 @@ public class PostController {
 
     @ApiOperation(value = "列表", httpMethod = "GET")
     @GetMapping
-    public Response list(
-            @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
-            @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize
+    public Response<PageUtil> list(
+            @RequestParam(name = "pageNum", required = false, defaultValue = "1") Long pageNum,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "20") Long pageSize
     ) {
-        PageInfo<PostInHomeVO> pageInfo = postService.pageInHome(pageNum, pageSize);
-        return Response.success(pageInfo);
+        return Response.success(postService.pageInHome(pageNum, pageSize));
     }
 
     @ApiOperation(value = "新增", httpMethod = "POST")

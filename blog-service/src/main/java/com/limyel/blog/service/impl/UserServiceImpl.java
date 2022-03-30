@@ -22,12 +22,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int save(User member) {
-        return userMapper.insertSelective(member);
+        return userMapper.insert(member);
     }
 
     @Override
     public int update(User member) {
-        return userMapper.updateByPrimaryKeySelective(member);
+        return userMapper.updateById(member);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getById(Long id) {
-        return userMapper.selectByPrimaryKey(id);
+        return userMapper.selectById(id);
     }
 
     @Override

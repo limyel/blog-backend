@@ -1,7 +1,8 @@
 package com.limyel.blog.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.github.pagehelper.PageInfo;
+import com.limyel.blog.core.util.PageUtil;
 import com.limyel.blog.entity.About;
 import com.limyel.blog.vo.AboutDetailVO;
 
@@ -23,7 +24,7 @@ public interface AboutService extends IService<About> {
      * @param about
      * @return
      */
-    int save(About about);
+    int saveAbout(About about);
 
     /**
      * 通过 id 获取
@@ -52,7 +53,7 @@ public interface AboutService extends IService<About> {
      * @param pageSize
      * @return
      */
-    PageInfo<About> page(int pageNum, int pageSize);
+    PageUtil page(Long pageNum, Long pageSize);
 
     /**
      * 通过 id 获取关于详情

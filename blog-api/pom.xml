@@ -31,7 +31,7 @@
         </dependency>
         <dependency>
             <groupId>com.limyel</groupId>
-            <artifactId>blog-common</artifactId>
+            <artifactId>blog-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

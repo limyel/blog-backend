@@ -1,20 +1,20 @@
 package com.limyel.blog.service;
 
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.limyel.blog.core.util.PageUtil;
 import com.limyel.blog.entity.Post;
 import com.limyel.blog.entity.Tag;
 import com.limyel.blog.vo.PostDetailVO;
 import com.limyel.blog.vo.PostInArchiveVO;
-import com.limyel.blog.vo.PostInHomeVO;
 import com.limyel.blog.dto.PostDTO;
 
 import java.util.List;
 
-public interface PostService {
+public interface PostService extends IService<Post> {
 
     Post getById(Long id);
 
-    PageInfo<PostInHomeVO> pageInHome(int pageNum, int pageSize);
+    PageUtil pageInHome(Long pageNum, Long pageSize);
 
     /**
      * 保存
@@ -33,7 +33,7 @@ public interface PostService {
 
     List<PostInArchiveVO> listHot();
 
-    PageInfo<PostInArchiveVO> pageInTag(Tag tag, int pageNum, int pageSize);
+    PageUtil pageByTag(String slug, Long pageNum, Long pageSize);
 
     int update(Post post, PostDTO vo);
 

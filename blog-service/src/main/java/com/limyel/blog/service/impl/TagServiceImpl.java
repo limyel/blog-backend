@@ -1,7 +1,8 @@
 package com.limyel.blog.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.limyel.blog.core.util.PageUtil;
 import com.limyel.blog.entity.Tag;
 import com.limyel.blog.vo.TagDetailVO;
 import com.limyel.blog.vo.TagInPostVO;
@@ -12,9 +13,9 @@ import com.limyel.blog.utils.BeanUtil;
 import com.limyel.blog.utils.SlugUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TagServiceImpl implements TagService {
@@ -40,10 +41,11 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public Tag getBySlug(String slug) {
-        Tag record = new Tag();
-        record.setSlug(slug);
-        Tag tag = tagMapper.select;
-        return tag;
+        QueryWrapper<Tag> wrapper = new QueryWrapper<>();
+        wrapper.eq("slug", slug);
+        Optional<Tag> tag = Optional.of(tagMapper.selectOne(wrapper));
+        // todo not found
+        return tag.orElseThrow(RuntimeException::new);
     }
 
     @Override
@@ -56,28 +58,28 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public Tag getById(Long id) {
-        return tagMapper.selectByPrimaryKey(id);
+        return tagMapper.selectById(id);
     }
 
     @Override
     public int delete(Tag tag) {
         tag.setDeleted(true);
-        return tagMapper.updateByPrimaryKey(tag);
+        return tagMapper.updateById(tag);
     }
 
     @Override
     public int update(Tag tag, TagDTO vo) {
         BeanUtil.cover(vo, tag);
         tag.setSlug(SlugUtil.generate(vo.getName()));
-        return tagMapper.updateByPrimaryKey(tag);
+        return tagMapper.updateById(tag);
     }
 
     @Override
-    public PageInfo<Tag> page(int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
-        Example example = new Example(Tag.class);
-        example.createCriteria().andEqualTo("deleted", false);
-        List<Tag> tags = tagMapper.selectByExample(example);
-        return new PageInfo<>(tags);
+    public PageUtil page(Long pageNum, Long pageSize) {
+        Page<Tag> page = new Page<>(pageNum, pageSize);
+        QueryWrapper<Tag> wrapper = new QueryWrapper<>();
+        wrapper.eq("deleted", false);
+        Page<Tag> tagPage = tagMapper.selectPage(page, wrapper);
+        return new PageUtil(tagPage);
     }
 }

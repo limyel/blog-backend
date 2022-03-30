@@ -13,16 +13,7 @@ import java.util.Date;
 @Getter
 @Setter
 @TableName("about")
-public class About {
-
-    @TableId
-    private Long id;
-
-    private Date createTime;
-
-    private Date updateTime;
-
-    private Boolean deleted;
+public class About extends BaseEntity {
 
     private String title;
 

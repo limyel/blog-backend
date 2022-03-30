@@ -1,5 +1,6 @@
 package com.limyel.blog.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.limyel.blog.dao.CommentMapper;
 import com.limyel.blog.entity.Comment;
@@ -22,7 +23,7 @@ import java.util.List;
  * @author limyel
  */
 @Service
-public class CommentServiceImpl implements CommentService {
+public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> implements CommentService {
 
     @Autowired
     private CommentMapper commentMapper;
@@ -34,13 +35,13 @@ public class CommentServiceImpl implements CommentService {
     private PostService postService;
 
     @Override
-    public int save(Comment comment) {
-        return commentMapper.insertSelective(comment);
+    public int saveComment(Comment comment) {
+        return commentMapper.insert(comment);
     }
 
     @Override
     public Comment getById(Long id) {
-        return commentMapper.selectByPrimaryKey(id);
+        return commentMapper.selectById(id);
     }
 
     @Override

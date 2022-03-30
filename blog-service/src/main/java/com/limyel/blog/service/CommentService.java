@@ -18,7 +18,7 @@ public interface CommentService extends IService<Comment> {
      * @param comment
      * @return
      */
-    int save(Comment comment);
+    int saveComment(Comment comment);
 
     /**
      * 通过 id 获取
