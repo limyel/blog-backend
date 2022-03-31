@@ -1,7 +1,10 @@
 package com.limyel.blog.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
+import com.limyel.blog.core.util.PageUtil;
 import com.limyel.blog.dao.CommentMapper;
 import com.limyel.blog.entity.Comment;
 import com.limyel.blog.entity.Post;
@@ -45,9 +48,10 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     }
 
     @Override
-    public List<CommentInPostVO> pageInPost(Post post, int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
-        return commentMapper.selectByPostId(post.getId());
+    public PageUtil pageInPost(Post post, Long pageNum, Long pageSize) {
+        IPage<Comment> page = new Page<>(pageNum, pageSize);
+
+        return new PageUtil(commentMapper.selectByPostId(page, post.getId()));
     }
 
     @Override

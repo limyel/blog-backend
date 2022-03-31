@@ -16,12 +16,14 @@ public class GlobalExceptionAdvice {
     @ResponseBody
     @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
     public Response handleException(HttpServletRequest request, Exception e) {
+        e.printStackTrace();
         return null;
     }
 
     @ExceptionHandler(BaseException.class)
     @ResponseBody
     public Response handleBlogException(HttpServletRequest request, BaseException baseException) {
+        baseException.printStackTrace();
         return null;
     }
 

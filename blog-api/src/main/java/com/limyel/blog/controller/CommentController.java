@@ -2,6 +2,7 @@ package com.limyel.blog.controller;
 
 import com.limyel.blog.core.Response;
 import com.limyel.blog.core.annotation.CurrentUser;
+import com.limyel.blog.core.util.PageUtil;
 import com.limyel.blog.entity.Comment;
 import com.limyel.blog.entity.User;
 import com.limyel.blog.entity.Post;
@@ -37,19 +38,19 @@ public class CommentController {
 
     @ApiOperation(value = "文章中的列表", httpMethod = "GET")
     @GetMapping("/post/{id}")
-    public Response listInPost(
+    public Response<PageUtil> listInPost(
             @PathVariable(name = "id") Long id,
-            @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
-            @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize
+            @RequestParam(name = "pageNum", required = false, defaultValue = "1") Long pageNum,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "20") Long pageSize
     ) {
         Post post = postService.getById(id);
         if (post == null) {
             return Response.notFound();
         }
 
-        List<CommentInPostVO> result = commentService.pageInPost(post, pageNum, pageSize);
+        PageUtil pageUtil = commentService.pageInPost(post, pageNum, pageSize);
 
-        return Response.success(result);
+        return Response.success(pageUtil);
     }
 
     @ApiOperation(value = "发布", httpMethod = "POST")

@@ -1,6 +1,7 @@
 package com.limyel.blog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.limyel.blog.core.util.PageUtil;
 import com.limyel.blog.entity.Comment;
 import com.limyel.blog.entity.Post;
 import com.limyel.blog.vo.CommentLatestVO;
@@ -34,7 +35,7 @@ public interface CommentService extends IService<Comment> {
      * @param pageSize
      * @return
      */
-    List<CommentInPostVO> pageInPost(Post post, int pageNum, int pageSize);
+    PageUtil pageInPost(Post post, Long pageNum, Long pageSize);
 
     /**
      * 最新评论

@@ -3,8 +3,8 @@
 <mapper namespace="com.limyel.blog.dao.UserMapper">
   <resultMap id="BaseResultMap" type="com.limyel.blog.entity.User">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
-    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updatedAt" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl" />
@@ -20,7 +20,7 @@
   </resultMap>
 
   <sql id="BaseColumns">
-    id, created_at, updated_at, deleted, name, avatar_url, email, html_url
+    id, create_time, update_time, deleted, name, avatar_url, email, html_url
   </sql>
 
   <select id="selectVOById" resultMap="User" parameterType="java.lang.Long">

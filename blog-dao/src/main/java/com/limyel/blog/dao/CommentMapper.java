@@ -1,6 +1,7 @@
 package com.limyel.blog.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.limyel.blog.entity.Comment;
 import com.limyel.blog.vo.CommentInPostVO;
 import com.limyel.blog.vo.ParentCommentVO;
@@ -14,7 +15,7 @@ import java.util.List;
 @Repository
 public interface CommentMapper extends BaseMapper<Comment> {
 
-    List<CommentInPostVO> selectByPostId(Long postId);
+    IPage<CommentInPostVO> selectByPostId(IPage<Comment> page, Long postId);
 
     ParentCommentVO selectParentById(Long parentCommentId);
 

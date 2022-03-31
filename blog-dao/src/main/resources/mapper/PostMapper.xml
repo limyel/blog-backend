@@ -3,8 +3,8 @@
 <mapper namespace="com.limyel.blog.dao.PostMapper">
   <resultMap id="BaseResultMap" type="com.limyel.blog.entity.Post">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
-    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updatedAt" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="content" jdbcType="VARCHAR" property="content" />
@@ -14,8 +14,8 @@
 
   <resultMap id="PostInHome" type="com.limyel.blog.vo.PostInHomeVO">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
-    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updatedAt" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="slug" jdbcType="VARCHAR" property="slug" />
     <result column="introduction" jdbcType="VARCHAR" property="introduction" />
@@ -24,26 +24,26 @@
   </resultMap>
 
   <sql id="BaseColumns">
-    id, created_at, updated_at, deleted, title, content, slug, introduction
+    id, create_time, update_time, deleted, title, content, slug, introduction
   </sql>
 
   <select id="selectInHome" resultMap="PostInHome">
-    select t1.id, t1.created_at, t1.updated_at, t1.title, t1.slug, t1.introduction from post t1 where t1.deleted = 0 order by t1.created_at desc
+    select t1.id, t1.create_time, t1.update_time, t1.title, t1.slug, t1.introduction from post t1 where t1.deleted = 0 order by t1.create_time desc
   </select>
 
   <select id="selectYear" resultType="java.lang.Integer">
-    select YEAR(created_at) from post where deleted = 0 group by YEAR(created_at)
+    select YEAR(create_time) from post where deleted = 0 group by YEAR(create_time)
   </select>
 
   <select id="selectByYear" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-    select <include refid="BaseColumns"/> from post where YEAR(created_at) = #{year} and deleted = 0 order by YEAR(created_at) desc limit 0, 10
+    select <include refid="BaseColumns"/> from post where YEAR(create_time) = #{year} and deleted = 0 order by YEAR(create_time) desc limit 0, 10
   </select>
 
   <select id="selectHot" resultType="com.limyel.blog.vo.PostInArchiveVO">
-    select created_at, title, slug from post where deleted = 0 order by views desc limit 0, 5
+    select create_time, title, slug from post where deleted = 0 order by views desc limit 0, 5
   </select>
 
   <select id="selectByTagId" parameterType="java.lang.Long" resultType="com.limyel.blog.vo.PostInArchiveVO">
-    select created_at, title, slug from post where deleted = 0 and id in (select t1.post_id from post_tag t1 where t1.deleted = 0 and t1.tag_id = #{tagId})
+    select create_time, title, slug from post where deleted = 0 and id in (select t1.post_id from post_tag t1 where t1.deleted = 0 and t1.tag_id = #{tagId})
   </select>
 </mapper>
