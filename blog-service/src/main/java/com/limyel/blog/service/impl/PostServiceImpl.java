@@ -1,6 +1,7 @@
 package com.limyel.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
@@ -120,7 +121,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         Page<Post> page = new Page<>(pageNum, pageSize);
         QueryWrapper<Post> wrapper = new QueryWrapper<>();
         wrapper.eq("tag_id", tag.getId());
-        Page<Post> postPage = postMapper.selectPage(page, wrapper);
+        IPage<PostInArchiveVO> postPage = postMapper.selectByTagId(page, tag.getId());
 
         return new PageUtil(postPage);
     }
