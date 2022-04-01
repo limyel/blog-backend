@@ -69,7 +69,7 @@ public class GithubUserInfoDTO {
 
     private Integer following;
 
-    private Date createdAt;
+    private Date createTime;
 
-    private Date updatedAt;
+    private Date updateTime;
 }

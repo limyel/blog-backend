@@ -9,7 +9,7 @@ import java.util.Date;
 @Setter
 public class CommentLatestVO {
 
-    private Date createdAt;
+    private Date createTime;
 
     private String content;
 

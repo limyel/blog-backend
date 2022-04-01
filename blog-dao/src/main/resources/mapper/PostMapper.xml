@@ -3,8 +3,8 @@
 <mapper namespace="com.limyel.blog.dao.PostMapper">
   <resultMap id="BaseResultMap" type="com.limyel.blog.entity.Post">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createdAt" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="content" jdbcType="VARCHAR" property="content" />
@@ -14,8 +14,8 @@
 
   <resultMap id="PostInHome" type="com.limyel.blog.vo.PostInHomeVO">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createdAt" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="slug" jdbcType="VARCHAR" property="slug" />
     <result column="introduction" jdbcType="VARCHAR" property="introduction" />

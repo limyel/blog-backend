@@ -14,7 +14,7 @@ public class CommentInPostVO {
 
     private Long id;
 
-    private Date createdAt;
+    private Date createTime;
 
     private String content;
 

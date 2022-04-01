@@ -12,7 +12,7 @@ public class PostDetailVO {
 
     private Long id;
 
-    private Date createdAt;
+    private Date createTime;
 
     private List<TagInPostVO> tags;
 

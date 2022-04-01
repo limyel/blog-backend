@@ -3,8 +3,8 @@
 <mapper namespace="com.limyel.blog.dao.AboutMapper">
   <resultMap id="BaseResultMap" type="com.limyel.blog.entity.About">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createdAt" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="sequence" jdbcType="INTEGER" property="sequence" />

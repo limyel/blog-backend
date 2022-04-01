@@ -3,8 +3,8 @@
 <mapper namespace="com.limyel.blog.dao.CommentMapper">
   <resultMap id="BaseResultMap" type="com.limyel.blog.entity.Comment">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createdAt" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
@@ -16,7 +16,7 @@
 
   <resultMap id="CommentInPost" type="com.limyel.blog.vo.CommentInPostVO">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="floor" jdbcType="INTEGER" property="floor" />
     <association column="user_id" property="user" select="com.limyel.blog.dao.UserMapper.selectVOById" />
@@ -25,7 +25,7 @@
 
   <resultMap id="ParentComment" type="com.limyel.blog.vo.ParentCommentVO">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="floor" jdbcType="INTEGER" property="floor" />
     <association column="user_id" property="user" select="com.limyel.blog.dao.UserMapper.selectVOById" />

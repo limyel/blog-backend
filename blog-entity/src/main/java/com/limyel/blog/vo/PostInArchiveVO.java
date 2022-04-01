@@ -9,7 +9,7 @@ import java.util.Date;
 @Setter
 public class PostInArchiveVO {
 
-    private Date createdAt;
+    private Date createTime;
 
     private String title;
 

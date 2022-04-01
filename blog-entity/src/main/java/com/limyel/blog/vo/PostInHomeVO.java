@@ -12,9 +12,9 @@ public class PostInHomeVO {
 
     private Long id;
 
-    private Date createdAt;
+    private Date createTime;
 
-    private Date updatedAt;
+    private Date updateTime;
 
     private String title;
 

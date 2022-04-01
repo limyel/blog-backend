@@ -3,8 +3,8 @@
 <mapper namespace="com.limyel.blog.dao.PostTagMapper">
   <resultMap id="BaseResultMap" type="com.limyel.blog.entity.PostTag">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createdAt" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
     <result column="post_id" jdbcType="BIGINT" property="postId" />
     <result column="tag_id" jdbcType="BIGINT" property="tagId" />
