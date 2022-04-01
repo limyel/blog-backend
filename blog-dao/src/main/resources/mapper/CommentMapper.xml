@@ -36,11 +36,11 @@
   </sql>
 
   <select id="selectByPostId" parameterType="java.lang.Long" resultMap="CommentInPost">
-    select id, create_time, content, floor, member_id, parent_comment_id from comment where post_id=#{postId} order by create_time desc
+    select id, create_time, content, floor, user_id, parent_comment_id from comment where post_id=#{postId} order by create_time desc
   </select>
 
   <select id="selectParentById" parameterType="java.lang.Long" resultMap="ParentComment">
-    select id, create_time, content, floor, member_id from comment where id = #{parentCommentId}
+    select id, create_time, content, floor, user_id from comment where id = #{parentCommentId}
   </select>
 
   <select id="selectLatest" resultMap="BaseResultMap">
