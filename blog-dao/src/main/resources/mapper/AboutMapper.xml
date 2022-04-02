@@ -7,7 +7,7 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
     <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="sequence" jdbcType="INTEGER" property="sequence" />
+    <result column="index" jdbcType="INTEGER" property="index" />
   </resultMap>
 
   <resultMap id="AboutDetail" type="com.limyel.blog.vo.AboutDetailVO" extends="BaseResultMap">
@@ -15,7 +15,7 @@
   </resultMap>
 
   <sql id="BaseColumns">
-    id, create_time, update_time, deleted, title, sequence
+    id, create_time, update_time, deleted, title, index
   </sql>
 
   <select id="selectDetail" resultMap="AboutDetail">

@@ -9,6 +9,6 @@ public class AboutDTO {
 
     private String title;
 
-    private Integer sequence;
+    private Integer index;
 
 }

@@ -10,15 +10,15 @@
     <result column="link" jdbcType="VARCHAR" property="link" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="about_id" jdbcType="BIGINT" property="aboutId" />
-    <result column="sequence" jdbcType="INTEGER" property="sequence" />
+    <result column="index" jdbcType="INTEGER" property="index" />
   </resultMap>
 
   <sql id="BaseColumns">
-    id, create_time, update_time, deleted, name, link, description, about_id, sequence
+    id, create_time, update_time, deleted, name, link, description, about_id, index
   </sql>
 
   <select id="selectByAboutId" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select <include refid="BaseColumns"/> from about_item where about_id = #{aboutId} and deleted = 0 order by sequence
+    select <include refid="BaseColumns"/> from about_item where about_id = #{aboutId} and deleted = 0 order by index
   </select>
 
   <update id="deleteByAboutId" parameterType="java.lang.Long">
