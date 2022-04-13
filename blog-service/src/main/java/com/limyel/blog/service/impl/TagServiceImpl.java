@@ -1,6 +1,7 @@
 package com.limyel.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.limyel.blog.core.util.PageUtil;
 import com.limyel.blog.entity.Tag;
@@ -49,11 +50,13 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public int countByIds(List<Long> ids) {
+    public long countByIds(List<Long> ids) {
         if (ids == null || ids.size() == 0) {
             return 0;
         }
-        return tagMapper.selectCountByIds(ids);
+        QueryWrapper<Tag> wrapper = Wrappers.query();
+        wrapper.in("id", ids);
+        return tagMapper.selectCount(wrapper);
     }
 
     @Override

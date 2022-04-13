@@ -1,5 +1,7 @@
 package com.limyel.blog.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.limyel.blog.common.exception.BlogException;
 import com.limyel.blog.dao.AboutItemMapper;
@@ -28,7 +30,9 @@ public class AboutItemServiceImpl extends ServiceImpl<AboutItemMapper, AboutItem
 
     @Override
     public List<AboutItem> listByAboutId(Long aboutId) {
-        return aboutItemMapper.selectByAboutId(aboutId);
+        LambdaQueryWrapper<AboutItem> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(AboutItem::getAboutId, aboutId);
+        return aboutItemMapper.selectList(wrapper);
     }
 
     @Override
@@ -48,10 +52,6 @@ public class AboutItemServiceImpl extends ServiceImpl<AboutItemMapper, AboutItem
 
     @Override
     public int deleteById(Long id) {
-        AboutItem aboutItem = aboutItemMapper.selectById(id);
-        if (aboutItem == null) {
-
-        }
         return aboutItemMapper.deleteById(id);
     }
 
@@ -62,7 +62,9 @@ public class AboutItemServiceImpl extends ServiceImpl<AboutItemMapper, AboutItem
 
     @Override
     public int deleteByAboutId(Long aboutId) {
-        return aboutItemMapper.deleteById(aboutId);
+        LambdaQueryWrapper<AboutItem> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(AboutItem::getAboutId, aboutId);
+        return aboutItemMapper.delete(wrapper);
     }
 
 

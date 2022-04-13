@@ -18,5 +18,4 @@ public interface TagMapper extends BaseMapper<Tag> {
 
     List<TagDetailVO> selectDetail();
 
-    Integer selectCountByIds(List<Long> ids);
 }

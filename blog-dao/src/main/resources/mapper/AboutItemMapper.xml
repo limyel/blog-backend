@@ -17,11 +17,4 @@
     id, create_time, update_time, deleted, name, link, description, about_id, `index`
   </sql>
 
-  <select id="selectByAboutId" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select <include refid="BaseColumns"/> from about_item where about_id = #{aboutId} and deleted = 0 order by `index`
-  </select>
-
-  <update id="deleteByAboutId" parameterType="java.lang.Long">
-    update about_item set deleted = 1 where about_id = #{aboutId}
-  </update>
 </mapper>

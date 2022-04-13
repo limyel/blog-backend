@@ -43,8 +43,4 @@
     select id, create_time, content, floor, user_id from comment where id = #{parentCommentId}
   </select>
 
-  <select id="selectLatest" resultMap="BaseResultMap">
-    select <include refid="BaseColumns"/> from comment order by create_time desc limit 5
-  </select>
-
 </mapper>

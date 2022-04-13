@@ -27,15 +27,4 @@
     select id, name, avatar_url, html_url from user
   </select>
 
-  <select id="selectByInfo" resultMap="BaseResultMap">
-    select <include refid="BaseColumns"/> from user
-    <where>
-      <if test="name != null">
-        name=#{name}
-      </if>
-      <if test="email != null">
-        and email=#{email}
-      </if>
-    </where>
-  </select>
 </mapper>

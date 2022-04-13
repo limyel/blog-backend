@@ -7,7 +7,6 @@ import com.limyel.blog.vo.TagInPostVO;
 import com.limyel.blog.dto.TagDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface TagService {
 
@@ -19,7 +18,7 @@ public interface TagService {
 
     Tag getBySlug(String slug);
 
-    int countByIds(List<Long> ids);
+    long countByIds(List<Long> ids);
 
     Tag getById(Long id);
 

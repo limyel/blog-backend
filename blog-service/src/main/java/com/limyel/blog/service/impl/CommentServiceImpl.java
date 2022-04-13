@@ -1,6 +1,10 @@
 package com.limyel.blog.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
@@ -56,7 +60,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
     @Override
     public List<CommentLatestVO> listLatest() {
-        List<Comment> comments = commentMapper.selectLatest();
+        LambdaQueryWrapper<Comment> wrapper = Wrappers.lambdaQuery();
+        wrapper.orderByDesc(Comment::getCreateTime).last("limit 5");
+        List<Comment> comments = commentMapper.selectList(wrapper);
         List<CommentLatestVO> result = new ArrayList<>();
         comments.forEach(comment -> {
             CommentLatestVO commentLatestVO = BeanUtil.copy(comment, CommentLatestVO.class);

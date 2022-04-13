@@ -11,6 +11,4 @@ public interface UserMapper extends BaseMapper<User> {
 
     UserVO selectVOById(Long id);
 
-    User selectByInfo(@Param("name") String name, @Param("email") String email);
-
 }

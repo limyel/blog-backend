@@ -1,5 +1,6 @@
 package com.limyel.blog.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.limyel.blog.dao.UserMapper;
 import com.limyel.blog.entity.User;
 import com.limyel.blog.dto.AdminLoginDTO;
@@ -32,7 +33,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getByInfo(String name, String email) {
-        return userMapper.selectByInfo(name, email);
+        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(User::getName, name);
+        wrapper.eq(User::getEmail, email);
+        return userMapper.selectOne(wrapper);
     }
 
     @Override

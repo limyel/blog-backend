@@ -19,6 +19,4 @@ public interface CommentMapper extends BaseMapper<Comment> {
 
     ParentCommentVO selectParentById(Long parentCommentId);
 
-    List<Comment> selectLatest();
-
 }
