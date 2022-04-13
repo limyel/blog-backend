@@ -46,10 +46,13 @@ public class AboutServiceImpl extends ServiceImpl<AboutMapper, About> implements
     }
 
     @Override
-    public int delete(About about) {
-        about.setDeleted(true);
-        aboutItemService.deleteByAboutId(about.getId());
-        return aboutMapper.updateById(about);
+    public int delete(Long id) {
+        About about = this.getById(id);
+        if (about == null) {
+            // todo not found
+        }
+        aboutItemService.deleteByAboutId(id);
+        return aboutMapper.deleteById(id);
     }
 
     @Override

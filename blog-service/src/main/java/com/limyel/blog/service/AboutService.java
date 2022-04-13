@@ -38,7 +38,7 @@ public interface AboutService extends IService<About> {
      * @param about
      * @return
      */
-    int delete(About about);
+    int delete(Long id);
 
     /**
      * 更新

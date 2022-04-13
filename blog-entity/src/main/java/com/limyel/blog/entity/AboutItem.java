@@ -34,6 +34,6 @@ public class AboutItem extends BaseEntity {
     /**
      * 顺序
      */
-    private Integer index;
+    private Integer sequence;
 
 }

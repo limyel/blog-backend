@@ -15,5 +15,5 @@ public class AboutItemDTO {
 
     private Long aboutId;
 
-    private Integer index;
+    private Integer sequence;
 }

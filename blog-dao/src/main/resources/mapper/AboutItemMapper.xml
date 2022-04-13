@@ -10,11 +10,11 @@
     <result column="link" jdbcType="VARCHAR" property="link" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="about_id" jdbcType="BIGINT" property="aboutId" />
-    <result column="index" jdbcType="INTEGER" property="index" />
+    <result column="sequence" jdbcType="INTEGER" property="sequence" />
   </resultMap>
 
   <sql id="BaseColumns">
-    id, create_time, update_time, deleted, name, link, description, about_id, `index`
+    id, create_time, update_time, deleted, name, link, description, about_id, sequence
   </sql>
 
 </mapper>

@@ -17,6 +17,5 @@ public class About extends BaseEntity {
 
     private String title;
 
-    @TableField("`index`")
-    private Integer index;
+    private Integer sequence;
 }

@@ -47,11 +47,7 @@ public class AboutController {
     public Response delete(
             @PathVariable("id") Long id
     ) {
-        About about = aboutService.getById(id);
-        if (about == null) {
-            return Response.notFound();
-        }
-        aboutService.delete(about);
+        aboutService.delete(id);
         return Response.success();
     }
 
