@@ -61,7 +61,6 @@ public class AboutServiceImpl extends ServiceImpl<AboutMapper, About> implements
     public PageUtil page(Long pageNum, Long pageSize) {
         Page<About> page = new Page<>(pageNum, pageSize);
         QueryWrapper<About> wrapper = new QueryWrapper<>();
-        wrapper.eq("deleted", false);
         Page<About> aboutPage = aboutMapper.selectPage(page, wrapper);
         return new PageUtil(aboutPage);
     }

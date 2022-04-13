@@ -3,7 +3,7 @@
 <configuration>
 
     <!-- 日志文件存放路径-->
-    <property name="PATH" value="/var/logs"/>
+    <property name="PATH" value="/var/log/spring"/>
 
     <!-- 彩色日志依赖的渲染类 -->
     <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
