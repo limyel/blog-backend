@@ -3,6 +3,7 @@ package com.limyel.blog.utils;
 import com.github.stuxuhai.jpinyin.PinyinException;
 import com.github.stuxuhai.jpinyin.PinyinFormat;
 import com.github.stuxuhai.jpinyin.PinyinHelper;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 生成 slug
@@ -10,6 +11,10 @@ import com.github.stuxuhai.jpinyin.PinyinHelper;
 public class SlugUtil {
 
     public static String generate(String s) {
+        if (StringUtils.isBlank(s)) {
+            // todo 完善
+        }
+
         StringBuilder stringBuilder = new StringBuilder();
         // 标记，ascii 字符和汉字交界的地方加上 - 符号
         boolean flag = true;

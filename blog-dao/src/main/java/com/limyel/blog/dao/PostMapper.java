@@ -16,7 +16,7 @@ import java.util.List;
 @Repository
 public interface PostMapper extends BaseMapper<Post> {
 
-    Page<PostInHomeVO> selectInHome(IPage<Post> page);
+    Page<PostInHomeVO> selectInHome(IPage<PostInHomeVO> page);
 
     List<Integer> selectYear();
 

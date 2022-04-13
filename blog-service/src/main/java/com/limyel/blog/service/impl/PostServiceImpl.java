@@ -1,10 +1,12 @@
 package com.limyel.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.pagehelper.PageHelper;
 import com.limyel.blog.common.exception.BlogException;
 import com.limyel.blog.core.util.PageUtil;
 import com.limyel.blog.entity.PostTag;
@@ -20,12 +22,15 @@ import com.limyel.blog.service.PostTagService;
 import com.limyel.blog.service.TagService;
 import com.limyel.blog.utils.BeanUtil;
 import com.limyel.blog.utils.SlugUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements PostService {
 
@@ -45,10 +50,10 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
 
     @Override
     public PageUtil pageInHome(Long pageNum, Long pageSize) {
-        Page<Post> page = new Page<>(pageNum, pageSize);
-//        Page<Post> postPage = this.page(page);
+        Page<PostInHomeVO> page = new Page<>(pageNum, pageSize);
 
-        Page<PostInHomeVO> postPage = postMapper.selectInHome(page);
+        Page<PostInHomeVO> postPage = this.postMapper.selectInHome(page);
+
         return new PageUtil(postPage);
     }
 
@@ -76,7 +81,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
     public PostDetailVO getDetailById(Long id) {
         Post post = postMapper.selectById(id);
         if (post == null) {
-            return null;
+            // todo not found
         }
         PostDetailVO postDetail = BeanUtil.copy(post, PostDetailVO.class);
         // todo tag 只需要 id
@@ -130,13 +135,17 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
     public int update(Post post, PostDTO vo) {
         if (!validateTags(vo.getTagIds())) {
             throw new BlogException("标签不存在");
+            // todo 完善抛出异常
         }
-        post.setTitle(vo.getTitle());
-        post.setContent(vo.getContent());
-        post.setIntroduction(vo.getIntroduction());
-        post.setSlug(SlugUtil.generate(vo.getTitle()));
 
-        return postMapper.updateById(post);
+        LambdaUpdateWrapper<Post> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.set(StringUtils.isNotBlank(vo.getTitle()), Post::getTitle, vo.getTitle());
+        updateWrapper.set(StringUtils.isNotBlank(vo.getContent()), Post::getContent, vo.getContent());
+        updateWrapper.set(StringUtils.isNotBlank(vo.getIntroduction()), Post::getIntroduction, vo.getIntroduction());
+        System.out.println(StringUtils.isNotBlank(vo.getTitle()));
+        updateWrapper.set(StringUtils.isNotBlank(vo.getTitle()), Post::getSlug, SlugUtil.generate(vo.getTitle()));
+
+        return postMapper.update(post, updateWrapper);
     }
 
     @Override
