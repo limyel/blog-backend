@@ -51,11 +51,11 @@ public class AboutItemController {
     }
 
     @ApiOperation(value = "列表", httpMethod = "GET")
-    @GetMapping("/about/{id}")
+    @GetMapping("/about/{aboutId}")
     public Response list(
-            @PathVariable Long id
+            @PathVariable Long aboutId
     ) {
-        List<AboutItem> aboutItems = aboutItemService.listByAboutId(id);
+        List<AboutItem> aboutItems = aboutItemService.listByAboutId(aboutId);
         return Response.success(aboutItems);
     }
 
