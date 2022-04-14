@@ -3,6 +3,7 @@ package com.limyel.blog.utils;
 import com.github.stuxuhai.jpinyin.PinyinException;
 import com.github.stuxuhai.jpinyin.PinyinFormat;
 import com.github.stuxuhai.jpinyin.PinyinHelper;
+import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -17,7 +18,8 @@ public class SlugUtil {
         }
 
         StringBuilder stringBuilder = new StringBuilder();
-        // 标记，ascii 字符和汉字交界的地方加上 - 符号
+        s = s.replace('.', '-');
+        // 标记，字母、数字这些字符与汉字交界的地方加上 - 符号
         boolean flag = true;
         for (char c: s.toCharArray()) {
             if ((int) c <= 128) {
