@@ -43,11 +43,7 @@ public class TagController {
     public Response delete(
             @PathVariable("id") Long id
     ) {
-        Tag tag = tagService.getById(id);
-        if (tag == null) {
-            return Response.notFound();
-        }
-        tagService.delete(tag);
+        tagService.delete(id);
         return Response.success();
     }
 

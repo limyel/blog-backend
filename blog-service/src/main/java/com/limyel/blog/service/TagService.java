@@ -22,7 +22,7 @@ public interface TagService {
 
     Tag getById(Long id);
 
-    int delete(Tag tag);
+    int delete(Long id);
 
     int update(Tag tag, TagDTO vo);
 

@@ -35,7 +35,7 @@ public interface PostService extends IService<Post> {
 
     PageUtil pageByTag(String slug, Long pageNum, Long pageSize);
 
-    int update(Post post, PostDTO vo);
+    int update(Long id, PostDTO postDTO);
 
-    int delete(Post post);
+    int delete(Long id);
 }

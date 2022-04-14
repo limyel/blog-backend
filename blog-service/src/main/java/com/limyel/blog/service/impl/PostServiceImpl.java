@@ -23,6 +23,7 @@ import com.limyel.blog.service.TagService;
 import com.limyel.blog.utils.BeanUtil;
 import com.limyel.blog.utils.SlugUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -132,26 +133,23 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
     }
 
     @Override
-    public int update(Post post, PostDTO vo) {
-        if (!validateTags(vo.getTagIds())) {
+    public int update(Long id, PostDTO postDTO) {
+        // todo 自定义 validator 验证器
+        if (ObjectUtils.allNotNull(postDTO.getTagIds()) && !validateTags(postDTO.getTagIds())) {
             throw new BlogException("标签不存在");
             // todo 完善抛出异常
         }
 
-        LambdaUpdateWrapper<Post> updateWrapper = new LambdaUpdateWrapper<>();
-        updateWrapper.set(StringUtils.isNotBlank(vo.getTitle()), Post::getTitle, vo.getTitle());
-        updateWrapper.set(StringUtils.isNotBlank(vo.getContent()), Post::getContent, vo.getContent());
-        updateWrapper.set(StringUtils.isNotBlank(vo.getIntroduction()), Post::getIntroduction, vo.getIntroduction());
-        System.out.println(StringUtils.isNotBlank(vo.getTitle()));
-        updateWrapper.set(StringUtils.isNotBlank(vo.getTitle()), Post::getSlug, SlugUtil.generate(vo.getTitle()));
+        Post post = BeanUtil.copy(postDTO, Post.class);
+        post.setId(id);
 
-        return postMapper.update(post, updateWrapper);
+        return postMapper.updateById(post);
     }
 
     @Override
-    public int delete(Post post) {
-        post.setDeleted(true);
-        return postMapper.updateById(post);
+    public int delete(Long id) {
+        // todo not found
+        return postMapper.deleteById(id);
     }
 
     /**

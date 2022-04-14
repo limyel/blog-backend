@@ -65,9 +65,9 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public int delete(Tag tag) {
-        tag.setDeleted(true);
-        return tagMapper.updateById(tag);
+    public int delete(Long id) {
+        // todo not found
+        return tagMapper.deleteById(id);
     }
 
     @Override

@@ -12,7 +12,8 @@ public class SlugUtil {
 
     public static String generate(String s) {
         if (StringUtils.isBlank(s)) {
-            // todo 完善
+            // todo 如果为空，完善
+            return null;
         }
 
         StringBuilder stringBuilder = new StringBuilder();

@@ -68,14 +68,10 @@ public class PostController {
     @ApiOperation(value = "修改", httpMethod = "PUT")
     @PutMapping("/{id}")
     public Response update(
-            @PathVariable("id") Long id,
+            @PathVariable(value = "id") Long id,
             @RequestBody PostDTO vo
     ) {
-        Post post = postService.getById(id);
-        if (post == null) {
-            return Response.notFound();
-        }
-        postService.update(post, vo);
+        postService.update(id, vo);
         return Response.success();
     }
 
@@ -84,11 +80,7 @@ public class PostController {
     public Response delete(
             @PathVariable("id") Long id
     ) {
-        Post post = postService.getById(id);
-        if (post == null) {
-            return Response.notFound();
-        }
-        postService.delete(post);
+        postService.delete(id);
         return Response.success();
     }
 }
