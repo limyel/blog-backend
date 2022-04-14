@@ -10,15 +10,8 @@
     <result column="sequence" jdbcType="INTEGER" property="sequence" />
   </resultMap>
 
-  <resultMap id="AboutDetail" type="com.limyel.blog.vo.AboutDetailVO" extends="BaseResultMap">
-    <collection column="id" property="items" ofType="com.limyel.blog.entity.AboutItem" select="com.limyel.blog.dao.AboutItemMapper.selectByAboutId"/>
-  </resultMap>
-
   <sql id="BaseColumns">
     id, create_time, update_time, deleted, title, sequence
   </sql>
 
-  <select id="selectDetail" resultMap="AboutDetail">
-    select <include refid="BaseColumns"/> from about where deleted = 0
-  </select>
 </mapper>

@@ -16,6 +16,7 @@ import com.limyel.blog.utils.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,7 +33,15 @@ public class AboutServiceImpl extends ServiceImpl<AboutMapper, About> implements
 
     @Override
     public List<AboutDetailVO> listDetail() {
-        return aboutMapper.selectDetail();
+        // todo 用 Stream 改造
+        List<About> aboutList = this.aboutMapper.selectList(null);
+        List<AboutDetailVO> result = new ArrayList<>();
+        for (About about: aboutList) {
+            AboutDetailVO aboutDetailVO = BeanUtil.copy(about, AboutDetailVO.class);
+            aboutDetailVO.setItems(this.aboutItemService.listByAboutId(about.getId()));
+            result.add(aboutDetailVO);
+        }
+        return result;
     }
 
     @Override

@@ -10,6 +10,4 @@ import java.util.List;
 @Repository
 public interface AboutMapper extends BaseMapper<About> {
 
-    List<AboutDetailVO> selectDetail();
-
 }
