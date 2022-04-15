@@ -1,4 +1,4 @@
-package com.limyel.blog.search.entity;
+package com.limyel.blog.entity;
 
 import lombok.Getter;
 import lombok.Setter;
