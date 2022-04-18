@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author limyel
@@ -33,15 +34,13 @@ public class AboutServiceImpl extends ServiceImpl<AboutMapper, About> implements
 
     @Override
     public List<AboutDetailVO> listDetail() {
-        // todo 用 Stream 改造
         List<About> aboutList = this.aboutMapper.selectList(null);
-        List<AboutDetailVO> result = new ArrayList<>();
-        for (About about: aboutList) {
+
+        return aboutList.stream().map(about -> {
             AboutDetailVO aboutDetailVO = BeanUtil.copy(about, AboutDetailVO.class);
             aboutDetailVO.setItems(this.aboutItemService.listByAboutId(about.getId()));
-            result.add(aboutDetailVO);
-        }
-        return result;
+            return aboutDetailVO;
+        }).collect(Collectors.toList());
     }
 
     @Override
