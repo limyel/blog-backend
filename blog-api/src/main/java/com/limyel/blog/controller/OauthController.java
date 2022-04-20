@@ -1,9 +1,9 @@
 package com.limyel.blog.controller;
 
-import com.limyel.blog.core.Response;
+import com.limyel.blog.common.Response;
 import com.limyel.blog.vo.UserVO;
 import com.limyel.blog.service.GithubOauthService;
-import com.limyel.blog.utils.JwtUtil;
+import com.limyel.blog.common.util.JwtUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

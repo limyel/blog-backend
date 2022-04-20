@@ -1,14 +1,11 @@
 package com.limyel.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.limyel.blog.common.exception.BlogException;
-import com.limyel.blog.core.util.PageUtil;
+import com.limyel.blog.common.util.PageUtil;
 import com.limyel.blog.entity.PostTag;
 import com.limyel.blog.entity.Tag;
 import com.limyel.blog.vo.PostDetailVO;
@@ -20,11 +17,10 @@ import com.limyel.blog.dto.PostDTO;
 import com.limyel.blog.service.PostService;
 import com.limyel.blog.service.PostTagService;
 import com.limyel.blog.service.TagService;
-import com.limyel.blog.utils.BeanUtil;
-import com.limyel.blog.utils.SlugUtil;
+import com.limyel.blog.common.util.BeanUtil;
+import com.limyel.blog.common.util.SlugUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

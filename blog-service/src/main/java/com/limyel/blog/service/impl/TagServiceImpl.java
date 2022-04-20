@@ -3,15 +3,15 @@ package com.limyel.blog.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.limyel.blog.core.util.PageUtil;
+import com.limyel.blog.common.util.PageUtil;
 import com.limyel.blog.entity.Tag;
 import com.limyel.blog.vo.TagDetailVO;
 import com.limyel.blog.vo.TagInPostVO;
 import com.limyel.blog.dao.TagMapper;
 import com.limyel.blog.dto.TagDTO;
 import com.limyel.blog.service.TagService;
-import com.limyel.blog.utils.BeanUtil;
-import com.limyel.blog.utils.SlugUtil;
+import com.limyel.blog.common.util.BeanUtil;
+import com.limyel.blog.common.util.SlugUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

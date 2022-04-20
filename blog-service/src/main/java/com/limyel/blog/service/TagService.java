@@ -1,6 +1,6 @@
 package com.limyel.blog.service;
 
-import com.limyel.blog.core.util.PageUtil;
+import com.limyel.blog.common.util.PageUtil;
 import com.limyel.blog.entity.Tag;
 import com.limyel.blog.vo.TagDetailVO;
 import com.limyel.blog.vo.TagInPostVO;

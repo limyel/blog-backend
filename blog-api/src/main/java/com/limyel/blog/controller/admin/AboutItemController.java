@@ -1,10 +1,10 @@
 package com.limyel.blog.controller.admin;
 
-import com.limyel.blog.core.Response;
+import com.limyel.blog.common.Response;
 import com.limyel.blog.entity.AboutItem;
 import com.limyel.blog.dto.AboutItemDTO;
 import com.limyel.blog.service.AboutItemService;
-import com.limyel.blog.utils.BeanUtil;
+import com.limyel.blog.common.util.BeanUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

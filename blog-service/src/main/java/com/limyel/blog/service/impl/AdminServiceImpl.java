@@ -6,7 +6,7 @@ import com.limyel.blog.dao.AdminMapper;
 import com.limyel.blog.entity.Admin;
 import com.limyel.blog.dto.AdminLoginDTO;
 import com.limyel.blog.service.AdminService;
-import com.limyel.blog.utils.JwtUtil;
+import com.limyel.blog.common.util.JwtUtil;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

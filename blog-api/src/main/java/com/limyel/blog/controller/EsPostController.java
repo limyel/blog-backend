@@ -1,6 +1,6 @@
 package com.limyel.blog.controller;
 
-import com.limyel.blog.core.Response;
+import com.limyel.blog.common.Response;
 import com.limyel.blog.service.EsPostService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;

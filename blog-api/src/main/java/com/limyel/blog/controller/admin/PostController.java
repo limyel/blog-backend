@@ -1,8 +1,7 @@
 package com.limyel.blog.controller.admin;
 
-import com.limyel.blog.core.Response;
-import com.limyel.blog.core.util.PageUtil;
-import com.limyel.blog.entity.Post;
+import com.limyel.blog.common.Response;
+import com.limyel.blog.common.util.PageUtil;
 import com.limyel.blog.vo.PostDetailVO;
 import com.limyel.blog.dto.PostDTO;
 import com.limyel.blog.service.PostService;

@@ -1,15 +1,9 @@
 package com.limyel.blog.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.limyel.blog.utils.SlugUtil;
+import com.limyel.blog.common.util.SlugUtil;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-
-import java.util.Date;
 
 @Getter
 @Setter

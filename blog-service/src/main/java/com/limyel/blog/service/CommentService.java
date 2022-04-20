@@ -1,11 +1,10 @@
 package com.limyel.blog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.limyel.blog.core.util.PageUtil;
+import com.limyel.blog.common.util.PageUtil;
 import com.limyel.blog.entity.Comment;
 import com.limyel.blog.entity.Post;
 import com.limyel.blog.vo.CommentLatestVO;
-import com.limyel.blog.vo.CommentInPostVO;
 
 import java.util.List;
 

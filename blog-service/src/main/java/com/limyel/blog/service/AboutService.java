@@ -1,8 +1,7 @@
 package com.limyel.blog.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.limyel.blog.core.util.PageUtil;
+import com.limyel.blog.common.util.PageUtil;
 import com.limyel.blog.entity.About;
 import com.limyel.blog.vo.AboutDetailVO;
 
