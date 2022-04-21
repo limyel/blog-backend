@@ -59,9 +59,6 @@ public class CommentController {
             @RequestBody CommentDTO commentDTO
     ) {
         Comment comment = BeanUtil.copy(commentDTO, Comment.class);
-        if (comment.getParentCommentId() != null && commentService.getById(comment.getParentCommentId()) == null) {
-            return Response.notFound();
-        }
         if (comment.getPostId() != null && postService.getById(comment.getPostId()) == null) {
             return Response.notFound();
         }

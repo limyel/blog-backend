@@ -9,6 +9,7 @@ import com.limyel.blog.common.util.PageUtil;
 import com.limyel.blog.dao.CommentMapper;
 import com.limyel.blog.entity.Comment;
 import com.limyel.blog.entity.Post;
+import com.limyel.blog.vo.CommentInPostVO;
 import com.limyel.blog.vo.CommentLatestVO;
 import com.limyel.blog.vo.PostInArchiveVO;
 import com.limyel.blog.vo.UserVO;
@@ -49,8 +50,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
     @Override
     public PageUtil pageInPost(Post post, Long pageNum, Long pageSize) {
-        IPage<Comment> page = new Page<>(pageNum, pageSize);
-
+        Page<CommentInPostVO> page = new Page<>(pageNum, pageSize);
         return new PageUtil(commentMapper.selectByPostId(page, post.getId()));
     }
 

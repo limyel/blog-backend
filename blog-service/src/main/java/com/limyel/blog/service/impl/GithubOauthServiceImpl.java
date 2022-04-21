@@ -57,7 +57,7 @@ public class GithubOauthServiceImpl implements GithubOauthService {
         if (member == null) {
             throw new BlogException("获取 GitHub 用户信息失败");
         }
-        User oldMember = memberService.getByInfo(member.getName(), member.getEmail());
+        User oldMember = memberService.getByInfo(member.getUsername(), member.getEmail());
         if (oldMember != null) {
             member.setId(oldMember.getId());
             BeanUtil.cover(member, oldMember);
@@ -82,7 +82,7 @@ public class GithubOauthServiceImpl implements GithubOauthService {
             member.setAvatarUrl(vo.getAvatarUrl());
             member.setEmail(vo.getEmail());
             member.setHtmlUrl(vo.getHtmlUrl());
-            member.setName(vo.getName());
+            member.setUsername(vo.getName());
             return member;
         } catch (JsonProcessingException e) {
             e.printStackTrace();
