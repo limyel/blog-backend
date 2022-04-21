@@ -21,5 +21,5 @@ public interface PostMapper extends BaseMapper<Post> {
 
     List<PostInArchiveVO> selectHot();
 
-    IPage<PostInArchiveVO> selectByTagId(IPage<Post> page, Long tagId);
+    IPage<PostInArchiveVO> selectByTagId(Page<Post> page, Long tagId);
 }

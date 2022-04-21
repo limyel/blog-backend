@@ -46,7 +46,7 @@
   </select>
 
   <select id="selectByYear" resultMap="BaseResultMap">
-    select <include refid="BaseColumns"/> from post where YEAR(create_time) = #{year} and is_deleted = 0 order by create_time desc
+    select <include refid="BaseColumns"/> from post where YEAR(create_time) = #{year} and is_deleted = 0 and type = 0 order by create_time desc
   </select>
 
   <select id="selectHot" resultType="com.limyel.blog.vo.PostInArchiveVO">

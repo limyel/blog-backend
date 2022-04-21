@@ -17,19 +17,19 @@ public class PageUtil implements Serializable {
 	/**
 	 * 总记录数
 	 */
-	private int total;
+	private Long total;
 	/**
 	 * 每页记录数
 	 */
-	private int pageSize;
+	private Long pageSize;
 	/**
 	 * 总页数
 	 */
-	private int pages;
+	private Long pages;
 	/**
 	 * 当前页数
 	 */
-	private int pageNum;
+	private Long pageNum;
 	/**
 	 * 列表数据
 	 */
@@ -42,23 +42,23 @@ public class PageUtil implements Serializable {
 	 * @param pageSize    每页记录数
 	 * @param currPage    当前页数
 	 */
-	public PageUtil(List<?> list, int totalCount, int pageSize, int currPage) {
+	public PageUtil(List<?> list, Long totalCount, Long pageSize, Long currPage, Long pages) {
 		this.list = list;
 		this.total = totalCount;
 		this.pageSize = pageSize;
 		this.pageNum = currPage;
-		this.pages = (int) Math.ceil((double)totalCount/pageSize);
+		this.pages = pages;
+	}
+
+	public PageUtil(List<?> list, IPage<?> iPage) {
+		this(list, iPage.getTotal(), iPage.getSize(), iPage.getCurrent(), iPage.getPages());
 	}
 
 	/**
 	 * 分页
 	 */
-	public PageUtil(IPage<?> page) {
-		this.list = page.getRecords();
-		this.total = (int)page.getTotal();
-		this.pageSize = (int)page.getSize();
-		this.pageNum = (int)page.getCurrent();
-		this.pages = (int)page.getPages();
+	public PageUtil(IPage<?> iPage) {
+		this(iPage.getRecords(), iPage);
 	}
 
 }

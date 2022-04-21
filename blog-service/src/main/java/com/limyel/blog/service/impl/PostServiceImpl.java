@@ -1,13 +1,16 @@
 package com.limyel.blog.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.limyel.blog.common.exception.BlogException;
 import com.limyel.blog.common.util.PageUtil;
 import com.limyel.blog.entity.PostTag;
 import com.limyel.blog.entity.Tag;
+import com.limyel.blog.vo.AboutVO;
 import com.limyel.blog.vo.PostDetailVO;
 import com.limyel.blog.vo.PostInArchiveVO;
 import com.limyel.blog.vo.PostInHomeVO;
@@ -26,6 +29,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -145,6 +149,25 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
     public int delete(Long id) {
         // todo not found
         return postMapper.deleteById(id);
+    }
+
+    @Override
+    public AboutVO getAbout() {
+        LambdaQueryWrapper<Post> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Post::getType, Post.Type.about);
+        Post post = postMapper.selectOne(wrapper);
+        return BeanUtil.copy(post, AboutVO.class);
+    }
+
+    @Override
+    public PageUtil pageWeekly(Page<Post> page) {
+        LambdaQueryWrapper<Post> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(Post::getType, Post.Type.weekly);
+        IPage<Post> postPage = postMapper.selectPage(page, wrapper);
+        List<PostInArchiveVO> result = postPage.getRecords().stream()
+                .map(post -> BeanUtil.copy(post, PostInArchiveVO.class))
+                .collect(Collectors.toList());
+        return new PageUtil(result, postPage);
     }
 
     /**

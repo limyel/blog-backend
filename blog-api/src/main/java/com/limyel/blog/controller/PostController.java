@@ -1,7 +1,9 @@
 package com.limyel.blog.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.limyel.blog.common.Response;
 import com.limyel.blog.common.util.PageUtil;
+import com.limyel.blog.entity.Post;
 import com.limyel.blog.vo.PostDetailVO;
 import com.limyel.blog.vo.PostInArchiveVO;
 import com.limyel.blog.service.PostService;
@@ -81,5 +83,21 @@ public class PostController {
             @RequestParam(name = "pageSize", required = false, defaultValue = "20") Long pageSize
     ) {
         return Response.success(postService.pageByTag(slug, pageNum, pageSize));
+    }
+
+    @ApiOperation(value = "获取 about", httpMethod = "GET")
+    @GetMapping("/about")
+    public Response getAbout() {
+        return Response.success(postService.getAbout());
+    }
+
+    @ApiOperation(value = "获取周报", httpMethod = "GET")
+    @GetMapping("/weekly")
+    public Response listWeekly(
+            @RequestParam(name = "pageNum", required = false, defaultValue = "1") Long pageNum,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "20") Long pageSize
+    ) {
+        Page<Post> page = new Page<>(pageNum, pageSize);
+        return Response.success(postService.pageWeekly(page));
     }
 }
