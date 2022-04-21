@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>blog-entity</artifactId>
+    <artifactId>blog-model</artifactId>
     <dependencies>
 
         <dependency>
