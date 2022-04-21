@@ -27,7 +27,7 @@ import java.util.Map;
  */
 @Slf4j
 @Api(tags = "Blog 文章")
-@RestController("")
+@RestController
 @RequestMapping("/blog/posts")
 public class PostController {
 
