@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.limyel.blog.dao.PostMapper">
+  <resultMap id="BaseResultMap" type="com.limyel.blog.entity.Post">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_deleted" jdbcType="TINYINT" property="deleted" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="slug" jdbcType="VARCHAR" property="slug" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    <result column="views" jdbcType="INTEGER" property="views" />
+    <result column="type" jdbcType="SMALLINT" property="type" />
+    <result column="is_published" jdbcType="TINYINT" property="published" />
+  </resultMap>
+
+  <resultMap id="PostInHome" type="com.limyel.blog.vo.PostInHomeVO">
+    <id column="id" property="id"/>
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="title" property="title"/>
+    <result column="introduction" property="introduction"/>
+    <result column="slug" property="slug"/>
+    <collection property="tags" ofType="com.limyel.blog.vo.TagInPostVO">
+      <id column="t3.id" property="id"/>
+      <result column="t3.name" property="name"/>
+      <result column="t3.slug" property="slug"/>
+    </collection>
+  </resultMap>
+
+  <sql id="BaseColumns">
+    id, create_time, update_time, is_deleted, title, content, slug, introduction, views, type, is_published
+  </sql>
+
+  <select id="selectInHome" resultMap="PostInHome">
+    select
+        t1.id, t1.create_time, t1.update_time, t1.title, t1.introduction, t1.slug,
+        t3.id, t3.name, t3.slug
+    from post t1 left join post_tag t2 on t1.id = t2.post_id left join tag t3 on t3.id = t2.tag_id and t3.is_deleted = 0
+    where t1.is_deleted = 0
+  </select>
+
+  <select id="selectYear" resultType="Integer">
+    select distinct YEAR(create_time) from post where is_deleted = 0
+  </select>
+
+  <select id="selectByYear" resultMap="BaseResultMap">
+    select <include refid="BaseColumns"/> from post where YEAR(create_time) = #{year} and is_deleted = 0 order by create_time desc
+  </select>
+
+  <select id="selectHot" resultType="com.limyel.blog.vo.PostInArchiveVO">
+    select create_time, title, slug from post where is_deleted = 0 order by views, create_time desc limit 0, 5
+  </select>
+
+  <select id="selectByTagId" resultType="com.limyel.blog.vo.PostInArchiveVO">
+    select create_time, title, slug from post where is_deleted = 0 and id in (select t1.post_id from post_tag t1 where t1.tag_id = #{tagId})
+  </select>
+</mapper>
