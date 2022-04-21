@@ -10,7 +10,7 @@
         <result column="user_id" jdbcType="BIGINT" property="userId" />
         <result column="post_id" jdbcType="BIGINT" property="postId" />
         <result column="floor" jdbcType="INTEGER" property="floor" />
-        <result column="is_show" jdbcType="TINYINT" property="show" />
+        <result column="is_published" jdbcType="TINYINT" property="published" />
     </resultMap>
 
     <resultMap id="CommentInPost" type="com.limyel.blog.vo.CommentInPostVO">
@@ -27,11 +27,11 @@
     </resultMap>
 
     <sql id="BaseColumns">
-        id, create_time, update_time, deleted, content, user_id, parent_comment_id, post_id, floor, status
+        id, create_time, update_time, deleted, content, user_id, parent_comment_id, post_id, floor, is_published
     </sql>
 
     <select id="selectByPostId" parameterType="java.lang.Long" resultMap="CommentInPost">
-        select t1.id, t1.create_time, t1.content, t1.floor, t2.id, t2.name, t2.avatar_url, t2.html_url from comment t1 left join user t2 on t1.user_id = t2.id where t1.post_id=#{postId} order by t1.create_time desc
+        select t1.id, t1.create_time, t1.content, t1.floor, t2.id, t2.name, t2.avatar_url, t2.html_url from comment t1 left join user t2 on t1.user_id = t2.id where t1.post_id=#{postId} and t1.is_published = 1 order by t1.create_time desc
     </select>
 
 </mapper>

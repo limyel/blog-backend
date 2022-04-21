@@ -19,7 +19,7 @@ public class Comment extends BaseEntity {
 
     private Integer floor;
 
-    @TableField(value = "is_show")
-    private Boolean show;
+    @TableField(value = "is_published")
+    private Boolean published;
 
 }

@@ -1,5 +1,6 @@
 package com.limyel.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,10 +10,10 @@ import lombok.Setter;
 public class Post extends BaseEntity {
 
     public enum Type {
-        Blog,
-        About,
-        Profile,
-        Weekly,
+        blog,
+        about,
+        profile,
+        weekly,
     }
 
     private String title;
@@ -25,6 +26,7 @@ public class Post extends BaseEntity {
 
     private Integer views;
 
+    @EnumValue
     private Type type;
 
     @TableField(value = "is_published")

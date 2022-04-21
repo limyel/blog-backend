@@ -11,7 +11,7 @@
     <result column="slug" jdbcType="VARCHAR" property="slug" />
     <result column="introduction" jdbcType="VARCHAR" property="introduction" />
     <result column="views" jdbcType="INTEGER" property="views" />
-    <result column="type" jdbcType="SMALLINT" property="type" />
+    <result column="type" jdbcType="SMALLINT" property="type" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
     <result column="is_published" jdbcType="TINYINT" property="published" />
   </resultMap>
 

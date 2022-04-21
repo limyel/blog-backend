@@ -91,7 +91,6 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
     @Override
     public PostDetailVO getDetailBySlug(String slug) {
         QueryWrapper<Post> wrapper = new QueryWrapper<>();
-        wrapper.eq("deleted", false);
         wrapper.eq("slug", slug);
         Post post = postMapper.selectOne(wrapper);
         PostDetailVO postDetail = BeanUtil.copy(post, PostDetailVO.class);
