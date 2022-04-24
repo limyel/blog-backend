@@ -11,9 +11,9 @@ public class Post extends BaseEntity {
 
     public enum Type {
         blog,
+        weekly,
         about,
         profile,
-        weekly,
     }
 
     private String title;
