@@ -1,9 +1,8 @@
-package com.limyel.blog.common.util;
+package com.limyel.blog.common.utils;
 
 import com.github.stuxuhai.jpinyin.PinyinException;
 import com.github.stuxuhai.jpinyin.PinyinFormat;
 import com.github.stuxuhai.jpinyin.PinyinHelper;
-import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**

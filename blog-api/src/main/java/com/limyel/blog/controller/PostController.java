@@ -1,8 +1,8 @@
 package com.limyel.blog.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.limyel.blog.common.Response;
-import com.limyel.blog.common.util.PageUtil;
+import com.limyel.blog.common.api.Response;
+import com.limyel.blog.common.utils.PageUtil;
 import com.limyel.blog.entity.Post;
 import com.limyel.blog.vo.PostDetailVO;
 import com.limyel.blog.vo.PostInArchiveVO;

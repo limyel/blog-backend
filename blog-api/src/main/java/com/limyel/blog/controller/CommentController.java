@@ -1,8 +1,8 @@
 package com.limyel.blog.controller;
 
-import com.limyel.blog.common.Response;
 import com.limyel.blog.common.annotation.CurrentUser;
-import com.limyel.blog.common.util.PageUtil;
+import com.limyel.blog.common.api.Response;
+import com.limyel.blog.common.utils.PageUtil;
 import com.limyel.blog.entity.Comment;
 import com.limyel.blog.entity.User;
 import com.limyel.blog.entity.Post;
@@ -10,7 +10,7 @@ import com.limyel.blog.dto.CommentDTO;
 import com.limyel.blog.vo.CommentLatestVO;
 import com.limyel.blog.service.CommentService;
 import com.limyel.blog.service.PostService;
-import com.limyel.blog.common.util.BeanUtil;
+import com.limyel.blog.common.utils.BeanUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

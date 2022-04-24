@@ -1,8 +1,8 @@
-package com.limyel.blog.framework.argresolver;//package com.limyel.blog.common.argresolver;
+package com.limyel.blog.common.framework;//package com.limyel.blog.common.argresolver;
 
-import com.limyel.blog.common.exception.InvalidTokenException;
 import com.limyel.blog.common.annotation.CurrentUser;
-import com.limyel.blog.common.util.JwtUtil;
+import com.limyel.blog.common.exception.ApiException;
+import com.limyel.blog.common.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -39,7 +39,7 @@ public class CurrentUserArgumentResolver implements HandlerMethodArgumentResolve
         String token = authorizationHeader.split(" ")[1];
 
         if (token.equals("undefined")) {
-            throw new InvalidTokenException();
+            throw new ApiException(90001);
         }
 
         Long id = jwtUtil.parseId(token);

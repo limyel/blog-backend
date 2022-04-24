@@ -3,15 +3,15 @@ package com.limyel.blog.service.impl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.limyel.blog.common.exception.BlogException;
+import com.limyel.blog.common.exception.ApiException;
 import com.limyel.blog.entity.User;
 import com.limyel.blog.dto.GithubAccessTokenDTO;
 import com.limyel.blog.dto.GithubUserInfoDTO;
 import com.limyel.blog.vo.UserVO;
 import com.limyel.blog.service.GithubOauthService;
 import com.limyel.blog.service.UserService;
-import com.limyel.blog.common.util.BeanUtil;
-import com.limyel.blog.common.util.OkHttpUtil;
+import com.limyel.blog.common.utils.BeanUtil;
+import com.limyel.blog.common.utils.OkHttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -51,11 +51,11 @@ public class GithubOauthServiceImpl implements GithubOauthService {
         params.put("code", code);
         String accessToken = getAccessToken(params);
         if (accessToken == null) {
-            throw new BlogException("获取 GitHub access token 失败");
+            throw new ApiException(80001);
         }
         User member = getMemberInfo(accessToken);
         if (member == null) {
-            throw new BlogException("获取 GitHub 用户信息失败");
+            throw new ApiException(80002);
         }
         User oldMember = memberService.getByInfo(member.getUsername(), member.getEmail());
         if (oldMember != null) {

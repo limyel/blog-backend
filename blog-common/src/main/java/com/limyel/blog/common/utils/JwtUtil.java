@@ -1,4 +1,4 @@
-package com.limyel.blog.common.util;
+package com.limyel.blog.common.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

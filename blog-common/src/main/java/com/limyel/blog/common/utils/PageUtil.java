@@ -1,4 +1,4 @@
-package com.limyel.blog.common.util;
+package com.limyel.blog.common.utils;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.Getter;

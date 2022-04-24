@@ -1,11 +1,10 @@
 package com.limyel.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.limyel.blog.common.util.PageUtil;
+import com.limyel.blog.common.utils.PageUtil;
 import com.limyel.blog.dao.CommentMapper;
 import com.limyel.blog.entity.Comment;
 import com.limyel.blog.entity.Post;
@@ -16,7 +15,7 @@ import com.limyel.blog.vo.UserVO;
 import com.limyel.blog.service.CommentService;
 import com.limyel.blog.service.PostService;
 import com.limyel.blog.service.UserService;
-import com.limyel.blog.common.util.BeanUtil;
+import com.limyel.blog.common.utils.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

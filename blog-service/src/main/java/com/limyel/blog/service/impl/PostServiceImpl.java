@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.limyel.blog.common.exception.BlogException;
-import com.limyel.blog.common.util.PageUtil;
+import com.limyel.blog.common.exception.ApiException;
+import com.limyel.blog.common.utils.PageUtil;
 import com.limyel.blog.entity.PostTag;
 import com.limyel.blog.entity.Tag;
 import com.limyel.blog.vo.AboutVO;
@@ -20,8 +20,8 @@ import com.limyel.blog.dto.PostDTO;
 import com.limyel.blog.service.PostService;
 import com.limyel.blog.service.PostTagService;
 import com.limyel.blog.service.TagService;
-import com.limyel.blog.common.util.BeanUtil;
-import com.limyel.blog.common.util.SlugUtil;
+import com.limyel.blog.common.utils.BeanUtil;
+import com.limyel.blog.common.utils.SlugUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +64,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         post.setSlug(SlugUtil.generate(vo.getTitle()));
 
         if (!validateTags(vo.getTagIds())) {
-            throw new BlogException("标签不存在");
+            throw new ApiException(20001);
         }
         int result = postMapper.insert(post);
 
@@ -135,8 +135,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
     public int update(Long id, PostDTO postDTO) {
         // todo 自定义 validator 验证器
         if (ObjectUtils.allNotNull(postDTO.getTagIds()) && !validateTags(postDTO.getTagIds())) {
-            throw new BlogException("标签不存在");
-            // todo 完善抛出异常
+            throw new ApiException(20001);
         }
 
         Post post = BeanUtil.copy(postDTO, Post.class);

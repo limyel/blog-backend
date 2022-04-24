@@ -1,7 +1,7 @@
 package com.limyel.blog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.limyel.blog.common.util.PageUtil;
+import com.limyel.blog.common.utils.PageUtil;
 import com.limyel.blog.entity.Comment;
 import com.limyel.blog.entity.Post;
 import com.limyel.blog.vo.CommentLatestVO;

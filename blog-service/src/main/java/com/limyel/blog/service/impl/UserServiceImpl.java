@@ -5,7 +5,7 @@ import com.limyel.blog.dao.UserMapper;
 import com.limyel.blog.entity.User;
 import com.limyel.blog.dto.AdminLoginDTO;
 import com.limyel.blog.service.UserService;
-import com.limyel.blog.common.util.JwtUtil;
+import com.limyel.blog.common.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
