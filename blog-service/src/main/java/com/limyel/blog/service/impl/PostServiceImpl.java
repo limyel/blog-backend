@@ -29,6 +29,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -80,10 +81,8 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
 
     @Override
     public PostDetailVO getDetailById(Long id) {
-        Post post = postMapper.selectById(id);
-        if (post == null) {
-            // todo not found
-        }
+        Optional<Post> optionalPost = Optional.of(postMapper.selectById(id));
+        Post post = optionalPost.orElseThrow(() -> new ApiException(10001));
         PostDetailVO postDetail = BeanUtil.copy(post, PostDetailVO.class);
         // todo tag 只需要 id
         postDetail.setTags(tagService.listByPostId(post.getId()));
@@ -146,8 +145,8 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
 
     @Override
     public int delete(Long id) {
-        // todo not found
-        return postMapper.deleteById(id);
+        Optional<Post> post = Optional.of(postMapper.selectById(id));
+        return postMapper.deleteById(post.orElseThrow(() -> new ApiException(10001)));
     }
 
     @Override

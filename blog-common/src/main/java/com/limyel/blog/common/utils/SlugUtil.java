@@ -3,7 +3,10 @@ package com.limyel.blog.common.utils;
 import com.github.stuxuhai.jpinyin.PinyinException;
 import com.github.stuxuhai.jpinyin.PinyinFormat;
 import com.github.stuxuhai.jpinyin.PinyinHelper;
+import com.limyel.blog.common.exception.ApiException;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.Optional;
 
 /**
  * 生成 slug
@@ -12,8 +15,7 @@ public class SlugUtil {
 
     public static String generate(String s) {
         if (StringUtils.isBlank(s)) {
-            // todo 如果为空，完善
-            return null;
+            throw new ApiException(90002);
         }
 
         StringBuilder stringBuilder = new StringBuilder();

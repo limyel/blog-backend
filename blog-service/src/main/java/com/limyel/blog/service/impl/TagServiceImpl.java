@@ -3,6 +3,7 @@ package com.limyel.blog.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.limyel.blog.common.exception.ApiException;
 import com.limyel.blog.common.utils.PageUtil;
 import com.limyel.blog.entity.Tag;
 import com.limyel.blog.vo.TagDetailVO;
@@ -45,8 +46,7 @@ public class TagServiceImpl implements TagService {
         QueryWrapper<Tag> wrapper = new QueryWrapper<>();
         wrapper.eq("slug", slug);
         Optional<Tag> tag = Optional.of(tagMapper.selectOne(wrapper));
-        // todo not found
-        return tag.orElseThrow(RuntimeException::new);
+        return tag.orElseThrow(() -> new ApiException(20001));
     }
 
     @Override
@@ -66,8 +66,8 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public int delete(Long id) {
-        // todo not found
-        return tagMapper.deleteById(id);
+        Optional<Tag> tag = Optional.of(tagMapper.selectById(id));
+        return tagMapper.deleteById(tag.orElseThrow(() -> new ApiException(20001)));
     }
 
     @Override
