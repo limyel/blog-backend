@@ -20,7 +20,7 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
+        <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
         <mysql.version>8.0.28</mysql.version>
         <swagger.version>2.9.2</swagger.version>
         <mybatis-plus.version>3.5.1</mybatis-plus.version>
@@ -106,18 +106,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
-            <exclusions>
-                <!-- 不依赖 redis 的异步客户端 lettuce -->
-                <exclusion>
-                    <groupId>io.lettuce</groupId>
-                    <artifactId>lettuce-core</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- 引入 jedis -->
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
         </dependency>
 
 
@@ -215,6 +203,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.12.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>2.11.1</version>
         </dependency>
 
     </dependencies>
