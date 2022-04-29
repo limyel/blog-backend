@@ -10,10 +10,7 @@ import com.limyel.blog.common.exception.ApiException;
 import com.limyel.blog.common.utils.PageUtil;
 import com.limyel.blog.entity.PostTag;
 import com.limyel.blog.entity.Tag;
-import com.limyel.blog.vo.AboutVO;
-import com.limyel.blog.vo.PostDetailVO;
-import com.limyel.blog.vo.PostInArchiveVO;
-import com.limyel.blog.vo.PostInHomeVO;
+import com.limyel.blog.vo.*;
 import com.limyel.blog.dao.PostMapper;
 import com.limyel.blog.entity.Post;
 import com.limyel.blog.dto.PostDTO;
@@ -64,17 +61,17 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         Post post = BeanUtil.copy(vo, Post.class);
         post.setSlug(SlugUtil.generate(vo.getTitle()));
 
-        if (!validateTags(vo.getTagIds())) {
+        if (!validateTags(vo.getTagIdList())) {
             throw new ApiException(20001);
         }
         int result = postMapper.insert(post);
 
-        for (Long tagId: vo.getTagIds()) {
+        vo.getTagIdList().forEach(tagId -> {
             PostTag postTag = new PostTag();
             postTag.setPostId(post.getId());
             postTag.setTagId(tagId);
             postTagService.save(postTag);
-        }
+        });
 
         return result;
     }
@@ -84,10 +81,10 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         Optional<Post> optionalPost = Optional.of(postMapper.selectById(id));
         Post post = optionalPost.orElseThrow(() -> new ApiException(10001));
         PostDetailVO postDetail = BeanUtil.copy(post, PostDetailVO.class);
-        // todo tag 只需要 id
-        postDetail.setTags(tagService.listByPostId(post.getId()));
-        postDetail.setTagIds(new ArrayList<>());
-        postDetail.getTags().forEach(tag -> postDetail.getTagIds().add(tag.getId()));
+        List<Long> tagIdList = tagService.listByPostId(post.getId()).stream()
+                .map(TagInPostVO::getId)
+                .collect(Collectors.toList());
+        postDetail.setTagIdList(tagIdList);
         return postDetail;
     }
 
@@ -132,8 +129,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
 
     @Override
     public int update(Long id, PostDTO postDTO) {
-        // todo 自定义 validator 验证器
-        if (ObjectUtils.allNotNull(postDTO.getTagIds()) && !validateTags(postDTO.getTagIds())) {
+        if (ObjectUtils.isNotEmpty(postDTO.getTagIdList()) && !validateTags(postDTO.getTagIdList())) {
             throw new ApiException(20001);
         }
 
@@ -170,10 +166,10 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
 
     /**
      * 验证标签是否正确
-     * @param ids
+     * @param idList
      * @return
      */
-    private boolean validateTags(List<Long> ids) {
-        return tagService.countByIds(ids) == ids.size();
+    private boolean validateTags(List<Long> idList) {
+        return tagService.countByIds(idList) == idList.size();
     }
 }

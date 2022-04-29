@@ -1,8 +1,10 @@
 package com.limyel.blog.dto;
 
+import com.limyel.blog.entity.Post;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Getter
@@ -15,6 +17,17 @@ public class PostDTO {
 
     private String introduction;
 
-    private List<Long> tagIds;
+    private List<Long> tagIdList;
+
+    @NotNull(groups = {Save.class, Update.class})
+    private Post.Type type;
+
+    public interface Save {
+
+    }
+
+    public interface Update {
+
+    }
 
 }

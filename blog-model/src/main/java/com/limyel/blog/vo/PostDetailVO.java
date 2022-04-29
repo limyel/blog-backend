@@ -16,7 +16,7 @@ public class PostDetailVO {
 
     private List<TagInPostVO> tags;
 
-    private List<Long> tagIds;
+    private List<Long> tagIdList;
 
     private Integer views;
 

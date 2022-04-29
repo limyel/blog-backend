@@ -12,12 +12,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.NotBlank;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,10 +77,11 @@ public class PostController {
         return Response.success(postService.listHot());
     }
 
-    @ApiOperation(value = "根据标签", httpMethod = "GET")
+    @ApiOperation(value = "根据标签获取文章", httpMethod = "GET")
     @GetMapping("/tag/{slug}")
+    @Validated
     public Response getInTag(
-            @PathVariable(value = "slug") String slug,
+            @PathVariable(value = "slug") @NotBlank String slug,
             @RequestParam(name = "pageNum", required = false, defaultValue = "1") Long pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "20") Long pageSize
     ) {

@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -49,7 +50,7 @@ public class PostController {
     @ApiOperation(value = "新增", httpMethod = "POST")
     @PostMapping
     public Response save(
-            @RequestBody PostDTO vo
+            @RequestBody @Validated(PostDTO.Save.class) PostDTO vo
     ) {
         postService.save(vo);
         return Response.success();
@@ -68,7 +69,7 @@ public class PostController {
     @PutMapping("/{id}")
     public Response update(
             @PathVariable(value = "id") Long id,
-            @RequestBody PostDTO vo
+            @RequestBody @Validated(PostDTO.Update.class) PostDTO vo
     ) {
         postService.update(id, vo);
         return Response.success();
