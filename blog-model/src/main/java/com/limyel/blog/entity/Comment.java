@@ -1,14 +1,14 @@
 package com.limyel.blog.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.messaging.handler.annotation.SendTo;
 
+import javax.persistence.Entity;
 import java.util.Date;
 
 @Getter
 @Setter
+@Entity
 public class Comment extends BaseEntity {
 
     private String content;
@@ -19,7 +19,6 @@ public class Comment extends BaseEntity {
 
     private Integer floor;
 
-    @TableField(value = "is_published")
     private Boolean published;
 
 }

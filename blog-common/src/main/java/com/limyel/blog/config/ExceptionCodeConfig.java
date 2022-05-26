@@ -12,7 +12,7 @@ import java.util.Map;
 @Getter
 @Setter
 @Component
-@ConfigurationProperties(prefix = "haoyuan")
+@ConfigurationProperties(prefix = "blog")
 @PropertySource(value = "classpath:config/exception-code.properties")
 public class ExceptionCodeConfig {
 

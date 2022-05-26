@@ -1,12 +1,13 @@
 package com.limyel.blog.entity;
 
-import com.baomidou.mybatisplus.annotation.EnumValue;
-import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+
 @Getter
 @Setter
+@Entity
 public class Post extends BaseEntity {
 
     public enum Type {
@@ -26,10 +27,8 @@ public class Post extends BaseEntity {
 
     private Integer views;
 
-    @EnumValue
     private Type type;
 
-    @TableField(value = "is_published")
     private Boolean published;
 
 }

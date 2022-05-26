@@ -5,9 +5,9 @@ import com.limyel.blog.dto.AdminLoginDTO;
 
 public interface UserService {
 
-    int save(User member);
+    void save(User member);
 
-    int update(User member);
+    void update(User member);
 
     User getByInfo(String name, String email);
 

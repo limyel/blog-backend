@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.limyel.blog.common.utils.PageUtil;
 import com.limyel.blog.dao.CommentMapper;
+import com.limyel.blog.dao.CommentRepository;
 import com.limyel.blog.entity.Comment;
 import com.limyel.blog.entity.Post;
 import com.limyel.blog.vo.CommentInPostVO;
@@ -26,10 +27,10 @@ import java.util.List;
  * @author limyel
  */
 @Service
-public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> implements CommentService {
+public class CommentServiceImpl implements CommentService {
 
     @Autowired
-    private CommentMapper commentMapper;
+    private CommentRepository commentRepository;
 
     @Autowired
     private UserService userService;
@@ -38,13 +39,13 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     private PostService postService;
 
     @Override
-    public int saveComment(Comment comment) {
-        return commentMapper.insert(comment);
+    public void saveComment(Comment comment) {
+        commentRepository.save(comment);
     }
 
     @Override
     public Comment getById(Long id) {
-        return commentMapper.selectById(id);
+        return commentRepository.getOne(id);
     }
 
     @Override

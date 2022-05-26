@@ -1,7 +1,7 @@
 package com.limyel.blog.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.limyel.blog.dao.UserMapper;
+import com.limyel.blog.common.exception.ApiException;
+import com.limyel.blog.dao.UserRepository;
 import com.limyel.blog.entity.User;
 import com.limyel.blog.dto.AdminLoginDTO;
 import com.limyel.blog.service.UserService;
@@ -16,32 +16,30 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserMapper userMapper;
+    private UserRepository userRepository;
 
     @Autowired
     private JwtUtil jwtUtil;
 
     @Override
-    public int save(User member) {
-        return userMapper.insert(member);
+    public void save(User user) {
+        userRepository.save(user);
     }
 
     @Override
-    public int update(User member) {
-        return userMapper.updateById(member);
+    public void update(User user) {
+        userRepository.save(user);
     }
 
     @Override
-    public User getByInfo(String name, String email) {
-        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(User::getUsername, name);
-        wrapper.eq(User::getEmail, email);
-        return userMapper.selectOne(wrapper);
+    public User getByInfo(String username, String email) {
+        return userRepository.findUserByUsernameAndEmail(username, email)
+                .orElseThrow(() -> new ApiException(70001));
     }
 
     @Override
     public User getById(Long id) {
-        return userMapper.selectById(id);
+        return userRepository.getOne(id);
     }
 
     @Override

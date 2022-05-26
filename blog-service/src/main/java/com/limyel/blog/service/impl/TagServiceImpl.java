@@ -1,19 +1,17 @@
 package com.limyel.blog.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.limyel.blog.common.exception.ApiException;
 import com.limyel.blog.common.utils.PageUtil;
+import com.limyel.blog.dao.TagRepository;
 import com.limyel.blog.entity.Tag;
 import com.limyel.blog.vo.TagDetailVO;
 import com.limyel.blog.vo.TagInPostVO;
-import com.limyel.blog.dao.TagMapper;
 import com.limyel.blog.dto.TagDTO;
 import com.limyel.blog.service.TagService;
 import com.limyel.blog.common.utils.BeanUtil;
 import com.limyel.blog.common.utils.SlugUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,12 +21,12 @@ import java.util.Optional;
 public class TagServiceImpl implements TagService {
 
     @Autowired
-    private TagMapper tagMapper;
+    private TagRepository tagRepository;
 
     @Override
-    public int save(Tag tag) {
+    public void save(Tag tag) {
         tag.setSlug(SlugUtil.generate(tag.getName()));
-        return tagMapper.insert(tag);
+        tagRepository.save(tag);
     }
 
     @Override
@@ -43,25 +41,21 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public Tag getBySlug(String slug) {
-        QueryWrapper<Tag> wrapper = new QueryWrapper<>();
-        wrapper.eq("slug", slug);
-        Optional<Tag> tag = Optional.of(tagMapper.selectOne(wrapper));
+        Optional<Tag> tag = tagRepository.findTagBySlug(slug);
         return tag.orElseThrow(() -> new ApiException(20001));
     }
 
     @Override
-    public long countByIds(List<Long> ids) {
-        if (ids == null || ids.size() == 0) {
+    public long countByIds(List<Long> idList) {
+        if (idList == null || idList.size() == 0) {
             return 0;
         }
-        QueryWrapper<Tag> wrapper = Wrappers.query();
-        wrapper.in("id", ids);
-        return tagMapper.selectCount(wrapper);
+        return tagRepository.countTagsByIdIn(idList);
     }
 
     @Override
     public Tag getById(Long id) {
-        return tagMapper.selectById(id);
+        return tagRepository.getOne(id);
     }
 
     @Override
@@ -71,10 +65,10 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public int update(Tag tag, TagDTO vo) {
+    public void update(Tag tag, TagDTO vo) {
         BeanUtil.cover(vo, tag);
         tag.setSlug(SlugUtil.generate(vo.getName()));
-        return tagMapper.updateById(tag);
+        tagRepository.save(tag);
     }
 
     @Override

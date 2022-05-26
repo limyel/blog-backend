@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.limyel.blog.common.exception.ApiException;
 import com.limyel.blog.common.utils.PageUtil;
+import com.limyel.blog.dao.PostRepository;
 import com.limyel.blog.entity.PostTag;
 import com.limyel.blog.entity.Tag;
 import com.limyel.blog.vo.*;
@@ -34,7 +35,7 @@ import java.util.stream.Collectors;
 public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements PostService {
 
     @Autowired
-    private PostMapper postMapper;
+    private PostRepository postRepository;
 
     @Autowired
     private TagService tagService;
@@ -44,7 +45,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
 
     @Override
     public Post getById(Long id) {
-        return postMapper.selectById(id);
+        return postRepository.getOne(id);
     }
 
     @Override

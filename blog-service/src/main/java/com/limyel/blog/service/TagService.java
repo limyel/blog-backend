@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface TagService {
 
-    int save(Tag tag);
+    void save(Tag tag);
 
     List<TagInPostVO> listByPostId(Long postId);
 
@@ -24,7 +24,7 @@ public interface TagService {
 
     int delete(Long id);
 
-    int update(Tag tag, TagDTO vo);
+    void update(Tag tag, TagDTO vo);
 
     PageUtil page(Long pageNum, Long pageSize);
 }
