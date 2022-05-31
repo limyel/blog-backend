@@ -1,30 +1,11 @@
 package com.limyel.blog.service;
 
-import com.limyel.blog.common.utils.PageUtil;
-import com.limyel.blog.entity.Tag;
 import com.limyel.blog.vo.TagDetailVO;
-import com.limyel.blog.vo.TagInPostVO;
-import com.limyel.blog.dto.TagDTO;
 
 import java.util.List;
 
 public interface TagService {
 
-    void save(Tag tag);
-
-    List<TagInPostVO> listByPostId(Long postId);
-
     List<TagDetailVO> listDetail();
 
-    Tag getBySlug(String slug);
-
-    long countByIds(List<Long> ids);
-
-    Tag getById(Long id);
-
-    int delete(Long id);
-
-    void update(Tag tag, TagDTO vo);
-
-    PageUtil page(Long pageNum, Long pageSize);
 }

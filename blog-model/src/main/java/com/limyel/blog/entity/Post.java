@@ -2,20 +2,16 @@ package com.limyel.blog.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
+@Where(clause = "is_deleted = 0")
 public class Post extends BaseEntity {
-
-    public enum Type {
-        blog,
-        weekly,
-        about,
-        profile,
-    }
 
     private String title;
 
@@ -27,8 +23,12 @@ public class Post extends BaseEntity {
 
     private Integer views;
 
-    private Type type;
-
     private Boolean published;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "post_tag",
+            joinColumns = @JoinColumn(name = "post_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private List<Tag> tagList;
 
 }

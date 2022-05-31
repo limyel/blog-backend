@@ -7,27 +7,21 @@ import org.springframework.beans.BeanUtils;
 
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
-public class PostDetailVO {
+public class PostPureVO {
 
-    private Long id;
+    private String title;
+
+    private String slug;
 
     private Date createTime;
 
     private List<TagPureVO> tagList;
 
-    private Integer views;
-
-    private String title;
-
-    private String content;
-
-    public PostDetailVO(Post post) {
+    public PostPureVO(Post post) {
         BeanUtils.copyProperties(post, this);
-        this.tagList = post.getTagList().stream().map(TagPureVO::new).collect(Collectors.toList());
     }
 
 }

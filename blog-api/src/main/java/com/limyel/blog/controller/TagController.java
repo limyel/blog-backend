@@ -30,13 +30,4 @@ public class TagController {
         return Response.success(result);
     }
 
-    @ApiOperation(value = "详情", httpMethod = "GET")
-    @GetMapping("/{slug}")
-    public Response getBySlug(
-            @PathVariable("slug") String slug
-    ) {
-        Tag tag = tagService.getBySlug(slug);
-        return Response.success(tag);
-    }
-
 }

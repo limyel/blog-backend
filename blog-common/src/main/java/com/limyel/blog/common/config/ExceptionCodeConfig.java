@@ -1,4 +1,4 @@
-package com.limyel.blog.config;
+package com.limyel.blog.common.config;
 
 import lombok.Getter;
 import lombok.Setter;

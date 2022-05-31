@@ -1,7 +1,7 @@
 package com.limyel.blog.common.exception;
 
 import com.limyel.blog.common.api.Response;
-import com.limyel.blog.config.ExceptionCodeConfig;
+import com.limyel.blog.common.config.ExceptionCodeConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

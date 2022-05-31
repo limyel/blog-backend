@@ -7,7 +7,7 @@ import org.springframework.beans.BeanUtils;
 
 @Getter
 @Setter
-public class TagDetailVO {
+public class TagPureVO {
 
     private Long id;
 
@@ -15,10 +15,7 @@ public class TagDetailVO {
 
     private String slug;
 
-    private Integer postNum;
-
-    public TagDetailVO(Tag tag) {
+    public TagPureVO(Tag tag) {
         BeanUtils.copyProperties(tag, this);
-        this.postNum = tag.getPostList().size();
     }
 }

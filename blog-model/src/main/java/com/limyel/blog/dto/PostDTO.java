@@ -19,9 +19,6 @@ public class PostDTO {
 
     private List<Long> tagIdList;
 
-    @NotNull(groups = {Save.class, Update.class})
-    private Post.Type type;
-
     public interface Save {
 
     }
