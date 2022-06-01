@@ -2,6 +2,7 @@ package com.limyel.blog.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "post")
+@Where(clause = "is_deleted = 0")
 public class Post extends BaseEntity {
 
     private String title;
