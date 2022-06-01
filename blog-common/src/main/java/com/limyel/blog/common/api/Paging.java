@@ -62,6 +62,11 @@ public class Paging<T> implements Serializable {
                 }).collect(Collectors.toList());
     }
 
+    public Paging(Page<?> page, List<T> result) {
+        this.initPaging(page);
+        this.setList(result);
+    }
+
     private void initPaging(Page<?> page) {
         this.total = page.getTotalElements();
         this.pageSize = page.getSize();

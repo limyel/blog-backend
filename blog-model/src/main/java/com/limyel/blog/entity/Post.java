@@ -2,7 +2,6 @@ package com.limyel.blog.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Where(clause = "is_deleted = 0")
+@Table(name = "post")
 public class Post extends BaseEntity {
 
     private String title;
@@ -19,16 +18,15 @@ public class Post extends BaseEntity {
 
     private String slug;
 
-    private String introduction;
-
     private Integer views;
 
-    private Boolean published;
+    @Column(name = "is_published", nullable = false)
+    private Boolean published = false;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "post_tag",
-            joinColumns = @JoinColumn(name = "post_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+            joinColumns = {@JoinColumn(name = "post_id")},
+            inverseJoinColumns = {@JoinColumn(name = "tag_id")})
     private List<Tag> tagList;
 
 }

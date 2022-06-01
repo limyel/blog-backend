@@ -1,14 +1,15 @@
 package com.limyel.blog.service;
 
 import com.limyel.blog.common.api.Paging;
-import com.limyel.blog.vo.PostDetailVO;
-import com.limyel.blog.vo.PostPureVO;
+import com.limyel.blog.dto.PostDetailDTO;
+import com.limyel.blog.dto.PostPureDTO;
+
+import javax.transaction.Transactional;
 
 public interface PostService {
 
-    Paging<PostPureVO> pageInHome(Integer pageNum, Integer pageSize);
+    Paging<PostPureDTO> page(Integer pageNum, Integer pageSize);
 
-    PostDetailVO getDetail(String slug);
+    PostDetailDTO getBySlug(String slug);
 
-    PostDetailVO getAbout();
 }

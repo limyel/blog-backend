@@ -1,11 +1,10 @@
-package com.limyel.blog.config;
+package com.limyel.blog.common.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import java.util.List;
@@ -15,16 +14,6 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
     @Autowired
     private List<HandlerMethodArgumentResolver> handlerMethodArgumentResolvers;
-
-    @Override
-    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // swagger2 的静态资源
-        registry.addResourceHandler("/swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
-//        registry.addResourceHandler("/doc.html").addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
-
-        super.addResourceHandlers(registry);
-    }
 
     /**
      * 跨域
