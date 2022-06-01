@@ -5,6 +5,7 @@ import com.limyel.blog.dto.PostDetailDTO;
 import com.limyel.blog.dto.PostPureDTO;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 public interface PostService {
 
@@ -12,4 +13,7 @@ public interface PostService {
 
     PostDetailDTO getBySlug(String slug);
 
+    List<PostPureDTO> listByTag(String tagSlug);
+
+    PostDetailDTO getAbout();
 }

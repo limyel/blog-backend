@@ -26,11 +26,23 @@ public class PostController {
         return Response.success(postService.page(pageNum-1, pageSize));
     }
 
+    @GetMapping("/about")
+    public Response<PostDetailDTO> getAbout() {
+        return Response.success(postService.getAbout());
+    }
+
     @GetMapping("/{slug}")
     public Response<PostDetailDTO> detail(
             @PathVariable String slug
     ) {
         return Response.success(postService.getBySlug(slug));
+    }
+
+    @GetMapping("/by-tag/{slug}")
+    public Response<List<PostPureDTO>> pageByTag(
+            @PathVariable(name = "slug") String tagSlug
+    ) {
+        return Response.success(postService.listByTag(tagSlug));
     }
 
 }
