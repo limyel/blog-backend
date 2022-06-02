@@ -13,7 +13,7 @@ public interface PostService {
 
     PostDetailDTO getBySlug(String slug);
 
-    List<PostPureDTO> listByTag(String tagSlug);
+    List<PostPureDTO> pageByTag(String tagSlug, Integer pageNum, Integer pageSize);
 
     PostDetailDTO getAbout();
 }

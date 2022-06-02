@@ -40,9 +40,11 @@ public class PostController {
 
     @GetMapping("/by-tag/{slug}")
     public Response<List<PostPureDTO>> pageByTag(
+            @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize,
             @PathVariable(name = "slug") String tagSlug
     ) {
-        return Response.success(postService.listByTag(tagSlug));
+        return Response.success(postService.pageByTag(tagSlug));
     }
 
 }
