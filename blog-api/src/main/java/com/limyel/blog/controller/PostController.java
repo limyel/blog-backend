@@ -4,7 +4,6 @@ import com.limyel.blog.common.api.Paging;
 import com.limyel.blog.common.api.Response;
 import com.limyel.blog.dto.PostDetailDTO;
 import com.limyel.blog.dto.PostPureDTO;
-import com.limyel.blog.entity.Post;
 import com.limyel.blog.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -44,7 +43,7 @@ public class PostController {
             @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize,
             @PathVariable(name = "slug") String tagSlug
     ) {
-        return Response.success(postService.pageByTag(tagSlug));
+        return Response.success(postService.pageByTag(tagSlug, pageNum, pageSize));
     }
 
 }

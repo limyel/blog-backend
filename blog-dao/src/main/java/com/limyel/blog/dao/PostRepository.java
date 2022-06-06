@@ -17,7 +17,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     Post findPostBySlug(String slug);
 
-    List<Post> findPostsByTagListContains(Tag tag);
+    Page<Post> findPostsByTagListContains(Tag tag, Pageable pageable);
 
     Post findFirstByTagListContains(Tag tag);
 

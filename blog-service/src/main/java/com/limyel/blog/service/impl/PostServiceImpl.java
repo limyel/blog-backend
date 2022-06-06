@@ -43,6 +43,15 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public Paging<PostPureDTO> pageByTag(String tagSlug, Integer pageNum, Integer pageSize) {
+        Tag tag = tagRepository.findTagBySlug(tagSlug).orElseThrow(() -> new ApiException(20001));
+        Pageable pageable = PageRequest.of(pageNum, pageSize);
+        Page<Post> page = postRepository.findPostsByTagListContains(tag, pageable);
+        List<PostPureDTO> result = page.getContent().stream().map(PostPureDTO::new).collect(Collectors.toList());
+        return new Paging<>(page, result);
+    }
+
+    @Override
     public List<PostPureDTO> listByTag(String tagSlug) {
         Tag tag = tagRepository.findTagBySlug(tagSlug).orElseThrow(() -> new ApiException(20001));
         List<Post> postList = postRepository.findPostsByTagListContains(tag);
