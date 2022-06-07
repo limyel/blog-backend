@@ -52,14 +52,6 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostPureDTO> listByTag(String tagSlug) {
-        Tag tag = tagRepository.findTagBySlug(tagSlug).orElseThrow(() -> new ApiException(20001));
-        List<Post> postList = postRepository.findPostsByTagListContains(tag);
-        List<PostPureDTO> result = postList.stream().map(PostPureDTO::new).collect(Collectors.toList());
-        return result;
-    }
-
-    @Override
     public PostDetailDTO getAbout() {
         Tag tag = tagRepository.findTagBySlug("about").orElseThrow(() -> new ApiException(20001));
         Post post = postRepository.findFirstByTagListContains(tag);
