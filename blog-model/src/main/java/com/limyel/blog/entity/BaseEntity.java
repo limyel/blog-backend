@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -18,10 +18,10 @@ public class BaseEntity {
     private Long id;
 
     @JsonIgnore
-    private Date createTime;
+    private LocalDateTime createTime;
 
     @JsonIgnore
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     @JsonIgnore
     @Column(name = "is_deleted")

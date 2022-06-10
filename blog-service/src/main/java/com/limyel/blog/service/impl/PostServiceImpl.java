@@ -14,9 +14,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
-import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,6 +30,22 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     private TagRepository tagRepository;
+
+    @Override
+    public Map<Integer, List<PostPureDTO>> pageInHome(Integer pageNum, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNum, pageSize);
+        Page<Post> page = postRepository.findPostsByOrderByCreateTimeDesc(pageable);
+        List<PostPureDTO> postList = page.getContent().stream().map(PostPureDTO::new).collect(Collectors.toList());
+        Map<Integer, List<PostPureDTO>> result = new HashMap<>();
+        postList.forEach(postPureDTO -> {
+            int year = postPureDTO.getCreateTime().getYear();
+            if (ObjectUtils.isEmpty(result.get(year))) {
+                result.put(year, new ArrayList<>());
+            }
+            result.get(year).add(postPureDTO);
+        });
+        return result;
+    }
 
     @Override
     public Paging<PostPureDTO> page(Integer pageNum, Integer pageSize) {

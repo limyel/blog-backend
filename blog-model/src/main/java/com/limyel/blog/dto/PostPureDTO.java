@@ -1,19 +1,22 @@
 package com.limyel.blog.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.limyel.blog.common.framework.LocalDateTimeToLongSerializer;
 import com.limyel.blog.entity.Post;
 import com.limyel.blog.entity.Tag;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Setter
 public class PostPureDTO {
 
-    private Date createTime;
+    @JsonSerialize(using = LocalDateTimeToLongSerializer.class)
+    private LocalDateTime createTime;
 
     private String title;
 

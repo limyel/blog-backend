@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/post")
@@ -18,11 +19,11 @@ public class PostController {
     private PostService postService;
 
     @GetMapping
-    public Response<Paging<PostPureDTO>> list(
+    public Response<Map<Integer, List<PostPureDTO>>> pageInHome(
             @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize
     ) {
-        return Response.success(postService.page(pageNum-1, pageSize));
+        return Response.success(postService.pageInHome(pageNum-1, pageSize));
     }
 
     @GetMapping("/about")
@@ -38,7 +39,7 @@ public class PostController {
     }
 
     @GetMapping("/by-tag/{slug}")
-    public Response<List<PostPureDTO>> pageByTag(
+    public Response<Paging<PostPureDTO>> pageByTag(
             @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize,
             @PathVariable(name = "slug") String tagSlug
