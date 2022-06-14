@@ -1,5 +1,6 @@
 package com.limyel.blog.common.api;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;
@@ -12,29 +13,10 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
-public class Paging<T> implements Serializable {
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
+public class Paging<T> extends PageInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    /**
-     * 总数
-     */
-    private Long total;
-
-    /**
-     * 每页记录
-     */
-    private Integer pageSize;
-
-    /**
-     * 总页数
-     */
-    private Integer totalPage;
-
-    /**
-     * 当前页数
-     */
-    private Integer pageNum;
 
     /**
      * 数据
@@ -42,12 +24,12 @@ public class Paging<T> implements Serializable {
     private List<T> list;
 
     public Paging(Page<T> page) {
-        this.initPaging(page);
+        super(page);
         this.list = page.getContent();
     }
 
     public Paging(Page<?> page, Class<T> clazz) {
-        this.initPaging(page);
+        super(page);
         this.list = page.getContent()
                 .stream().map(item -> {
                     T target = null;
@@ -63,14 +45,8 @@ public class Paging<T> implements Serializable {
     }
 
     public Paging(Page<?> page, List<T> result) {
-        this.initPaging(page);
+        super(page);
         this.setList(result);
     }
 
-    private void initPaging(Page<?> page) {
-        this.total = page.getTotalElements();
-        this.pageSize = page.getSize();
-        this.totalPage = page.getTotalPages();
-        this.pageNum = page.getNumberOfElements();
-    }
 }

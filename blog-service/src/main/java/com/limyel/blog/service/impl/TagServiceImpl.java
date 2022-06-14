@@ -1,10 +1,14 @@
 package com.limyel.blog.service.impl;
 
+import com.limyel.blog.common.api.Paging;
 import com.limyel.blog.dao.TagRepository;
 import com.limyel.blog.dto.TagDetailDTO;
 import com.limyel.blog.entity.Tag;
 import com.limyel.blog.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,12 +21,10 @@ public class TagServiceImpl implements TagService {
     private TagRepository tagRepository;
 
     @Override
-    public List<TagDetailDTO> list() {
-        List<Tag> all = tagRepository.findAll();
-        return all.stream().map(tag -> {
-            TagDetailDTO tagDetailDTO = new TagDetailDTO(tag);
-            // todo postNum
-            return tagDetailDTO;
-        }).collect(Collectors.toList());
+    public Paging<TagDetailDTO> page(Integer pageNum, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNum, pageSize);
+        Page<Tag> page = tagRepository.findTagByOrderByCreateTimeDesc(pageable);
+        List<TagDetailDTO> result = page.getContent().stream().map(TagDetailDTO::new).collect(Collectors.toList());
+        return new Paging<>(page, result);
     }
 }

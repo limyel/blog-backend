@@ -2,6 +2,7 @@ package com.limyel.blog.service.impl;
 
 import com.limyel.blog.common.api.Paging;
 import com.limyel.blog.common.exception.ApiException;
+import com.limyel.blog.common.utils.BeanUtil;
 import com.limyel.blog.dao.PostRepository;
 import com.limyel.blog.dao.TagRepository;
 import com.limyel.blog.dto.PostDetailDTO;
@@ -9,12 +10,14 @@ import com.limyel.blog.dto.PostPureDTO;
 import com.limyel.blog.entity.Post;
 import com.limyel.blog.entity.Tag;
 import com.limyel.blog.service.PostService;
+import com.limyel.blog.vo.HomeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,9 +35,15 @@ public class PostServiceImpl implements PostService {
     private TagRepository tagRepository;
 
     @Override
-    public Map<Integer, List<PostPureDTO>> pageInHome(Integer pageNum, Integer pageSize) {
+    public HomeVO pageWithYear(String tagSlug, Integer pageNum, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNum, pageSize);
-        Page<Post> page = postRepository.findPostsByOrderByCreateTimeDesc(pageable);
+        Page<Post> page;
+        if (StringUtils.isEmpty(tagSlug)) {
+            page = postRepository.findPostsByOrderByCreateTimeDesc(pageable);
+        } else {
+            Tag tag = tagRepository.findTagBySlug(tagSlug).orElseThrow(() -> new ApiException(20001));
+            page = postRepository.findPostsByTagListContainsOrderByCreateTimeDesc(tag, pageable);
+        }
         List<PostPureDTO> postList = page.getContent().stream().map(PostPureDTO::new).collect(Collectors.toList());
         Map<Integer, List<PostPureDTO>> result = new HashMap<>();
         postList.forEach(postPureDTO -> {
@@ -44,7 +53,10 @@ public class PostServiceImpl implements PostService {
             }
             result.get(year).add(postPureDTO);
         });
-        return result;
+
+        HomeVO homeVO = new HomeVO(page);
+        homeVO.setResult(result);
+        return homeVO;
     }
 
     @Override
@@ -59,15 +71,6 @@ public class PostServiceImpl implements PostService {
     public PostDetailDTO getBySlug(String slug) {
         Post post = postRepository.findPostBySlug(slug);
         return new PostDetailDTO(post);
-    }
-
-    @Override
-    public Paging<PostPureDTO> pageByTag(String tagSlug, Integer pageNum, Integer pageSize) {
-        Tag tag = tagRepository.findTagBySlug(tagSlug).orElseThrow(() -> new ApiException(20001));
-        Pageable pageable = PageRequest.of(pageNum, pageSize);
-        Page<Post> page = postRepository.findPostsByTagListContains(tag, pageable);
-        List<PostPureDTO> result = page.getContent().stream().map(PostPureDTO::new).collect(Collectors.toList());
-        return new Paging<>(page, result);
     }
 
     @Override
