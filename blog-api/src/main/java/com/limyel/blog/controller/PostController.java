@@ -32,7 +32,7 @@ public class PostController {
     public Response<HomeVO> pageWithYear(
             @RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize,
-            @RequestParam(name = "slug", required = false) String tagSlug
+            @RequestParam(name = "tagSlug", required = false) String tagSlug
     ) {
         return Response.success(postService.pageWithYear(tagSlug, pageNum-1, pageSize));
     }

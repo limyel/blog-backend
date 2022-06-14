@@ -1,5 +1,7 @@
 package com.limyel.blog.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.limyel.blog.common.framework.LocalDateTimeToLongSerializer;
 import com.limyel.blog.entity.Post;
 import com.limyel.blog.entity.Tag;
 import lombok.AllArgsConstructor;
@@ -7,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +18,8 @@ import java.util.List;
 @AllArgsConstructor
 public class PostDetailDTO {
 
-    private Date createTime;
+    @JsonSerialize(using = LocalDateTimeToLongSerializer.class)
+    private LocalDateTime createTime;
 
     private String title;
 
