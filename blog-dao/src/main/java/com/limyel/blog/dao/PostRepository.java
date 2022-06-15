@@ -23,4 +23,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     Post findFirstByTagListContains(Tag tag);
 
+    Post findFirstByType(Post.Type type);
 }

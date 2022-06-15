@@ -14,6 +14,11 @@ import java.util.List;
 @Where(clause = "is_deleted = 0")
 public class Post extends BaseEntity {
 
+    public enum Type {
+        post,
+        about
+    }
+
     private String title;
 
     private String content;
@@ -21,6 +26,8 @@ public class Post extends BaseEntity {
     private String slug;
 
     private Integer views;
+
+    private Type type;
 
     @Column(name = "is_published", nullable = false)
     private Boolean published = false;

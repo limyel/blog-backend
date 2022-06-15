@@ -2,7 +2,6 @@ package com.limyel.blog.service.impl;
 
 import com.limyel.blog.common.api.Paging;
 import com.limyel.blog.common.exception.ApiException;
-import com.limyel.blog.common.utils.BeanUtil;
 import com.limyel.blog.dao.PostRepository;
 import com.limyel.blog.dao.TagRepository;
 import com.limyel.blog.dto.PostDetailDTO;
@@ -75,8 +74,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDetailDTO getAbout() {
-        Tag tag = tagRepository.findTagBySlug("about").orElseThrow(() -> new ApiException(20001));
-        Post post = postRepository.findFirstByTagListContains(tag);
+        Post post = postRepository.findFirstByType(Post.Type.about);
         return new PostDetailDTO(post);
     }
 }
